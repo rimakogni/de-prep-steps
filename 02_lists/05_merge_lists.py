@@ -23,6 +23,11 @@ def test_returns_two_multiple_elements_lists_merged_together():
     assert return_value == [1, 2, 3, 4, 5, 6]
 
 
+def test_merges_empty_lists():
+    return_value = merge_arrays([1, 2, 3], [])
+    assert return_value == [1, 2, 3]
+
+
 def test_returns_an_empty_list_if_both_are_empty():
     return_value = merge_arrays([], [])
     assert return_value == []
