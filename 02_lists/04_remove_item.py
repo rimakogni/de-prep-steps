@@ -1,5 +1,5 @@
 '''
-Write a function, get_sandwich_filling, that takes a list (items) and a number (n).
+Write a function, remove_item, that takes a list (items) and a number (n).
 Return a new list without the item at position n. This should be a new list and 
 the item should still exist in the original list
 
