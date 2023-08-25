@@ -6,7 +6,7 @@ is_item_omnipresent([[1,2,3], [2,3,4], [3,4,5]], 3) # returns True, present in a
 
 is_item_omnipresent([[1,2,3], [2,3,4], [3,4,5]], 9) # returns False, not present in any
 
-is_item_omnipresent([[1,2,3], [2,3,4], [3,4,5]], 4) # returns False, only present in two arrays
+is_item_omnipresent([[1,2,3], [2,3,4], [3,4,5]], 4) # returns False, only present in two lists
 '''
 
 
