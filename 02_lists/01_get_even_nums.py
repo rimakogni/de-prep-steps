@@ -11,3 +11,15 @@ def get_even_nums(nums):
 def test_returns_an_empty_list_for_no_numbers():
     return_value = get_even_nums([])
     assert return_value == []
+
+def test_includes_even_numbers():
+    return_value = get_even_nums([2, 4, 6])
+    assert return_value == [2, 4, 6]
+
+def test_excludes_odd_numbers():
+    return_value = get_even_nums([1, 3, 5])
+    assert return_value == []
+
+def test_includes_even_numbers_and_removes_odds():
+    return_value = get_even_nums([1, 2, 3])
+    assert return_value == [2]
