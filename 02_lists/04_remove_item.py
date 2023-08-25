@@ -3,9 +3,9 @@ Write a function, get_sandwich_filling, that takes a list (items) and a number (
 Return a new list without the item at position n. This should be a new list and 
 the item should still exist in the original list
 
-remove_item([1, 2, 3], 1) //returns [1, 3]
+remove_item([1, 2, 3], 1) # returns [1, 3]
 
-remove_item([3], 0) //returns []
+remove_item([3], 0) # returns []
 '''
 
 

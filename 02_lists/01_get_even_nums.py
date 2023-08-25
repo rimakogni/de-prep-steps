@@ -1,7 +1,7 @@
 '''
 Write a function, get_even_nums, that takes an list of numbers (nums) and returns a list of only the even numbers.
 
-get_even_nums([1, 2, 3]) // returns [2]
+get_even_nums([1, 2, 3]) # returns [2]
 '''
 
 

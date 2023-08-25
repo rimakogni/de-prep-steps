@@ -2,11 +2,11 @@
 Write a function, get_items_longer_than, that takes a list of strings (strs) and a length (max_len). 
 It should return an list of only the items longer than the given length.
 
-get_items_longer_than(['a','bb','ccc'], 1) //returns ['bb', 'ccc'];
+get_items_longer_than(['a','bb','ccc'], 1) # returns ['bb', 'ccc'];
 
-get_items_longer_than(['a','bb','ccc'], 2) //returns ['ccc'];
+get_items_longer_than(['a','bb','ccc'], 2) # returns ['ccc'];
 
-get_items_longer_than(['a','bb','ccc'], 4) //returns [];
+get_items_longer_than(['a','bb','ccc'], 4) # returns [];
 '''
 
 
