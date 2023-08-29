@@ -1,72 +1,81 @@
 # Numbers
 
-Read through the following expressions and predict the _value_ and _data type_ of each one - e.g. is it a string, integer, or float?
+Type the following variables into the REPL.
+
+```python
+a = 12
+b = 5
+c = 0.6
+d = 17.1
+```
+
+You can start the REPL by typing `python` at the command line prompt. Then type the input at the Python prompt, like this:
+
+<img src="repl.png" alt="" width=609 height=120 title="Python REPL"></img>
+
+Read through the following expressions and predict the _value_ and _data type_ of each one - e.g. is it a string, an integer, a float?
 
 Justify your prediction and then use Python to check if you were correct.
 
 Make sure you understand why you got the results you did and investigate any that surprised you. You can use the [Python documentation](https://docs.python.org/3/).
 [Speedsheet](https://speedsheet.io/s/python) for Python is also useful for quick reference.
 
-You can use the Python REPL to try out these exercises. Just type `python` at the command line prompt. Then type the Python command shown at the prompt, like this:
-
-<img src="repl.png" alt="" width=620 height=65 title="Python REPL"></img>
-
-
 A: 
 ```python
-12*4
+a * b
 ```
 
 
 B: 
 ```python
-3*0.1
+b * c
 ```
 
 
 C: 
 ```python
-0.1+6
+b + c
 ```
 
 
 D: 
 ```python
-11.3-10
+d - a
 ```
 
 
 E: 
 ```python
-13%2
+a % b
 ```
 
 
 F: 
 ```python
-13%2.0
+a % 5.0
 ```
 
 
 G: 
 ```python
-2**8
+b**2
 ```
 
 
 H: 
 ```python
-11+9
+a + b
 ```
 
 
 I: 
 ```python
-6/10
+b / a
 ```
 
 
 J: 
 ```python
-19//10
+a // b
 ```
+
