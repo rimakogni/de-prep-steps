@@ -79,3 +79,9 @@ J:
 a // b
 ```
 
+
+K:
+```python
+len('northcoders') + b
+```
+
