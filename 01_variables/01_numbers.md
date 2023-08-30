@@ -15,7 +15,10 @@ You can start the REPL by typing `python` at the command line prompt. Then type 
 
 Read through the following expressions and predict the _value_ and _data type_ of each one - e.g. is it a string, an integer, a float?
 
-Justify your prediction and then use Python to check if you were correct.
+Justify your prediction and then use Python to check if you were correct. You can use the `type` command to help: eg:
+```python
+type(a * b)
+```
 
 Make sure you understand why you got the results you did and investigate any that surprised you. You can use the [Python documentation](https://docs.python.org/3/).
 [Speedsheet](https://speedsheet.io/s/python) for Python is also useful for quick reference.

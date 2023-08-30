@@ -2,7 +2,7 @@
 
 Read through the following expressions and predict the value and data type of each one.
 
-Justify your prediction and then use the Python REPL to check if you were correct.
+Justify your prediction and then type them into the Python REPL to check if you were correct.
 
 Make sure you understand why you got the results you did and investigate any that surprise you.
 
@@ -87,6 +87,7 @@ M:
 N:
 ```
 not 10 > 5
+```
 
 
 O:

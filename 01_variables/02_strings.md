@@ -12,7 +12,7 @@ In the Python REPL, create the following string variables:
 ```
 
 You can see what _methods_ are available for strings in the [documentation](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str)
-but you might find it easier to check out [SpeedSheet](https://speedsheet.io/s/python?q=strings-only#T7xJ). Use string methods to create:
+but you might find it easier to check out [SpeedSheet](https://speedsheet.io/s/python?q=strings-only#T7xJ). Use _string methods_ to create:
 
 A. A new variable called `shouty_name` with value `DAVID JOHN BARTLETT`
 
@@ -33,3 +33,10 @@ F: A new variable called `surname` with value `bartlett`
 G: A new variable called `middle_name` with value `john`
 
 H: A new variable called `full_honours` with value `Mr David John Bartlett, Senior Tutor`. (Note the comma!)
+
+
+Note: it's easy to create brand new variables by just typing them in. For example:
+```python
+shouty_name = 'DAVID JOHN BARTLETT'
+```
+Please do not do this. The purpose of this exercise is to **create new variables from the original ones**.
