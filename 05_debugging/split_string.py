@@ -1,5 +1,5 @@
 """
-split_string is a function that takes a string and returns an list containing all of the individual characters as separate elements.
+split_string is a function that takes a string and returns a list containing all of the individual characters as separate elements.
 
 Unfortunately, it looks like the function is currently throwing a TypeError.
 
