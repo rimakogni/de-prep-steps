@@ -5,6 +5,7 @@ Unfortunately for us, our team on the ground in Paris are patriotically Francoph
 
 Write a function that will take a dictionary representing a student's data, a key that needs changing, and its English translation.
 The function should return a new dictionary with the relevant key name changed to its English translation.
+If the key to change does not exist in the student then no changes should be made.
 
 student = {
     'prénom': 'Carla',
@@ -22,7 +23,8 @@ translate_key(student, 'prénom', 'first_name') # should return the following:
 
 """
 
-def translate_key(data, key_to_change, translation):
+
+def translate_key(student, key_to_change, translation):
     # Your code here
     pass
 
@@ -38,7 +40,7 @@ def test_return_unchanged_if_key_not_present():
         'first_name': 'Carla',
         'surname': 'Bruni',
         'job': 'Artist'
-    } 
+    }
     assert translate_key(student, 'prénom', 'first_name') == student
     assert translate_key(student, 'prénom', 'first_name') is not student
 
@@ -53,8 +55,12 @@ def test_translate_key_if_required():
         'first_name': 'Carla',
         'surname': 'Bruni',
         'job': 'Artist'
-    } 
+    }
     result1 = translate_key(student1, 'prénom', 'first_name')
+
+    assert result1 == expected1
+    assert result1 is not student1
+
     student2 = {
         'first_name': 'Jean',
         'surname': 'Reno',
@@ -64,9 +70,8 @@ def test_translate_key_if_required():
         'first_name': 'Jean',
         'surname': 'Reno',
         'job': 'Actor'
-    } 
+    }
     result2 = translate_key(student2, 'emploi', 'job')
 
     assert result2 == expected2
-    assert result2 is not expected2
-    
+    assert result2 is not student2

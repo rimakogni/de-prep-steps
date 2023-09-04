@@ -15,6 +15,7 @@ get_factorials([]) # returns []
 
 """
 
+
 def get_factorials(numbers):
     # Your code here
     pass
@@ -34,9 +35,3 @@ def test_number_one():
 
 def test_two_items():
     assert get_factorials([3, 4]) == [6, 24]
-
-
-def test_arbitrary_list():
-    import random
-    length = random.randint(3, 20)
-    numbers = random.sample(range(1, 20), length)

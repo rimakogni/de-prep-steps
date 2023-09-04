@@ -13,6 +13,7 @@ flip_booleans([]) # returns []
 
 """
 
+
 def flip_booleans(bools):
     # Your code here
     pass
@@ -23,7 +24,7 @@ def test_empty_list_returns_empty_list():
 
 
 def test_single_true_returns_single_false():
-    assert flip_booleans([True]) ==[False]
+    assert flip_booleans([True]) == [False]
 
 
 def test_single_false_returns_single_true():
@@ -39,4 +40,5 @@ def test_all_trues_returns_all_falses():
 
 
 def test_mixed_trues_and_falses_flipped_correctly():
-    assert flip_booleans([True, False, False, True]) == [False, True, True, False]
+    assert flip_booleans([True, False, False, True]) == [
+        False, True, True, False]

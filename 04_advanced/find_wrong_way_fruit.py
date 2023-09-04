@@ -18,9 +18,10 @@ find_wrong_way_fruit(['apple', 'elppa', 'apple']) # returns 1
 
 find_wrong_way_fruit(['banana', 'ananab', 'banana', 'banana']) # returns 1
 
-find_wrong_way_fruit(['apple', 'elppa']) # returns 0 as we can't tell which one is the right way round
+find_wrong_way_fruit(['apple', 'elppa']) # returns 0 as we can't tell which one is the right way round with less than 3 pieces of fruit
 
 """
+
 
 def find_wrong_way_fruit(orchard):
     # Your code here
