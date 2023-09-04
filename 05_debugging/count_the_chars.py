@@ -28,7 +28,7 @@ def test_counts_the_occurrences_in_simple_list():
     char_list = ['a', 'b', 'c']
     assert count_the_chars(char_list, 'b') == 1
     char_list = ['4', '6', 'hello', '2', '6', '6']
-    assert count_the_chars(char_list, '6')
+    assert count_the_chars(char_list, '6') == 3
 
 
 def test_counts_the_occurrences_in_mixed_lists():
