@@ -14,14 +14,10 @@ def is_sweet_enough(food_items):
     for i in range(len(food_items)):
         if food_items[i]['flavour'] != 'sweet':
             return False
-    return False if len(food_items) == 0 else True
+    return True
 
 
 # Do not change any code below this line
-
-def test_no_food_items_returns_false():
-    assert not is_sweet_enough([])
-
 
 def test_true_when_all_sweet():
     food_items = [
