@@ -7,7 +7,7 @@ For advice on how to do this, check out the following: https://docs.python.org/3
 
 Or the following guide on SpeedSheet: https://speedsheet.io/s/python#gL31
 
-If you run the function, it should pass all of the tests.
+If you run pytest on this file, all tests should pass.
 """
 
 def triple_nums(nums):

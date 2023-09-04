@@ -7,7 +7,7 @@ Alternatively, perhaps you can use a for comprehension with the `all` function: 
 
 The food items look like this: {'name': 'chocolate', 'flavour': 'sweet'}
 
-If you run the function, it should pass all of the tests. 
+If you run pytest on this file, all tests should pass. 
 """
 
 def is_sweet_enough(food_items):

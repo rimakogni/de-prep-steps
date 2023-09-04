@@ -3,7 +3,7 @@
 
 Refactor `shout_names` to use a list comprehension.
 
-If you run the function, it should pass all of the tests. 
+If you run pytest on this file, all tests should pass. 
 """
 
 def shout_names(names):
