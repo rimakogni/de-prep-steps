@@ -1,9 +1,7 @@
 """
 is_sweet_enough is a function that takes a list of food items and returns either True or False depending on whether every food in the array has a sweet flavour.
 
-Refactor is_sweet_enough to use a for comprehension that includes an if statement. See here for details: https://speedsheet.io/s/python#hCe5
-
-Alternatively, perhaps you can use a for comprehension with the `all` function: https://speedsheet.io/s/python#PEU2
+Refactor is_sweet_enough to use a for comprehension with the `all` function: https://speedsheet.io/s/python#PEU2
 
 The food items look like this: {'name': 'chocolate', 'flavour': 'sweet'}
 
