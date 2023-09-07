@@ -62,7 +62,7 @@ Now, you can type Python code instructions, followed by the `Return` key.
 The exercises invite you to type in various commands, 
 predicting what they might do in advance. For example, what might this command do?
 ```
->>> print('Hello New Northcoder!)
+>>> print('Hello New Northcoder!')
 ```
 To terminate the REPL session, type `exit()` or hit `Ctrl+d`
 
