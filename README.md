@@ -38,6 +38,7 @@ pytest --version
 ```
 
 You should see a response such as `pytest 7.4.1` or similar.
+As before, the version numbers do not need to match exactly. So long as you don't get an error you're go to go 👍 
 
 ## Completing and testing the exercises.
 
