@@ -18,6 +18,7 @@ You should see something like:
 Python 3.11.5
 ```
 (The digits will be different depending on what exact version you installed. As long as the version number is higher than 3.9.0, everything should be fine.)
+If you don't have python installed then go back to the `Preparing For The Course` section and repeat the steps there, failing that get in touch with us in your pre-course slack channel.
 
 ## Installing `pytest`
 
