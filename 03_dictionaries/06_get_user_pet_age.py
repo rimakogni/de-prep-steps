@@ -2,7 +2,7 @@
 Write a function that takes a `user` dictionary that looks like this:
 
 {
-  'name': "Tom",      
+  'name': "Tom",
   'age': 26,
   'pet': {
     'name': "Barney",
@@ -11,13 +11,15 @@ Write a function that takes a `user` dictionary that looks like this:
   }
 }
 
-The dictionary is nested; there are dictionaries paired to keys on the user dictionary.
-      
-The function should the access the age property in the nested pet dictionary and return the value.
+The dictionary is nested; there are dictionaries paired to keys on the user
+dictionary.
+
+The function should the access the age property in the nested pet dictionary
+and return the value.
 If the user doesn't have an age for their pet the function should return None.
 
 user = {
-  'name': "Carrie",      
+  'name': "Carrie",
   'age': 26,
   'pet': {
     'name': "Pixie",

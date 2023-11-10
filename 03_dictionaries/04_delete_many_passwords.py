@@ -1,17 +1,23 @@
 """
-Write a function that takes an array of user dictionaries (`users`), and deletes the password key value pair on each user and returns the dictionary.
-If a dictionary does not already have a password key then it should be unchanged.
+Write a function that takes an array of user dictionaries (`users`), and
+deletes the password key value pair on each user and returns the dictionary.
+If a dictionary does not already have a password key then it should be
+unchanged.
 
 delete_many_passwords([
     {'name': 'Barry', 'password': 'ilovetea', 'department': 'Tea'},
-    {'name': 'Sandeep', 'password': 'ilovecoffee', 'favourite_drink': 'Coffee'},
+    {
+        'name': 'Sandeep',
+        'password': 'ilovecoffee',
+        'favourite_drink': 'Coffee'
+        },
     {'name': 'Kavita', 'password': 'ilovepie', 'weakness': 'Pie'}
-]) 
-    
+])
+
 Returns
 [
-    { 'name': 'Barry', 'department': 'Tea'}, 
-    { 'name': 'Sandeep', 'favourite_drink': 'Coffee' }, 
+    { 'name': 'Barry', 'department': 'Tea'},
+    { 'name': 'Sandeep', 'favourite_drink': 'Coffee' },
     { 'name': 'Kavita', 'weakness': 'Pie'}
 ]
 """
@@ -35,7 +41,11 @@ def test_changes_single_dict():
 def test_changes_many_users():
     users1 = [
         {'name': 'Barry', 'password': 'ilovetea', 'department': 'Tea'},
-        {'name': 'Sandeep', 'password': 'ilovecoffee', 'favourite_drink': 'Coffee'},
+        {
+            'name': 'Sandeep',
+            'password': 'ilovecoffee',
+            'favourite_drink': 'Coffee'
+        },
         {'name': 'Kavita', 'password': 'ilovepie', 'weakness': 'Pie'}
     ]
     result1 = delete_many_passwords(users1)
@@ -47,7 +57,11 @@ def test_changes_many_users():
     assert result1 == expected
     users2 = [
         {'name': 'Barry', 'password': 'ilovetea', 'department': 'Tea'},
-        {'name': 'Sandeep', 'password': 'ilovecoffee', 'favourite_drink': 'Coffee'},
+        {
+            'name': 'Sandeep',
+            'password': 'ilovecoffee',
+            'favourite_drink': 'Coffee'
+        },
         {'name': 'Kavita', 'weakness': 'Pie'}
     ]
     result2 = delete_many_passwords(users2)

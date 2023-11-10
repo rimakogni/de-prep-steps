@@ -1,5 +1,7 @@
 """
-Write a function that takes a list of dictionaries with the format from create_northcoder (`northcoders`), and returns a new list of the users' names as strings.
+Write a function that takes a list of dictionaries with the format from
+create_northcoder (`northcoders`), and returns a new list of the users' names
+as strings.
 Any northcoders who are missing names should be omitted from the returned list.
 
 northcoders = [

@@ -1,11 +1,14 @@
 '''
-Write a function, get_sandwich_filling, that takes a list of sandwich ingredients (sandwich).
-This list represents the ingredients used to make a sandwich, it's first and last items will be the 'bread'
+Write a function, get_sandwich_filling, that takes a list of sandwich
+ingredients (sandwich).
+This list represents the ingredients used to make a sandwich, it's first and
+last items will be the 'bread'
 Return a list containing only the filling of the sandwich.
 
 get_sandwich_filling(['bread', 'bacon', 'bread']) # returns ['bacon']
 
-get_sandwich_filling(['bread', 'halluomi', 'lettuce', 'bread']) # returns ['halluomi', 'lettuce']
+get_sandwich_filling(['bread', 'halluomi', 'lettuce', 'bread']) # returns
+['halluomi', 'lettuce']
 
 get_sandwich_filling(['a', 'b', 'c', 'd']) # returns ['b', 'c']
 '''

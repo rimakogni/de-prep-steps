@@ -1,7 +1,9 @@
 '''
-Write a function, flatten_list_by_one, that when given a list with one or more nested lists (nested_lists) returns a new list with one less level of nesting.
+Write a function, flatten_list_by_one, that when given a list with one or more
+nested lists (nested_lists) returns a new list with one less level of nesting.
 
-All the elements of all the original nested lists must be kept in their original order.
+All the elements of all the original nested lists must be kept in their
+original order.
 
 flatten_list_by_one([[1], [2], [3]])  # returns [1, 2, 3]
 

@@ -1,10 +1,13 @@
 """
-`shout_names` is a function that takes a list of names and returns a list containing all of the names in capital letters followed by an exclamation mark "1".
+`shout_names` is a function that takes a list of names and returns a list
+containing all of the names in capital letters followed by an
+exclamation mark "!".
 
 Refactor `shout_names` to use a list comprehension.
 
-If you run pytest on this file, all tests should pass. 
+If you run pytest on this file, all tests should pass.
 """
+
 
 def shout_names(names):
     shouted_names = []

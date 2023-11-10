@@ -1,5 +1,6 @@
 """
-Write a function that takes a list of `words` and returns a list containing all of the words that are 
+Write a function that takes a list of `words` and returns a list containing
+all of the words that are
 palindromes (the same word forwards and backwards, e.g. 'pip').
 
 
@@ -12,6 +13,7 @@ get_palindromes(['apple', 'orange', 'banana']) # returns []
 get_palindromes([]) # returns []
 
 """
+
 
 def get_palindromes(words):
     # Your code here

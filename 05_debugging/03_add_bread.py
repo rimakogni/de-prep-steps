@@ -1,11 +1,14 @@
 """
-add_bread is a function that takes a dictionary describing a `person` and a string of their favourite bread, and returns that object with a 
+add_bread is a function that takes a dictionary describing a `person`
+and a string of their favourite bread, and returns that object with a
 new property (`fave_bread`) set to a value of their favourite bread.
 
-Unfortunately, it looks like the function has a couple of issues with the way it's written.
+Unfortunately, it looks like the function has a couple of issues with
+the way it's written.
 
 Can you work out what needs changing to make the function pass all the tests?
 """
+
 
 def add_bread(person, loaf):
     person['loaf'] == loaf

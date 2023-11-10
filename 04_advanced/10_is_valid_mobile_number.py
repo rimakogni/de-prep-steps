@@ -1,5 +1,6 @@
 """
-Write a function that takes a string of a mobile number (`mobile_number`). It should return `True` if the number is a valid UK number and `False` if not.
+Write a function that takes a string of a mobile number (`mobile_number`).
+It should return `True` if the number is a valid UK number and `False` if not.
 
 A valid mobile number may begin with:
 
@@ -19,6 +20,7 @@ is_valid_mobile_number('00447123456789') # returns True
 
 is_valid_mobile_number('0712345678!') # returns False
 """
+
 
 def is_valid_mobile_number(mobile_number):
     # Your code here

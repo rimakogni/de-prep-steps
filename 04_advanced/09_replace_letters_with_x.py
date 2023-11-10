@@ -1,6 +1,8 @@
 """
-Write a function that takes a `string` and returns a string with all of the letter characters replaced with an 'X'. 
-Any non-letter characters (e.g. punctuation, symbols) should be left as they are.
+Write a function that takes a `string` and returns a string with all of the
+letter characters replaced with an 'X'.
+Any non-letter characters (e.g. punctuation, symbols) should be left as they
+are.
 
 replace_letters_with_x('a') # returns 'X'
 
@@ -13,6 +15,7 @@ replace_letters_with_x('Hello!') # returns 'XXXXX!'
 replace_letters_with_x('Do you like coding?') # returns 'XX XXX XXXX XXXXXX?'
 
 """
+
 
 def replace_letters_with_x(string):
     # Your code here
@@ -44,4 +47,5 @@ def test_several_characters():
 
 
 def test_several_words():
-    assert replace_letters_with_x('Do you like coding?') == 'XX XXX XXXX XXXXXX?'
+    assert replace_letters_with_x(
+        'Do you like coding?') == 'XX XXX XXXX XXXXXX?'

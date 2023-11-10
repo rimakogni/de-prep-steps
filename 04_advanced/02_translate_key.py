@@ -1,11 +1,17 @@
 """
 Northcoders is expanding to France!
 
-Unfortunately for us, our team on the ground in Paris are patriotically Francophone and have been providing us with student data partly in French. 
+Unfortunately for us, our team on the ground in Paris are patriotically
+Francophone and have been providing us with student data partly in French.
 
-Write a function that will take a dictionary representing a student's data, a key that needs changing, and its English translation.
-The function should return a new dictionary with the relevant key name changed to its English translation.
-If the key to change does not exist in the student then no changes should be made.
+Write a function that will take a dictionary representing a student's data, a
+key that needs changing, and its English translation.
+
+The function should return a new dictionary with the relevant key name changed
+to its English translation.
+
+If the key to change does not exist in the student then no changes should be
+made.
 
 student = {
     'prénom': 'Carla',
@@ -19,7 +25,7 @@ translate_key(student, 'prénom', 'first_name') # should return the following:
     'first_name': 'Carla',
     'surname': 'Bruni',
     'job': 'Artist'
-} 
+}
 
 """
 

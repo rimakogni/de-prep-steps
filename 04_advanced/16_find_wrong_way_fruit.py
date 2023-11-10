@@ -7,9 +7,11 @@ This function takes a list of fruit (`orchard`) in the format:
 
 The fruit will all be the 'right way round' apart from one fruit!
 
-Your function should return its zero-based index position. So in this example, the function should return 4.
+Your function should return its zero-based index position.
+So in this example, the function should return 4.
 
-Note: The fruit will not always be apple, but it will always be an orchard of the same kind of fruit.
+Note: The fruit will not always be apple, but it will always be an orchard
+of the same kind of fruit.
 
 
 find_wrong_way_fruit(['apple', 'apple', 'elppa']) # returns 2
@@ -18,7 +20,8 @@ find_wrong_way_fruit(['apple', 'elppa', 'apple']) # returns 1
 
 find_wrong_way_fruit(['banana', 'ananab', 'banana', 'banana']) # returns 1
 
-find_wrong_way_fruit(['apple', 'elppa']) # returns 0 as we can't tell which one is the right way round with less than 3 pieces of fruit
+find_wrong_way_fruit(['apple', 'elppa']) # returns 0 as we can't tell which
+one is the right way round with less than 3 pieces of fruit
 
 """
 

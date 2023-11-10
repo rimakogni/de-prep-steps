@@ -1,10 +1,13 @@
 """
-`get_excited` is a function that takes a piece of text and returns it with all of the full stops (.) replaced by exclamation marks (!).
+`get_excited` is a function that takes a piece of text and returns it with all
+of the full stops (.) replaced by exclamation marks (!).
 
-Refactor get_excited to use a string method. All of this code can be rewritten in just one line with one string method...
+Refactor get_excited to use a string method. All of this code can be rewritten
+in just one line with one string method...
 
-If you run pytest on this file, all tests should pass. 
+If you run pytest on this file, all tests should pass.
 """
+
 
 def get_excited(text):
     new_text = ''

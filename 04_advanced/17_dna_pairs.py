@@ -1,5 +1,6 @@
 """
-This function takes a string of DNA, such as 'GTCA', and returns a list containing correctly matched DNA pairs.
+This function takes a string of DNA, such as 'GTCA', and returns a list
+containing correctly matched DNA pairs.
 
 The pairs are as follows:
 
@@ -8,7 +9,9 @@ The pairs are as follows:
 'T' -> 'A'
 'A' -> 'T'
 
-The function should ignore any letters that are not valid DNA pairs (e.g. not 'G', 'C', 'T' or 'A'). However, it should also work for lowercase and uppercase letters.
+The function should ignore any letters that are not valid DNA pairs
+(e.g. not 'G', 'C', 'T' or 'A').
+However, it should also work for lowercase and uppercase letters.
 
 dna_pairs('G') # returns ['GC']
 dna_pairs('GAT') # returns ['GC', 'AT', 'TA']
@@ -16,6 +19,7 @@ dna_pairs('GYTC') # returns ['GC', 'TA', 'CG']
 dna_pairs('gat') # returns ['GC', 'AT', 'TA']
 
 """
+
 
 def dna_pairs(dna_string):
     # Your code here
@@ -54,5 +58,5 @@ def test_long_uppercase_with_invalid_chars_returns_valid_list():
 
 
 def test_mixed_string_returns_valid_list():
-    assert dna_pairs('CGauTzgAcj') == ['CG', 'GC', 'AT', 'TA', 'GC', 'AT', 'CG']
-
+    assert dna_pairs('CGauTzgAcj') == [
+        'CG', 'GC', 'AT', 'TA', 'GC', 'AT', 'CG']

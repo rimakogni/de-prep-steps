@@ -1,6 +1,8 @@
 """
-Write a function that takes a `string` and returns a list containing the length of each word in that string. 
-If passed an empty string, the function should return an empty list. Words will be separated by a single space.
+Write a function that takes a `string` and returns a list containing the
+length of each word in that string.
+If passed an empty string, the function should return an empty list.
+Words will be separated by a single space.
 
 
 get_word_lengths('hello') # returns [5]
@@ -12,6 +14,7 @@ get_word_lengths('this is a sentence') # returns [4, 2, 1, 8]
 get_word_lengths('') # returns []
 
 """
+
 
 def get_word_lengths(string):
     # Your code here
@@ -33,5 +36,3 @@ def test_two_words():
 
 def test_many_words():
     assert get_word_lengths('this is a sentence') == [4, 2, 1, 8]
-
-

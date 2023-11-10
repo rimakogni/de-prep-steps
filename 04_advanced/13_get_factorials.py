@@ -1,7 +1,9 @@
 """
-Write a function that takes a list of `numbers` and returns a list containing the factorial of each number in the list.
+Write a function that takes a list of `numbers` and returns a list containing
+the factorial of each number in the list.
 
-The factorial of a number is the product of that number and all the integers below it.
+The factorial of a number is the product of that number and all the integers
+below it.
 E.g. the factorial of 4 is 4 * 3 * 2 * 1 = 24
 
 
