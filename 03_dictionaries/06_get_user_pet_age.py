@@ -3,7 +3,8 @@ Write a function that takes a `user` dictionary that looks like this:
 
 {
   'name': "Tom",
-  'age': 26, 'pet': {
+  'age': 26,
+  'pet': {
     'name': "Barney",
     'age': 6,
     'type': "good boy"
