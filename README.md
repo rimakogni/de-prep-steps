@@ -4,9 +4,13 @@
 These exercises are intended to give you some experience of writing simple Python code.
 
 ## Prerequisites
-You need to _fork and clone_ this repository. You should already have watched [this introduction](https://www.youtube.com/watch?v=4VjoJyqQkNQ&ab_channel=Tutor1) to forking and cloning. When you have cloned the repository to the local machine, then open it with Visual Studio Code (or the IDE of your choice).
+You need to _fork and clone_ this repository. You should already have watched 
+[this introduction](https://www.youtube.com/watch?v=4VjoJyqQkNQ&ab_channel=Tutor1) to forking and cloning.
+When you have cloned the repository to the local machine, then open it with Visual Studio Code 
+(or the IDE of your choice).
 
-Before you start, you should have the latest version Python 3 installed. If you have not already done so, follow the steps described in `Preparing For The Course` in the Pre-Course notes.
+Before you start, you should have the latest version of Python 3 installed. If you have not already 
+done so, follow the steps described in `Preparing For The Course` in the Pre-Course notes.
 
 To test if Python is installed correctly, type at the terminal command prompt:
 ```bash
@@ -17,13 +21,16 @@ You should see something like:
 ```
 Python 3.11.5
 ```
-(The digits will be different depending on what exact version you installed. As long as the version number is higher than 3.9.0, everything should be fine.)
-If you don't have python installed then go back to the `Preparing For The Course` section and repeat the steps there, failing that get in touch with us in your pre-course slack channel.
+(The digits will be different depending on what exact version you installed. As long as the 
+version number is higher than 3.9.0, everything should be fine.)
+If you don't have Python installed then go back to the `Preparing For The Course` section and 
+repeat the steps there. Failing that, get in touch with us in your pre-course slack channel.
 
 ## Installing `pytest`
 
-You will be asked to write some code in the exercise. To check whether you have got it right, we will run some automated tests using a tool called 
-`pytest`. You will be learning a _lot_ more about testing in general and `pytest` in particular during the course. For now, please just install 
+You will be asked to write some code in the exercise. To check whether you have got it right, 
+we will run some automated tests using a tool called `pytest`. You will be learning a _lot_ more 
+about testing in general and `pytest` in particular during the course. For now, please just install 
 `pytest` by typing:
 
 ```bash
@@ -38,7 +45,8 @@ pytest --version
 ```
 
 You should see a response such as `pytest 7.4.1` or similar.
-As before, the version numbers do not need to match exactly. So long as you don't get an error you're go to go 👍 
+As before, the version numbers do not need to match exactly. So long as you don't get an error you're good
+to go 👍 
 
 ## Completing and testing the exercises.
 
