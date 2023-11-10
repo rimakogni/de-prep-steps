@@ -1,5 +1,6 @@
 """
-Write a function that takes a list of booleans (`bools`) and returns a `list` with all of their values swapped 
+Write a function that takes a list of booleans (`bools`) and returns a `list`
+with all of their values swapped
 such that `True` becomes `False` and `False` becomes `True`.
 
 

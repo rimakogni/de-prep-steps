@@ -1,5 +1,6 @@
 """
-`count_the_chars` is a function that takes a list of values and a character. It should return a number representing 
+`count_the_chars` is a function that takes a list of values and a character.
+It should return a number representing 
 the total number of times that the character appears in the list.
 
 Unfortunately, it looks like the function isn't working.

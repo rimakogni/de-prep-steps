@@ -1,6 +1,7 @@
 """
-In this function, you will be provided with a dictionary. That dictionary is storing information on keys:
-    
+In this function, you will be provided with a dictionary. That dictionary is
+storing information on keys:
+
 {
     'name': 'Tom',
     'job': ['writing katas', 'marking'],
@@ -11,8 +12,11 @@ In this function, you will be provided with a dictionary. That dictionary is sto
     ]
 }
 
-In some cases, however, the keys have been very badly named. Good naming convention tells us that the __keys containing lists__ should have plural names.
-This function should return a new dictionary that is a copy of the input but with any keys that contain lists pluralised (an 's' added to the end.)
+In some cases, however, the keys have been very badly named. Good naming
+convention tells us that the __keys containing lists__ should have
+plural names.
+This function should return a new dictionary that is a copy of the input but
+with any keys that contain lists pluralised (an 's' added to the end.)
 
 {
     'name': 'Tom',

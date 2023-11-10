@@ -1,5 +1,6 @@
 """
-Write a function takes a list of dictionaries describing `dogs` and returns a list of the names of all the pug owners.
+Write a function takes a list of dictionaries describing `dogs` and returns a
+list of the names of all the pug owners.
 
 
 get_pug_owners([

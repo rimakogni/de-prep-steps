@@ -1,8 +1,10 @@
 '''
-Write a function that takes two lists (list1 and list2) and 
-returns a new list with all of the elements of list1 followed by all of the elements of list2.
+Write a function that takes two lists (list1 and list2) and
+returns a new list with all of the elements of list1 followed by all of the
+elements of list2.
 
-The function should return a new list and both original lists should remain unchanged.
+The function should return a new list and both original lists should remain
+unchanged.
 
 merge_lists([1, 2], [3, 4]) # returns [1, 2, 3, 4]
 '''

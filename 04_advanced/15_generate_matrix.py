@@ -1,5 +1,6 @@
 """
-Write a function that takes a `number` and returns a matrix of nested lists equal to the number passed. 
+Write a function that takes a `number` and returns a matrix of nested lists
+equal to the number passed.
 Each element in each sublist should be set to a value of `None`.
 
 
@@ -7,9 +8,14 @@ generate_matrix(1) # returns [[None]]
 
 generate_matrix(2) # returns [[None, None], [None, None]]
 
-generate_matrix(3) # returns [[None, None, None], [None, None, None], [None, None, None]]
+generate_matrix(3) # returns [
+    [None, None, None],
+    [None, None, None],
+    [None, None, None]
+    ]
 
 """
+
 
 def generate_matrix(number):
     # Your code here
@@ -29,7 +35,8 @@ def test_two():
 
 
 def test_three():
-    assert generate_matrix(3) == [[None, None, None], [None, None, None], [None, None, None]]
+    assert generate_matrix(3) == [[None, None, None], [
+        None, None, None], [None, None, None]]
 
 
 def test_arbitrary():
@@ -40,5 +47,4 @@ def test_arbitrary():
     for j in range(number):
         assert len(result[j]) == number
         for k in range(number):
-            assert result[j][k] == None
-
+            assert result[j][k] == None  # noqa

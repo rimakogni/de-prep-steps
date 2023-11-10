@@ -1,5 +1,6 @@
 """
-Write a function that takes a `number` and returns the largest number that can be made by rearranging the digits.
+Write a function that takes a `number` and returns the largest number that can
+be made by rearranging the digits.
 
 largest_number(3) # returns 3
 
@@ -10,6 +11,7 @@ largest_number(937846) # returns 987643
 largest_number(43) # returns 43
 
 """
+
 
 def largest_number(number):
     pass

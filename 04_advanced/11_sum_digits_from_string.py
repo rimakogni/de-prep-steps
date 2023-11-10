@@ -1,8 +1,10 @@
 """
-Write a function that takes a `string` and `adds` all the numbers in the string together. 
-The function should then return this total as an integer. 
+Write a function that takes a `string` and `adds` all the numbers in the
+string together.
+The function should then return this total as an integer.
 
-Consecutive numbers should be treated as individual digits (e.g. '123' is the same as 1, 2, 3 and not 123).
+Consecutive numbers should be treated as individual digits
+(e.g. '123' is the same as 1, 2, 3 and not 123).
 
 sum_digits_from_string('1') # returns 1
 
@@ -13,6 +15,7 @@ sum_digits_from_string('he12ll3') # returns 6
 sum_digits_from_string('northcoders') # returns 0
 
 """
+
 
 def sum_digits_from_string(string):
     # Your code here
