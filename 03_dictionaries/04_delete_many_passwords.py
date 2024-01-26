@@ -1,6 +1,6 @@
 """
 Write a function that takes an array of user dictionaries (`users`), and
-deletes the password key value pair on each user and returns the dictionary.
+deletes the password key value pair on each user and returns the list.
 If a dictionary does not already have a password key then it should be
 unchanged.
 
