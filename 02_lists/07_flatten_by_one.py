@@ -13,11 +13,6 @@ flatten_list_by_one([[1], [2], [[3, 4]]])  # returns [1, 2, [3, 4]]
 
 def flatten_list_by_one(nested_lists):
     # your code here
-    flat = []
-    for list in nested_lists:
-        for item in list:
-            flat.append(item)
-    return flat
     pass
 
 
