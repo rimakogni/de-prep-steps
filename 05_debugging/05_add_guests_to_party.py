@@ -12,7 +12,7 @@ Unfortunately, it looks like the function isn't working.
 
 Can you work out what needs changing to make the function pass all the tests?
 
-(An `invitee` might look like this: `{'name': 'Simon', 'RSVP': 'No'}`).
+(An `invitee` might look like this: `{'name': 'Simon', 'RSVP': 'no'}`).
 """
 
 
