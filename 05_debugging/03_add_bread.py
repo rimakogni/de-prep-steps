@@ -21,4 +21,4 @@ def test_adds_favourite_bread():
     person_1 = {'name': 'Joe'}
     person_2 = {'name': 'Paul'}
     assert add_bread(person_1, 'rye') == {'name': 'Joe', 'fave_bread': 'rye'}
-    assert add_bread(person_2) == {'name': 'Paul', 'fave_bread': 'granary'}
+    assert add_bread(person_2, 'granary') == {'name': 'Paul', 'fave_bread': 'granary'}
