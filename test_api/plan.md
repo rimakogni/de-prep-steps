@@ -29,3 +29,5 @@ Use colours for stdout
 - typing? (for the type checking tasks might be a bit strange, unless we use the pydantic type error)
 - Move all katas into root(?) and move testing into the .py files(same files as katas). 
 - leave data in tests. 
+
+- Use if statements with custom errors instead of asserting in code (appaz shouldnt use assert in prod code)

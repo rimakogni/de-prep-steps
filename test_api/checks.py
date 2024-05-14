@@ -32,21 +32,26 @@ class Check:
             assert self.return_value is not original_data
             print(f"Test {self.title}, {self.func.__name__}(): Test passed")
         except AssertionError:
-            print('Return value should be a new object')
+            print("Return value should be a new object")
             raise
- 
 
     def is_type(self, data_type):
-        # make use of _set_return_value?
-        # print here
-        pass
+        self._set_return_value()
+
+        try:
+            assert isinstance(self.return_value, data_type)
+            print(f"Test {self.title}, {self.func.__name__}(): Test passed")
+        except AssertionError:
+            print(
+                f"""Return value should be of type {self.return_value.__class__.__name__}"""
+            )
+            raise
 
     def _set_return_value(self):
-        if (hasattr(self, "args")):
+        if hasattr(self, "args"):
             self.return_value = self.func(*self.args)
         else:
             self.return_value = self.func()
-
 
     def returns(self):
         # print here
