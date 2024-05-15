@@ -1,16 +1,22 @@
+from test_api.checks import Check, SkipCheck
+
 """
-This is a demonstration problem to help you learn how to use `pytest`.
+This is a demonstration problem to help you learn how to use the pre-made
+tests.
 
 The (not very useful) function `count_to_two` should count to two, but is
-going wrong. To see it
-fail its tests, from the command line, type:
+going wrong. To see the first test pass, from the command line, type:
 
-pytest -vvv 00_demonstration/counter.py
+python 00_demonstration.py
 
-Then fix the code by changing the 1 on line 17 to 2.
+The second test is currently being skipped, to run this test you should change
+`SkipCheck` to `Check` and run the same `python` command. This test should
+fail until the code is fixed.
 
-Then run pytest using the same command and you should see all the tests pass.
+To fix the code, you should add 2 to the counter rather than 1.
 
+Then run using the same `python` command in the terminal and you should see
+all the tests pass.
 """
 
 
@@ -20,12 +26,5 @@ def count_to_two():
     return counter
 
 
-# Do not change code below this line
-
-
-def test_returns_an_integer():
-    assert type(count_to_two()) is int
-
-
-def test_counts_to_two():
-    assert count_to_two() == 2
+Check(count_to_two, 'returns integer').is_type(int)
+SkipCheck(count_to_two, 'returns 2').returns(2)  # Switch SkipCheck to Check
