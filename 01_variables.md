@@ -11,11 +11,12 @@ d = 17.1
 
 You can start the REPL by typing `python` at the command line prompt. Then type the input at the Python prompt, like this:
 
-<img src="repl.png" alt="" width=609 height=120 title="Python REPL"></img>
+<img src="img/repl.png" alt="" width=609 height=120 title="Python REPL"></img>
 
 Read through the following expressions and predict the _value_ and _data type_ of each one - e.g. is it a string, an integer, a float?
 
 Justify your prediction and then use Python to check if you were correct. You can use the `type` command to help: eg:
+
 ```python
 type(a * b)
 ```
@@ -23,71 +24,71 @@ type(a * b)
 Make sure you understand why you got the results you did and investigate any that surprised you. You can use the [Python documentation](https://docs.python.org/3/).
 [Speedsheet](https://speedsheet.io/s/python) for Python is also useful for quick reference.
 
-A: 
+A:
+
 ```python
 a * b
 ```
 
+B:
 
-B: 
 ```python
 b * c
 ```
 
+C:
 
-C: 
 ```python
 b + c
 ```
 
+D:
 
-D: 
 ```python
 d - a
 ```
 
+E:
 
-E: 
 ```python
 a % b
 ```
 
+F:
 
-F: 
 ```python
 a % 5.0
 ```
 
+G:
 
-G: 
 ```python
 b**2
 ```
 
+H:
 
-H: 
 ```python
 a + b
 ```
 
+I:
 
-I: 
 ```python
 b / a
 ```
 
+J:
 
-J: 
 ```python
 a // b
 ```
 
-
 K:
+
 ```python
 len('northcoders') + b
 ```
-
 
 # Strings
 
@@ -125,13 +126,13 @@ G: A new variable called `middle_name` with value `john`
 
 H: A new variable called `full_honours` with value `Mr David John Bartlett, Senior Tutor`. (Note the comma!)
 
-
 Note: it's easy to create brand new variables by just typing them in. For example:
+
 ```python
 shouty_name = 'DAVID JOHN BARTLETT'
 ```
-Please do not do this. The purpose of this exercise is to **create new variables from the original ones**.
 
+Please do not do this. The purpose of this exercise is to **create new variables from the original ones**.
 
 # Booleans
 
@@ -141,97 +142,98 @@ Justify your prediction and then type them into the Python REPL to check if you 
 
 Make sure you understand why you got the results you did and investigate any that surprise you.
 
-A: 
+A:
+
 ```
 30 > 12
 ```
 
+B:
 
-B: 
 ```
 4 < 4
 ```
 
+C:
 
-C: 
 ```
 12 == '12'
 ```
 
+D:
 
-D: 
 ```
 7 < 7.0
 ```
 
+E:
 
-E: 
 ```
 1 == True
 ```
 
+F:
 
-F: 
 ```
 0.9 < True
 ```
 
+G:
 
-G: 
 ```
 14 > 5 and len('tree') == 8/2
 ```
 
-
 H:
+
 ```
 3 and 4
 ```
 
-
 I:
+
 ```
 3 and 0
 ```
 
-
 J:
+
 ```
 0 and 3
 ```
 
-
 K:
+
 ```
 3 > 4 or 5 > 2
 ```
 
+L:
 
-L: 
 ```
 5 or 0.7
 ```
 
+M:
 
-M: 
 ```
 5 > 10 or 4
 ```
 
-
 N:
+
 ```
 not 10 > 5
 ```
 
-
 O:
+
 ```
 not 10 < 5
 ```
 
-
 P:
+
 ```
 not 3
 ```
