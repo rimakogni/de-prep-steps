@@ -13,10 +13,14 @@ class SkipCheck:
         pass
 
     def returns(self, return_value):
-        print(f"Test {self.title}, {self.func.__name__}(): skipping test...")
+        print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
+
+    # TODO: Add method for checking for input mutation!
 
 
 class Check:
+    # TODO: Flip title and func name in test outputs
+
     def __init__(self, func, title):
         self.func = func
         self.title = title
@@ -29,19 +33,34 @@ class Check:
         self._set_return_value()
 
         if self.return_value is not original_data:
-            print(f"Test {self.title}, {self.func.__name__}(): Test passed")
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test passed, "
+                "new object returned"
+            )
+
         else:
-            print("Return value should be a new object")
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test failed, "
+                "return value should be a new object"
+            )
+
+        print(feedback_msg)
 
     def is_type(self, data_type):
         self._set_return_value()
+
         if isinstance(self.return_value, data_type):
-            print(f"Test {self.title}, {self.func.__name__}(): Test passed")
-        else:
-            print(
-                f"""Return value should be of type {
-                    self.return_value.__class__.__name__}"""
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test passed, "
+                "correct data type returned"
             )
+        else:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Return value "
+                f"should be of type {self.return_value.__class__.__name__}"
+            )
+
+        print(feedback_msg)
 
     def _set_return_value(self):
         if hasattr(self, "args"):
@@ -51,10 +70,17 @@ class Check:
 
     def returns(self, expected_return_value):
         self._set_return_value()
+
         if self.return_value == expected_return_value:
-            print(f"Test {self.title}, {self.func.__name__}(): Test passed")
-        else:
-            print(
-                f"""Test {self.title}, {self.func.__name__}(): expected {
-                    expected_return_value}, but received {self.return_value}"""
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test passed"
             )
+        else:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: expected "
+                f"{expected_return_value}, but received {self.return_value}"
+            )
+
+        print(feedback_msg)
+
+    # TODO: Add method for checking for input mutation!

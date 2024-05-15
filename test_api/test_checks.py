@@ -46,7 +46,7 @@ class TestSkipCheck:
         skip.returns(4)
 
         captured = capsys.readouterr()
-        log_message = f"Test {test_title}, {add.__name__}(): skipping test..."
+        log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
 
         assert log_message in captured.out
 
@@ -80,8 +80,6 @@ class TestCheck:
 
         check.when_called_with(1, 2)
 
-        # assert 1 in check.args
-        # assert 2 in check.args
         assert check.args == (1, 2)
 
     def test_when_called_with_returns_self(self):
@@ -121,15 +119,18 @@ class TestCheck:
     ):
         def return_list(some_list):
             return some_list
+        test_title = "returns different list"
 
-        check = Check(return_list, "returns different list")
+        check = Check(return_list, test_title)
 
         test_list = [1, 2, 3]
 
         check.when_called_with(test_list).is_not(test_list)
 
         captured = capsys.readouterr()
-        log_message = "Return value should be a new object"
+        log_message = (
+            f"{return_list.__name__}(), Test {test_title}: Test failed, "
+            "return value should be a new object")
 
         assert log_message in captured.out
 
@@ -148,7 +149,8 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"Test {test_title}, {return_list.__name__}(): Test passed"
+            f"{return_list.__name__}(), Test {test_title}: Test passed, new "
+            "object returned"
         )
 
         assert log_message in captured.out
@@ -168,7 +170,8 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"Test {test_title}, {return_list.__name__}(): Test passed"
+            f"{return_list.__name__}(), Test {test_title}: Test passed, "
+            f"correct data type returned"
         )
 
         assert log_message in captured.out
@@ -189,7 +192,8 @@ class TestCheck:
         captured = capsys.readouterr().out
 
         log_message = (
-            f"Return value should be of type {test_list.__class__.__name__}"
+            f"{return_list.__name__}(), Test {test_title}: Return value should"
+            f" be of type {test_list.__class__.__name__}"
         )
 
         assert log_message in captured
@@ -204,7 +208,7 @@ class TestCheck:
         check.when_called_with(4, 4).returns(8)
 
         captured = capsys.readouterr()
-        log_message = f"Test {test_title}, {add.__name__}(): Test passed"
+        log_message = f"{add.__name__}(), Test {test_title}: Test passed"
 
         assert log_message in captured.out
 
@@ -220,7 +224,7 @@ class TestCheck:
         check.when_called_with(4, 4).returns(8)
 
         captured = capsys.readouterr()
-        log_message = f"Test {test_title}, {
-            add.__name__}(): expected 8, but received 9"
+        log_message = (
+            f"{add.__name__}(), Test {test_title}: expected 8, but received 9")
 
         assert log_message in captured.out
