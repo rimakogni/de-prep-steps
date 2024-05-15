@@ -111,24 +111,11 @@ class TestCheck:
 
         check = Check(add, "add")
 
-        returned = check.when_called_with(1, 2)
+        check.when_called_with(1, 2)
 
         check._set_return_value()
 
         assert check.return_value == 3
-
-    def test_is_not_raises_assertion_error_when_return_value_IS_the_given_object(
-        self,
-    ):
-        def return_list(some_list):
-            return some_list
-
-        check = Check(return_list, "returns different list")
-
-        test_list = [1, 2, 3]
-
-        with pytest.raises(AssertionError):
-            check.when_called_with(test_list).is_not(test_list)
 
     def test_is_not_prints_helpful_message_when_return_value_IS_the_given_object(
         self, capsys
@@ -140,22 +127,12 @@ class TestCheck:
 
         test_list = [1, 2, 3]
 
-        with pytest.raises(AssertionError):
-            check.when_called_with(test_list).is_not(test_list)
+        check.when_called_with(test_list).is_not(test_list)
 
-            captured = capsys.readouterr()
-            log_message = "Return value should be a new object"
+        captured = capsys.readouterr()
+        log_message = "Return value should be a new object"
 
-            assert log_message in captured.out
-
-        # try:
-        #     check.when_called_with(test_list).is_not(test_list)
-        #     raise Exception("Function should raise AssertionError")
-        # except AssertionError:
-        #     captured = capsys.readouterr()
-        #     log_message = "Return value should be a new object"
-
-        #     assert log_message in captured.out
+        assert log_message in captured.out
 
     def test_is_not_prints_helpful_message_when_return_value_IS_NOT_the_given_object(
         self, capsys
@@ -208,12 +185,42 @@ class TestCheck:
 
         test_list = [1, 2, 3]
 
-        with pytest.raises(AssertionError):
-            check.when_called_with(test_list).is_type(str)
+        check.when_called_with(test_list).is_type(str)
 
-            captured = capsys.readouterr().out
-            log_message = (
-                f"Return value should be of type {test_list.__name__}"
-            )
+        captured = capsys.readouterr().out
 
-            assert log_message in captured
+        log_message = (
+            f"Return value should be of type {test_list.__class__.__name__}"
+        )
+
+        assert log_message in captured
+
+    def test_returns_should_print_test_passed_message(self, capsys):
+        test_title = "returns 8"
+
+        def add(num_1, num_2):
+            return num_1 + num_2
+
+        check = Check(add, test_title)
+        check.when_called_with(4, 4).returns(8)
+
+        captured = capsys.readouterr()
+        log_message = f"Test {test_title}, {add.__name__}(): Test passed"
+
+        assert log_message in captured.out
+
+    def test_returns_prints_message_when_return_value_is_not_expected(
+        self, capsys
+    ):
+        test_title = "returns 8"
+
+        def add(num_1, num_2):
+            return num_1 + num_2 + 1
+
+        check = Check(add, test_title)
+        check.when_called_with(4, 4).returns(8)
+
+        captured = capsys.readouterr()
+        log_message = f"{add.__name__}: expected 8, but received 9"
+
+        assert log_message in captured.out
