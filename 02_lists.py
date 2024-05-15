@@ -1,5 +1,6 @@
 from test_api.checks import Check, SkipCheck
 
+
 """
 ### get_even_nums ###
 
@@ -73,6 +74,7 @@ SkipCheck(
     get_items_longer_than, "excludes strings equal to the max len"
 ).when_called_with(["a", "bb", "ccc"], 2).returns(["ccc"])
 
+
 """
 ### get_sandwich_filling ###
 
@@ -96,24 +98,28 @@ def get_sandwich_filling(sandwich):
     pass
 
 
-def test_returns_a_list_with_a_single_filling():
-    cheese_sandwich = ["bread", "lonely slice of cheese", "bread"]
-    return_value = get_sandwich_filling(cheese_sandwich)
-    assert return_value == ["lonely slice of cheese"]
+SkipCheck(
+    get_sandwich_filling, "returns a list with a single filling"
+).when_called_with(
+    ["bread", "lonely slice of cheese", "bread"]
+).returns(["lonely slice of cheese"])
+
+SkipCheck(
+    get_sandwich_filling, "returns a list with a multiple fillings"
+).when_called_with(
+    ["bread", "tomato", "lettuce", "cheese", "patty", "bread"]
+).returns(["tomato", "lettuce", "cheese", "patty"])
+
+SkipCheck(
+    get_sandwich_filling, "returns an empty list when there are no fillings"
+).when_called_with(
+    ["bread", "bread"]
+).returns([])
 
 
-def test_returns_a_list_of_fillings():
-    burger = ["bread", "tomato", "lettuce", "cheese", "patty", "bread"]
-    return_value = get_sandwich_filling(burger)
-    assert return_value == ["tomato", "lettuce", "cheese", "patty"]
+"""
+### remove_item ###
 
-
-def test_returns_an_empty_list_when_no_fillings():
-    bread_sandwich = ["bread", "bread"]
-    return_value = get_sandwich_filling(bread_sandwich)
-    assert return_value == []
-
-    """
 Write a function, remove_item, that takes a list (items) and a number (n).
 Return a new list without the item at position n. This should be a new list and
 the item should still exist in the original list
@@ -129,29 +135,28 @@ def remove_item(items, n):
     pass
 
 
-def test_returns_a_list_without_the_specified_element():
-    return_value = remove_item([1], 0)
-    assert return_value == []
+SkipCheck(
+    remove_item, "returns a list with specified element removed"
+).when_called_with([1], 0).returns([])
+
+SkipCheck(
+    remove_item,
+    "returns a list containing all elements that haven't been removed"
+).when_called_with([1, 2, 3, 4, 5], 2).returns([1, 2, 4, 5])
+
+SkipCheck(
+    remove_item,
+    "only removes the value at the specified index"
+).when_called_with([1, 2, 1, 2, 1], 2).returns([1, 2, 2, 1])
+
+test_list = [1, 2, 3]
+SkipCheck(
+    remove_item,
+    "returns a new list"
+).when_called_with(test_list, 2).is_not(test_list)
 
 
-def test_returns_a_list_including_other_elements():
-    return_value = remove_item([1, 2, 3, 4, 5], 2)
-    assert return_value == [1, 2, 4, 5]
-
-
-def test_only_removes_the_specified_element():
-    return_value = remove_item([1, 2, 1, 2, 1], 2)
-    assert return_value == [1, 2, 2, 1]
-
-
-def test_returns_a_new_list():
-    nums = [1, 2, 3]
-    return_value = remove_item(nums, 2)
-    assert (
-return_value is not nums
-), "Returned list should not be the same one that was passed in"  # noqa
-
-
+# TODO: THIS TEST NEEDS CHANGING!
 def test_element_is_still_included_in_original_list():
     nums = [1, 2, 3]
     remove_item(nums, 2)
@@ -159,6 +164,8 @@ def test_element_is_still_included_in_original_list():
 
 
 """
+### merge_lists ###
+
 Write a function that takes two lists (list1 and list2) and
 returns a new list with all of the elements of list1 followed by all of the
 elements of list2.
@@ -175,26 +182,24 @@ def merge_lists(list1, list2):
     pass
 
 
-def test_returns_two_single_elements_merged():
-    return_value = merge_lists([1], [2])
-    assert return_value == [1, 2]
+SkipCheck(
+    merge_lists, 'merges two single element lists together'
+).when_called_with([1], [2]).returns([1, 2])
+
+SkipCheck(
+    merge_lists, 'merges two multi element lists together'
+).when_called_with([1, 2, 3], [4, 5, 6]).returns([1, 2, 3, 4, 5, 6])
+
+SkipCheck(
+    merge_lists, 'merges two lists when one is empty'
+).when_called_with([1, 2, 3], []).returns([1, 2, 3])
+
+SkipCheck(
+    merge_lists, 'merges two lists when both are empty'
+).when_called_with([], []).returns([])
 
 
-def test_returns_two_multiple_elements_lists_merged_together():
-    return_value = merge_lists([1, 2, 3], [4, 5, 6])
-    assert return_value == [1, 2, 3, 4, 5, 6]
-
-
-def test_merges_empty_lists():
-    return_value = merge_lists([1, 2, 3], [])
-    assert return_value == [1, 2, 3]
-
-
-def test_returns_an_empty_list_if_both_are_empty():
-    return_value = merge_lists([], [])
-    assert return_value == []
-
-
+# TODO: THIS TEST NEEDS CHANGING!
 def test_original_lists_are_unchanged():
     list1 = [1, 2, 3]
     list2 = [4, 5, 6]
@@ -204,6 +209,8 @@ def test_original_lists_are_unchanged():
 
 
 """
+### is_item_omnipresent ###
+
 Write a function that takes an list of nested lists (lists) and an item to
 check for (item).
 It should return True if the passed item is present in every list inside lists.
@@ -225,27 +232,27 @@ def is_item_omnipresent(lists, item):
     pass
 
 
-def test_returns_false_if_item_missing_from_all():
-    return_value = is_item_omnipresent([[1], [2]], 3)
-    assert return_value == False  # noqa
+SkipCheck(
+    is_item_omnipresent, "returns false if item is missing from all lists"
+).when_called_with([[1], [2]], 3).returns(False)
 
+SkipCheck(
+    is_item_omnipresent, "returns false if item is missing from a single list"
+).when_called_with([[1], [2]], 1).returns(False)
 
-def test_returns_false_if_item_missing_from_one():
-    return_value = is_item_omnipresent([[1], [2]], 1)
-    assert return_value == False  # noqa
+SkipCheck(
+    is_item_omnipresent, "returns True if item is present in all lists"
+).when_called_with([[1], [1], [1]], 1).returns(True)
 
-
-def test_returns_true_if_item_present_in_all():
-    return_value = is_item_omnipresent([[1], [1], [1]], 1)
-    assert return_value == True  # noqa
-
-
-def test_returns_true_if_item_included_amongst_other_elements():
-    return_value = is_item_omnipresent([[1, 2], [2, 3], [2, 2]], 2)
-    assert return_value == True  # noqa
+SkipCheck(
+    is_item_omnipresent,
+    "returns True if item is present amongst other elements in mixed lists"
+).when_called_with([[1], [1], [1]], 1).returns(True)
 
 
 """
+### flatten_lists ###
+
 Write a function, flatten_list_by_one, that when given a list with one or more
 nested lists (nested_lists) returns a new list with one less level of nesting.
 
@@ -263,16 +270,14 @@ def flatten_list_by_one(nested_lists):
     pass
 
 
-def test_removes_single_layer_of_nesting():
-    return_value = flatten_list_by_one([[1], [2]])
-    assert return_value == [1, 2]
+SkipCheck(
+    flatten_list_by_one, 'removes single layer of nesting'
+).when_called_with([[1], [2]]).returns([1, 2])
 
+SkipCheck(
+    flatten_list_by_one, 'subsequent layers of nesting are preserved'
+).when_called_with([[[1, 2]], [[3, 4]]]).returns([[1, 2], [3, 4]])
 
-def test_removes_subsequent_layers_of_nesting_are_preserved():
-    return_value = flatten_list_by_one([[[1, 2]], [[3, 4]]])
-    assert return_value == [[1, 2], [3, 4]]
-
-
-def test_combines_levels_of_nesting():
-    return_value = flatten_list_by_one([[1, 2], [3, [4, 5]]])
-    assert return_value == [1, 2, 3, [4, 5]]
+SkipCheck(
+    flatten_list_by_one, 'combines levels of nesting'
+).when_called_with([[1, 2], [3, [4, 5]]]).returns([1, 2, 3, [4, 5]])
