@@ -1,4 +1,8 @@
+from test_api.checks import Check, SkipCheck
+
 """
+### get_even_nums ###
+
 Write a function, get_even_nums, that takes an list of numbers (nums) and
 returns a list of only the even numbers.
 
@@ -11,27 +15,30 @@ def get_even_nums(nums):
     pass
 
 
-def test_returns_an_empty_list_for_no_numbers():
-    return_value = get_even_nums([])
-    assert return_value == []
+Check(
+    get_even_nums,
+    "returns an empty list when there are no numbers"
+).when_called_with([]).returns([])
 
+Check(
+    get_even_nums,
+    "returns given list when all numbers are even"
+).when_called_with([2, 4, 6]).returns([2, 4, 6])
 
-def test_includes_even_numbers():
-    return_value = get_even_nums([2, 4, 6])
-    assert return_value == [2, 4, 6]
+Check(
+    get_even_nums,
+    "returns empty list when all numbers are odd"
+).when_called_with([1, 3, 5]).returns([])
 
-
-def test_excludes_odd_numbers():
-    return_value = get_even_nums([1, 3, 5])
-    assert return_value == []
-
-
-def test_includes_even_numbers_and_removes_odds():
-    return_value = get_even_nums([1, 2, 3])
-    assert return_value == [2]
+Check(
+    get_even_nums,
+    "returns empty list when numbers are mixed, even and odd"
+).when_called_with([1, 3, 5]).returns([])
 
 
 """
+### get_items_longer_than ###
+
 Write a function, get_items_longer_than, that takes a list of strings (strs)
 and a length (max_len).
 It should return an list of only the items longer than the given length.
@@ -49,27 +56,26 @@ def get_items_longer_than(strs, max_len):
     pass
 
 
-def test_returns_an_empty_list_for_no_strings():
-    return_value = get_items_longer_than([], 1)
-    assert return_value == []
+# ❗ Remember to change SkipCheck to Check!
+SkipCheck(
+    get_items_longer_than, "returns an empty list when there are no strings"
+).when_called_with([], 1).returns([])
 
+SkipCheck(
+    get_items_longer_than, "returns all strings longer than the max len"
+).when_called_with(["a", "bb"], 0).returns(["a", "bb"])
 
-def test_includes_strings_longer_than_the_max_len():
-    return_value = get_items_longer_than(["a", "bb"], 0)
-    assert return_value == ["a", "bb"]
+SkipCheck(
+    get_items_longer_than, "excludes strings shorter than the max len"
+).when_called_with(["a", "bb"], 3).returns([])
 
-
-def test_excludes_strings_shorter_than_the_max_len():
-    return_value = get_items_longer_than(["a", "bb"], 3)
-    assert return_value == []
-
-
-def test_excludes_strings_equal_to_the_max_len():
-    return_value = get_items_longer_than(["a", "bb", "ccc"], 2)
-    assert return_value == ["ccc"]
-
+SkipCheck(
+    get_items_longer_than, "excludes strings equal to the max len"
+).when_called_with(["a", "bb", "ccc"], 2).returns(["ccc"])
 
 """
+### get_sandwich_filling ###
+
 Write a function, get_sandwich_filling, that takes a list of sandwich
 ingredients (sandwich).
 This list represents the ingredients used to make a sandwich, it's first and
@@ -107,8 +113,7 @@ def test_returns_an_empty_list_when_no_fillings():
     return_value = get_sandwich_filling(bread_sandwich)
     assert return_value == []
 
-
-"""
+    """
 Write a function, remove_item, that takes a list (items) and a number (n).
 Return a new list without the item at position n. This should be a new list and
 the item should still exist in the original list
@@ -143,8 +148,8 @@ def test_returns_a_new_list():
     nums = [1, 2, 3]
     return_value = remove_item(nums, 2)
     assert (
-        return_value is not nums
-    ), "Returned list should not be the same one that was passed in"  # noqa
+return_value is not nums
+), "Returned list should not be the same one that was passed in"  # noqa
 
 
 def test_element_is_still_included_in_original_list():
