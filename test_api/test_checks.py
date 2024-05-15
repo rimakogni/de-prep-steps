@@ -20,23 +20,34 @@ class TestSkipCheck:
 
         assert skip.when_called_with(2) is skip
 
-    def test_is_not_returns_None(self):
+    def test_is_not_should_print_skip_test_message(self, capsys):
         def add(num):
             return num + num
+        test_title = "add func"
+        skip = SkipCheck(add, test_title)
 
-        skip = SkipCheck(add, "add")
+        skip.is_not({"lucky_number": 13})
 
-        assert skip.is_not({"lucky_number": 13}) is None
+        captured = capsys.readouterr()
+        log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
 
-    def test_is_type_returns_None(self):
+        assert log_message in captured.out
+
+    def test_is_type_should_print_skip_test_message(self, capsys):
         def add(num):
             return num + num
+        test_title = "add func"
 
-        skip = SkipCheck(add, "add")
+        skip = SkipCheck(add, test_title)
 
-        assert skip.is_type(str) is None
+        skip.is_type(str)
 
-    def test_returns_should_return_skip_test_message(self, capsys):
+        captured = capsys.readouterr()
+        log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
+
+        assert log_message in captured.out
+
+    def test_returns_should_print_skip_test_message(self, capsys):
         test_title = "returns 8"
 
         def add(num):

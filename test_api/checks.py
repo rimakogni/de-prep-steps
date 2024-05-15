@@ -7,10 +7,10 @@ class SkipCheck:
         return self
 
     def is_not(self, original_data):
-        pass
+        print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
 
     def is_type(self, data_type):
-        pass
+        print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
 
     def returns(self, return_value):
         print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
