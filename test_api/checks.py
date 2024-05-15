@@ -4,7 +4,7 @@ class SkipCheck:
         self.title = title
 
     def when_called_with(self, *args):
-        pass
+        return self
 
     def is_not(self, original_data):
         pass

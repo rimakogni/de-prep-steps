@@ -12,13 +12,13 @@ class TestSkipCheck:
         assert skip.func == add
         assert skip.title == "add"
 
-    def test_when_called_with_returns_None(self):
+    def test_when_called_with_returns_self(self):
         def add(num):
             return num + num
 
         skip = SkipCheck(add, "add")
 
-        assert skip.when_called_with(2) is None
+        assert skip.when_called_with(2) is skip
 
     def test_is_not_returns_None(self):
         def add(num):
