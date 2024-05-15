@@ -19,8 +19,6 @@ class SkipCheck:
 
 
 class Check:
-    # TODO: Flip title and func name in test outputs
-
     def __init__(self, func, title):
         self.func = func
         self.title = title
