@@ -1,10 +1,9 @@
 from checks import SkipCheck, Check
-import pytest
 
 
 class TestSkipCheck:
 
-    def test_skipCheck_is_initalised_with_a_function_and_title(self):
+    def test_skipCheck_is_initialised_with_a_function_and_title(self):
         def add(num):
             return num + num
 
@@ -221,6 +220,7 @@ class TestCheck:
         check.when_called_with(4, 4).returns(8)
 
         captured = capsys.readouterr()
-        log_message = f"{add.__name__}: expected 8, but received 9"
+        log_message = f"Test {test_title}, {
+            add.__name__}(): expected 8, but received 9"
 
         assert log_message in captured.out

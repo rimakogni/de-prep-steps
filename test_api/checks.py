@@ -39,7 +39,8 @@ class Check:
             print(f"Test {self.title}, {self.func.__name__}(): Test passed")
         else:
             print(
-                f"""Return value should be of type {self.return_value.__class__.__name__}"""
+                f"""Return value should be of type {
+                    self.return_value.__class__.__name__}"""
             )
 
     def _set_return_value(self):
@@ -54,5 +55,6 @@ class Check:
             print(f"Test {self.title}, {self.func.__name__}(): Test passed")
         else:
             print(
-                f"""{self.func.__name__}: expected {expected_return_value}, but received {self.return_value}"""
+                f"""Test {self.title}, {self.func.__name__}(): expected {
+                    expected_return_value}, but received {self.return_value}"""
             )
