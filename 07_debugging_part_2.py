@@ -15,10 +15,10 @@ Can you work out what needs changing to make the function pass all the tests?
 
 def count_occurrences(list_to_check, value):
     count = 0
-    # for i in range(list_to_check):
-    #     if list_to_check[i] = value:
-    #         count + 1
-    #         return count
+    for i in range(list_to_check):
+        if list_to_check[i] = value:
+            count + 1
+            return count
 
 
 # Do not change tests!
