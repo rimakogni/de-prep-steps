@@ -1,4 +1,9 @@
+from test_api.checks import Check, SkipCheck
+import typing
+
 """
+### add_price_to_product ###
+
 Write a function that takes a dictionary (`product`) that looks like this:
 `{ 'type': 'Tofu slices' }`,
 and a number (`price`). Add a price property to this dictionary and set its
@@ -17,16 +22,19 @@ def add_price_to_product(product, price):
     pass
 
 
-def test_empty_product_produces_no_output():
-    result = add_price_to_product({}, 2.20)
-    assert result == {}
+Check(add_price_to_product, 'returns empty dictionary when there is no product')\
+    .when_called_with({}, 2.20).returns({})
+
+Check(add_price_to_product, 'adds price to single product in dictionary')\
+    .when_called_with({"type": "Tofu slices"}, 2.20)\
+    .returns({"type": "Tofu slices", "price": 2.20})
+
+Check(add_price_to_product, 'adds price to single product with multiple fields')\
+    .when_called_with({"type": "Tofu slices", "flavour": "chocolate"}, 2.50)\
+    .returns({"type": "Tofu slices", "flavour": "chocolate", "price": 2.50})
 
 
-def test_single_product_has_price_added():
-    result = add_price_to_product({"type": "Tofu slices"}, 2.20)
-    assert result == {"type": "Tofu slices", "price": 2.20}
-
-
+# TODO: refactor to use `is` method
 def test_same_dictionary_is_returned():
     product = {"type": "Tofu slices"}
     result = add_price_to_product(product, 2.20)
@@ -34,17 +42,9 @@ def test_same_dictionary_is_returned():
     assert result is product
 
 
-def test_product_can_have_many_fields():
-    product = {"type": "Tofu slices", "flavour": "chocolate"}
-    result = add_price_to_product(product, 2.50)
-    assert result == {
-        "type": "Tofu slices",
-        "flavour": "chocolate",
-        "price": 2.50,
-    }
-
-
 """
+### add_property_to_product ###
+
 Write a function that takes three arguments:
 
  - a dictionary (`product`) that looks like this: `{'type': 'Terminator 2:
@@ -73,99 +73,36 @@ def add_property_to_product(product, property, value):
     pass
 
 
-def test_empty_product_gains_single_property():
-    result = add_property_to_product({}, "length", "2h 36m")
-    assert result == {"length": "2h 36m"}
+# ❗ Remember to change SkipCheck to Check!
+SkipCheck(add_property_to_product, 'empty product gains a single property')\
+    .when_called_with({}, "length", "2h 36m").returns({"length": "2h 36"})
+
+SkipCheck(add_property_to_product, 'string property added to product')\
+    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, "length", "2h 36m")\
+    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, "length": "2h 36m"})
+
+SkipCheck(add_property_to_product, 'integer property added to product')\
+    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, 36, 42)\
+    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, 36: 42})
+
+SkipCheck(add_property_to_product, 'float property added to product')\
+    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, 36.1, 'dave')\
+    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, 36.1: "dave"})
+
+SkipCheck(add_property_to_product, 'boolean property added to product')\
+    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, True, False)\
+    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, True: False})
+
+SkipCheck(add_property_to_product, 'list property NOT added to product')\
+    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, [1, 2, 3], 'a')\
+    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1})
+
+SkipCheck(add_property_to_product, 'dictionary property NOT added to product')\
+    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, {"a": "b"}, 'a')\
+    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1})
 
 
-def test_string_property_added_to_product():
-    product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-    result = add_property_to_product(product, "length", "2h 36m")
-    assert result == {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-        "length": "2h 36m",
-    }
-
-
-def test_integer_property_added_to_product():
-    product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-    result = add_property_to_product(product, 36, 42)
-    assert result == {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-        36: 42,
-    }
-
-
-def test_float_property_added_to_product():
-    product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-    result = add_property_to_product(product, 36.1, "dave")
-    assert result == {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-        36.1: "dave",
-    }
-
-
-def test_boolean_property_added_to_product():
-    product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-    result = add_property_to_product(product, True, False)
-    assert result == {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-        True: False,
-    }
-
-
-def test_list_property_not_added_to_product():
-    product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-    result = add_property_to_product(product, [1, 2, 3], "a")
-    assert result == {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-
-
-def test_dictionary_property_not_added_to_product():
-    product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-    result = add_property_to_product(product, {"a": "b"}, "a")
-    assert result == {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
-
-
+# TODO: Rewrite this test to use `is`
 def test_same_dictionary_returned():
     product = {
         "type": "Terminator 2: Judgement Day",
@@ -178,6 +115,8 @@ def test_same_dictionary_returned():
 
 
 """
+### create_northcoder ###
+
 Write a function that takes a string (name) and a number (year_of_birth) and
 returns an object with:
 
@@ -204,25 +143,22 @@ def create_northcoder(name, year_of_birth):
     pass
 
 
-def test_creates_northcoder_with_correct_age():
-    result = create_northcoder("Joe", 2002)
-    expected = {"name": "Joe", "age": 21, "language": "Python"}
-    assert result == expected
+SkipCheck(create_northcoder, "creates northcoder with correct age")\
+    .when_called_with("Joe", 2002)\
+    .returns({"name": "Joe", "age": 21, "language": "Python"})
 
+SkipCheck(create_northcoder, "2023 baby is 0 years old")\
+    .when_called_with("Paul", 2023)\
+    .returns({"name": "Paul", "age": 0, "language": "Python"})
 
-def test_2023_baby_is_0_years_old():
-    result = create_northcoder("Paul", 2023)
-    expected = {"name": "Paul", "age": 0, "language": "Python"}
-    assert result == expected
-
-
-def test_2123_baby_shows_age_error():
-    result = create_northcoder("Zarkon", 2123)
-    expected = {"name": "Zarkon", "age": "error", "language": "Python"}
-    assert result == expected
+SkipCheck(create_northcoder, "2123 baby is shows age error")\
+    .when_called_with("Zarkon", 2123)\
+    .returns({"name": "Zarkon", "age": "error", "language": "Python"})
 
 
 """
+### delete_many_passwords ###
+
 Write a function that takes an array of user dictionaries (`users`), and
 deletes the password key value pair on each user and returns the list.
 If a dictionary does not already have a password key then it should be
@@ -252,55 +188,37 @@ def delete_many_passwords(users):
     pass
 
 
-def test_changes_single_dict():
-    users = [{"name": "Barry", "password": "ilovetea", "department": "Tea"}]
-    result = delete_many_passwords(users)
-    assert result == [{"name": "Barry", "department": "Tea"}]
+SkipCheck(delete_many_passwords, 'changes single password')\
+    .when_called_with([{"name": "Barry", "password": "ilovetea", "department": "Tea"}])\
+    .returns([{"name": "Barry", "department": "Tea"}])
 
+SkipCheck(delete_many_passwords, 'does not change user without password')\
+    .when_called_with([{"name": "Sandeep", "favourite_drink": "Coffee"}])\
+    .returns([{"name": "Sandeep", "favourite_drink": "Coffee"}])
 
-def test_changes_many_users():
-    users1 = [
+SkipCheck(delete_many_passwords, 'changes many users')\
+    .when_called_with([
         {"name": "Barry", "password": "ilovetea", "department": "Tea"},
-        {
-            "name": "Sandeep",
-            "password": "ilovecoffee",
-            "favourite_drink": "Coffee",
-        },
+        {"name": "Sandeep", "password": "ilovecoffee", "favourite_drink": "Coffee"},
         {"name": "Kavita", "password": "ilovepie", "weakness": "Pie"},
-    ]
-    result1 = delete_many_passwords(users1)
-    expected = [
-        {"name": "Barry", "department": "Tea"},
-        {"name": "Sandeep", "favourite_drink": "Coffee"},
-        {"name": "Kavita", "weakness": "Pie"},
-    ]
-    assert result1 == expected
-    users2 = [
+    ])\
+    .returns([{"name": "Barry", "department": "Tea"}, {"name": "Sandeep", "favourite_drink": "Coffee"}, {"name": "Kavita", "weakness": "Pie"}])
+
+SkipCheck(delete_many_passwords, 'changes many users when some do not have passwords')\
+    .when_called_with([
         {"name": "Barry", "password": "ilovetea", "department": "Tea"},
-        {
-            "name": "Sandeep",
-            "password": "ilovecoffee",
-            "favourite_drink": "Coffee",
-        },
+        {"name": "Sandeep", "password": "ilovecoffee", "favourite_drink": "Coffee"},
         {"name": "Kavita", "weakness": "Pie"},
-    ]
-    result2 = delete_many_passwords(users2)
-    assert result2 == expected
+    ])\
+    .returns([{"name": "Barry", "department": "Tea"}, {"name": "Sandeep", "favourite_drink": "Coffee"}, {"name": "Kavita", "weakness": "Pie"}])
 
-
-def test_empty_list_is_returned():
-    users = []
-    result = delete_many_passwords(users)
-    assert result == []
-
-
-def test_does_not_change_any_object_without_password():
-    users = [{"name": "Sandeep", "favourite_drink": "Coffee"}]
-    result = delete_many_passwords(users)
-    assert result == [{"name": "Sandeep", "favourite_drink": "Coffee"}]
+SkipCheck(delete_many_passwords, 'returns empty list when no users present')\
+    .when_called_with([]).returns([])
 
 
 """
+### get_northcoders_names ###
+
 Write a function that takes a list of dictionaries with the format from
 create_northcoder (`northcoders`), and returns a new list of the users' names
 as strings.
@@ -328,24 +246,25 @@ def get_northcoders_names(northcoders):
     pass
 
 
-def test_returns_empty_list_if_input_empty():
-    assert get_northcoders_names([]) == []
+SkipCheck(get_northcoders_names, 'returns empty list if input is empty')\
+    .when_called_with([])\
+    .returns([])
 
-
-def test_gets_names_of_northcoders():
-    northcoders = [
+SkipCheck(get_northcoders_names, 'gets names of northcoders')\
+    .when_called_with([
         {"name": "Callum", "age": 31, "language": "JavaScript"},
-        {"name": "Carrie", "age": 32, "language": "Python"},
-    ]
-    assert get_northcoders_names(northcoders) == ["Callum", "Carrie"]
+        {"name": "Carrie", "age": 32, "language": "Python"}
+    ])\
+    .returns(["Callum", "Carrie"])
 
-
-def test_northcoders_missing_names_omitted():
-    northcoders = [{"age": 32, "language": "Python"}]
-    assert get_northcoders_names(northcoders) == []
+SkipCheck(get_northcoders_names, 'returns empty list if name is omitted')\
+    .when_called_with([{"age": 32, "language": "Python"}])\
+    .returns([])
 
 
 """
+### get_user_pet_age ###
+
 Write a function that takes a `user` dictionary that looks like this:
 
 {
@@ -384,30 +303,22 @@ def get_user_pet_age(user):
     pass
 
 
-def test_gets_pet_age():
-    user = {
-        "name": "Carrie",
-        "age": 26,
-        "pet": {"name": "Pixie", "age": 4, "type": "gremlin"},
-    }
-    assert get_user_pet_age(user) == 4
+SkipCheck(get_user_pet_age, 'returns pet age')\
+    .when_called_with({"name": "Carrie", "age": 26, "pet": {"name": "Pixie", "age": 4, "type": "gremlin"}})\
+    .returns(4)
 
+SkipCheck(get_user_pet_age, 'returns none if no pet')\
+    .when_called_with({"name": "Carrie", "age": 26})\
+    .returns(None)
 
-def test_returns_none_if_no_pet():
-    user = {"name": "Carrie", "age": 26}
-    assert get_user_pet_age(user) is None
-
-
-def test_returns_none_if_no_pet_age():
-    user = {
-        "name": "Carrie",
-        "age": 26,
-        "pet": {"name": "Pixie", "type": "gremlin"},
-    }
-    assert get_user_pet_age(user) is None
+SkipCheck(get_user_pet_age, 'returns none if no pet age')\
+    .when_called_with({"name": "Carrie", "age": 26, "pet": {"name": "Pixie", "type": "gremlin"}})\
+    .returns(None)
 
 
 """
+### update_voter_address ###
+
 Uh-oh! We've got some voters who've registered their addresses incorrectly!
 The `voter` dictionary looks like this:
 
@@ -457,20 +368,20 @@ def update_voter_address(voter, correct_house_number):
     pass
 
 
-def test_updates_address():
-    voter = {
-        "name": "Alex",
-        "age": 39,
-        "address": {"house_number": 2, "street": "Old St", "city": "Chester"},
-    }
-    update_voter_address(voter, 50)
-    assert voter["address"]["house_number"] == 50
+voter = {
+    "name": "Alex",
+    "age": 39,
+    "address": {"house_number": 2, "street": "Old St", "city": "Chester"},
+}
+
+SkipCheck(update_voter_address, 'function should return None')\
+    .when_called_with(voter, 50)\
+    .returns(None)
 
 
-def test_does_not_return_value():
-    voter = {
-        "name": "Alex",
-        "age": 39,
-        "address": {"house_number": 2, "street": "Old St", "city": "Chester"},
-    }
-    assert update_voter_address(voter, 50) is None
+# TODO: Can we refactor this so it is manageable by Check/SkipCheck - context manager?
+if voter["address"]["house_number"] == 50:
+    print(f"{update_voter_address.__name__}(), Test updates address: Test passed")
+else:
+    print(f"{update_voter_address.__name__}(), Test updates address: expected 50, but received {
+          voter["address"]["house_number"]}")
