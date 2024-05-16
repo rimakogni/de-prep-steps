@@ -1,4 +1,8 @@
+from test_api.checks import Check, SkipCheck
+
 """
+### triple_nums ###
+
 `triple_nums` is a function that takes a list of numbers and returns a list
 containing the result of multiplying each of those numbers by 3.
 
@@ -20,25 +24,16 @@ def triple_nums(nums):
     return tripled
 
 
-# Do not change any code below this line
+# Do not change tests!
 
-
-def test_returns_list():
-    assert type(triple_nums([])) is list
-
-
-def test_empty_input_produces_empty_output():
-    assert triple_nums([]) == []
-
-
-def test_returns_list_of_all_numbers_multiplied_by_three():
-    nums = [1, 2, 3, 4]
-    assert triple_nums(nums) == [3, 6, 9, 12]
-    nums = [10, 25, 30, 40]
-    assert triple_nums(nums) == [30, 75, 90, 120]
+Check(triple_nums, 'returns list').when_called_with([]).is_type(list)
+Check(triple_nums, 'when passed empty list returns empty list').when_called_with([]).returns([])
+Check(triple_nums, 'returns list of all numbers multiplied by three').when_called_with([10, 25, 30, 40]).returns([30, 75, 90, 120])
 
 
 """
+### shout_names ###
+
 `shout_names` is a function that takes a list of names and returns a list
 containing all of the names in capital letters followed by an
 exclamation mark "!".
@@ -56,27 +51,16 @@ def shout_names(names):
     return shouted_names
 
 
-# Do not change any code below this line
+# Do not change tests!
 
-
-def test_returns_a_list():
-    assert type(shout_names([])) == list
-
-
-def test_no_names_produces_empty_list():
-    assert shout_names([]) == []
-
-
-def test_shouts_names():
-    names = ["Carrie", "Diya", "Kyle", "Christian"]
-    expected = ["CARRIE!", "DIYA!", "KYLE!", "CHRISTIAN!"]
-    assert shout_names(names) == expected
-    names = ["Maddie", "Bethan", "Andrea", "Jade"]
-    expected = ["MADDIE!", "BETHAN!", "ANDREA!", "JADE!"]
-    assert shout_names(names) == expected
+Check(shout_names, 'returns a list').when_called_with([]).is_type(list)
+Check(shout_names, 'when passed empty list returns empty list').when_called_with([]).returns([])
+Check(shout_names, 'shouts names').when_called_with(["Carrie", "Diya", "Kyle", "Christian"]).returns(["CARRIE!", "DIYA!", "KYLE!", "CHRISTIAN!"])
 
 
 """
+### is_sweet_enough ###
+
 is_sweet_enough is a function that takes a list of food items and returns
 either True or False depending on whether every food in the array has a
 sweet flavour.
@@ -97,37 +81,24 @@ def is_sweet_enough(food_items):
     return True
 
 
-# Do not change any code below this line
+# Do not change tests!
 
+Check(is_sweet_enough, 'returns True when all foods are sweet')\
+    .when_called_with([{"name": "chocolate", "flavour": "sweet"}, {"name": "banana", "flavour": "sweet"}, {"name": "barfi", "flavour": "sweet"}])\
+    .returns(True)
 
-def test_true_when_all_sweet():
-    food_items = [
-        {"name": "chocolate", "flavour": "sweet"},
-        {"name": "banana", "flavour": "sweet"},
-        {"name": "barfi", "flavour": "sweet"},
-    ]
-    assert is_sweet_enough(food_items)
+Check(is_sweet_enough, 'returns False when no foods are sweet')\
+    .when_called_with([{"name": "samosa", "flavour": "savoury"}, {"name": "lemon", "flavour": "sour"}, {"name": "olive", "flavour": "bitter"}])\
+    .returns(False)
 
-
-def test_false_if_none_are_sweet():
-    food_items = [
-        {"name": "samosa", "flavour": "savoury"},
-        {"name": "lemon", "flavour": "sour"},
-        {"name": "olive", "flavour": "bitter"},
-    ]
-    assert not is_sweet_enough(food_items)
-
-
-def test_false_if_any_are_not_sweet():
-    food_items = [
-        {"name": "stollen", "flavour": "sweet"},
-        {"name": "cranberries", "flavour": "sour"},
-        {"name": "mince pie", "flavour": "sweet"},
-    ]
-    assert not is_sweet_enough(food_items)
+Check(is_sweet_enough, 'returns False when any foods are NOT sweet')\
+    .when_called_with([{"name": "stollen", "flavour": "sweet"}, {"name": "cranberries", "flavour": "sour"}, {"name": "mince pie", "flavour": "sweet"}])\
+    .returns(False)
 
 
 """
+### get_excited ###
+
 `get_excited` is a function that takes a piece of text and returns it with all
 of the full stops (.) replaced by exclamation marks (!).
 
@@ -148,27 +119,21 @@ def get_excited(text):
     return new_text
 
 
-def test_empty_string_returns_empty_string():
-    assert get_excited("") == ""
-
-
-def test_no_full_stops_means_text_unchanged():
-    text = "the quick brown fox jumps over the lazy dog"
-    assert get_excited(text) == text
-
-
-def test_replaces_full_stops_with_excalamation_marks():
-    text = "Today is a great day."
-    expected = "Today is a great day!"
-    assert get_excited(text) == expected
-    text = "We're gonna need a bigger boat."
-    expected = "We're gonna need a bigger boat!"
-    assert get_excited(text) == expected
-    text = "Woo. Woo. Woo. Who's ready to code?"
-    expected = "Woo! Woo! Woo! Who's ready to code?"
+Check(get_excited, 'returns empty string when passed empty string').when_called_with('').returns('')
+Check(get_excited, 'returns unchanged string when no full stops present')\
+    .when_called_with("the quick brown fox jumps over the lazy dog")\
+    .returns("the quick brown fox jumps over the lazy dog")
+Check(get_excited, 'replaces full stops with exclamation marks - single full stop')\
+    .when_called_with("We're gonna need a bigger boat.")\
+    .returns("We're gonna need a bigger boat!")
+Check(get_excited, 'replaces full stops with exclamation marks - multiple full stops')\
+    .when_called_with("Woo. Woo. Woo. Who's ready to code?")\
+    .returns("Woo! Woo! Woo! Who's ready to code?")
 
 
 """
+### shrek_characters ###
+
 shrek_characters is a function that takes a list of movie characters and
 returns a list of only the characters from the film franchise, Shrek.
 
@@ -186,36 +151,29 @@ def shrek_characters(characters):
     return shreks
 
 
-# Do not change any code below this line
+# Do not change tests!
 
-
-def test_empty_list_of_characters_produces_empty_list():
-    assert shrek_characters([]) == []
-
-
-def test_returns_empty_list_if_no_characters_from_shrek():
-    characters = [
+Check(shrek_characters, 'when passed an empty list returns an empty list').when_called_with([]).returns([])
+Check(shrek_characters, 'returns an empty list when list that contains no Shrek characters')\
+    .when_called_with([
         {
             "name": "Cedric Diggory",
             "movie": "Harry Potter and the Goblet of Fire",
         },
         {"name": "Elle Woods", "movie": "Legally Blonde"},
         {"name": "Paddington Bear", "movie": "Paddington 2"},
-    ]
-    assert shrek_characters(characters) == []
+    ]).returns([])
 
-
-def test_all_characters_if_all_in_shrek():
-    characters = [
+Check(shrek_characters, 'returns given list when list only contains Shrek characters')\
+    .when_called_with([
         {
             "name": "Shrek",
             "movie": "Shrek",
         },
         {"name": "Lord Farquaad", "movie": "Shrek"},
         {"name": "Magic Mirror", "movie": "Shrek"},
-    ]
-    assert shrek_characters(characters) == [
+    ]).returns([
         "Shrek",
         "Lord Farquaad",
         "Magic Mirror",
-    ]
+    ])
