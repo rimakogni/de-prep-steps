@@ -1,5 +1,4 @@
 from checks import SkipCheck, Check
-import copy
 
 
 class TestSkipCheck:
@@ -31,8 +30,9 @@ class TestSkipCheck:
         skip.is_not_same_as({"lucky_number": 13})
 
         captured = capsys.readouterr()
-        log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
-
+        log_message = f"Test {test_title}: skipping test..."
+    
+        assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_is_type_should_print_skip_test_message(self, capsys):
@@ -46,8 +46,9 @@ class TestSkipCheck:
         skip.is_type(str)
 
         captured = capsys.readouterr()
-        log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
+        log_message = f"Test {test_title}: skipping test..."
 
+        assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_returns_should_print_skip_test_message(self, capsys):
@@ -60,8 +61,9 @@ class TestSkipCheck:
         skip.returns(4)
 
         captured = capsys.readouterr()
-        log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
+        log_message = f"Test {test_title}: skipping test..."
 
+        assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
 
 
@@ -144,10 +146,10 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"{return_list.__name__}(), Test {test_title}: Test failed, "
-            "return value should be a new object"
+            f"Test {test_title}: Test failed, return value should be a new list"
         )
 
+        assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_is_not_same_as_prints_helpful_message_when_return_value_IS_NOT_same_as_the_given_object(
@@ -164,11 +166,9 @@ class TestCheck:
         check.when_called_with(test_list).is_not_same_as(test_list)
 
         captured = capsys.readouterr()
-        log_message = (
-            f"{return_list.__name__}(), Test {test_title}: Test passed, new "
-            "object returned"
-        )
+        log_message = f"Test {test_title}: Test passed, new Python object returned"
 
+        assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_is_type_prints_pass_message_when_value_IS_correct_type(
@@ -185,11 +185,9 @@ class TestCheck:
         check.when_called_with(test_list).is_type(list)
 
         captured = capsys.readouterr()
-        log_message = (
-            f"{return_list.__name__}(), Test {test_title}: Test passed, "
-            f"correct data type returned"
-        )
+        log_message = f"Test {test_title}: Test passed, correct data type returned"
 
+        assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_is_type_prints_helpful_message_when_return_value_IS_NOT_same_as_correct_type(
@@ -205,14 +203,15 @@ class TestCheck:
 
         check.when_called_with(test_list).is_type(str)
 
-        captured = capsys.readouterr().out
+        captured = capsys.readouterr()
 
         log_message = (
-            f"{return_list.__name__}(), Test {test_title}: Return value should"
-            f" be of type {test_list.__class__.__name__}"
+            f"Test {test_title}: Return value should "
+            f"be of type {test_list.__class__.__name__}"
         )
 
-        assert log_message in captured
+        assert f"{return_list.__name__}()" in captured.out
+        assert log_message in captured.out
 
     def test_returns_should_print_test_passed_message(self, capsys):
         test_title = "returns 8"
@@ -224,8 +223,9 @@ class TestCheck:
         check.when_called_with(4, 4).returns(8)
 
         captured = capsys.readouterr()
-        log_message = f"{add.__name__}(), Test {test_title}: Test passed"
+        log_message = f"Test {test_title}: Test passed"
 
+        assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_returns_prints_message_when_return_value_is_not_same_as_expected(
@@ -240,10 +240,9 @@ class TestCheck:
         check.when_called_with(4, 4).returns(8)
 
         captured = capsys.readouterr()
-        log_message = (
-            f"{add.__name__}(), Test {test_title}: expected 8, but received 9"
-        )
+        log_message = f"Test {test_title}: expected 8, but received 9"
 
+        assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_is_same_as_should_print_test_passed_message(self, capsys):
@@ -258,11 +257,9 @@ class TestCheck:
         check.when_called_with(test_list).is_same_as(test_list)
 
         captured = capsys.readouterr()
-        log_message = (
-            f"{return_list.__name__}(), Test {test_title}: Test passed, "
-            "same object returned"
-        )
+        log_message = f"Test {test_title}: Test passed, same object returned"
 
+        assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_is_same_as_should_print_test_failed_message(self, capsys):
@@ -278,10 +275,11 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"{return_list.__name__}(), Test {test_title}: Test failed, "
+            f"Test {test_title}: Test failed, "
             "return value should be the same object"
         )
 
+        assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_mutates_input_should_print_test_passed_message(self, capsys):
@@ -297,10 +295,11 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"{add_one_to_list.__name__}(), Test {test_title}: Test passed, "
+            f"Test {test_title}: Test passed, "
             "frogs successfully mutated"
         )
 
+        assert f"{add_one_to_list.__name__}()" in captured.out
         assert log_message in captured.out
 
     def test_mutates_input_should_print_test_failed_message(self, capsys):
@@ -316,8 +315,9 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"{add_one_to_list.__name__}(), Test {test_title}: Test failed, "
+            f"Test {test_title}: Test failed, "
             "bananas has not been mutated"
         )
 
+        assert f"{add_one_to_list.__name__}()" in captured.out
         assert log_message in captured.out

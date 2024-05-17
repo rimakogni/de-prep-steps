@@ -31,29 +31,17 @@ version number is higher than 3.9.0, everything should be fine.)
 If you don't have Python installed then go back to the `Preparing For The Course` section and
 repeat the steps there. Failing that, get in touch with us in your pre-course slack channel.
 
-## Installing `pytest`
+## Running tests
 
-You will be asked to write some code in the exercise. To check whether you have got it right,
-we will run some automated tests using a tool called `pytest`. You will be learning a _lot_ more
-about testing in general and `pytest` in particular during the course. For now, please just install
-`pytest` by typing:
+You will be asked to write some code in the exercise. To test whether you have got it right,
+we will run some automated tests using some tests that we've pre-written for you. You will be learning a _lot_ more
+about testing in general and also about a tool called `pytest` during the course. For now, please just run the files with python like so:
 
 ```bash
-pip install pytest
+python PATH_TO_FILE.py
 ```
 
 at the command prompt.
-
-You should see various messages telling you that components of the package are being downloaded. Then, to verify that the application has been installed
-correctly, type:
-
-```bash
-pytest --version
-```
-
-You should see a response such as `pytest 7.4.1` or similar.
-As before, the version numbers do not need to match exactly. So long as you don't get an error you're good
-to go 👍
 
 ## Completing and testing the exercises.
 
@@ -90,18 +78,24 @@ To terminate the REPL session, type `exit()` or hit `Ctrl+d`
 ### Function Exercises
 
 The remaining exercises all require you to write (or rewrite) some Python _functions_. Make sure you have read the pre-course
-notes on functions first. Testing how you coded these functions is what we accomplish with `pytest`.
+notes on functions first.
+
+To test how you coded these functions we will you the pre-written tests.
 
 For example, the file `counter.py` in the `00_demonstration` folder has a very simple function that is going wrong. You
 should be able to test this by typing (at the command prompt):
 
-```
-pytest -vvv 00_demonstration/counter.py
+```bash
+python 00_demonstration.py
 ```
 
-You should see a message saying that one of the tests is failing. Now, in VS Code, navigate to the `counter.py` file. The problem is on Line 17: change the 1 to a 2.
+You should see a message saying that one of the tests is passing and one is being skipped. Now, in VS Code, navigate to the `counter.py` file.
 
-Now, at the terminal prompt re-run the `pytest` command above. You should now see the tests passing. Congratulations!
+Change the `SkipCheck` on line 30 to `Check`.
+
+You should now be able to re-run `python 00_demonstration.py` and see the second test is failing.
+
+Now change the code to add 2 to the counter and re-run the `python` command to see the test passing. Congratulations!
 
 In most cases, you will be asked to write or change functions to illustrate different points about Python code. Please do not change the tests themselves, which are written below the function being tested.
 

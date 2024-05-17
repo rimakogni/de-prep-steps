@@ -390,77 +390,63 @@ SkipCheck(
     pluralise_keys, "returns empty dictionary when passed empty dictionary"
 ).when_called_with({}).returns({})
 
+# Test unnested dict
+test_dict = {"a": 1, "b": 2, "c": 3}
 SkipCheck(
-    pluralise_keys, "returns copy of dictionary with no arrays"
-).when_called_with({"a": 1, "b": 2, "c": 3}).is_not_same_as(
-    {"a": 1, "b": 2, "c": 3}
-)
+    pluralise_keys, "returns unchanged dictionary when there are no lists"
+).when_called_with(test_dict).returns({"a": 1, "b": 2, "c": 3})
+
+SkipCheck(
+    pluralise_keys, "returns copy of dictionary when there are no lists"
+).when_called_with(test_dict).is_not_same_as(test_dict)
+
+# Test nested dict
+test_dict = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
+SkipCheck(
+    pluralise_keys, "returns unchanged dictionary with nested dicts"
+).when_called_with(test_dict).returns({"a": 1, "b": 2, "c": {"d": 3, "e": 4}})
 
 SkipCheck(
     pluralise_keys, "returns copy of dictionary with nested dicts"
-).when_called_with({"a": 1, "b": 2, "c": {"d": 3, "e": 4}}).is_not_same_as(
-    {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
-)
+).when_called_with(test_dict).is_not_same_as(test_dict)
 
+# Test dict with one list 
+test_dict = {"a": 1, "b": 2, "num": [3, 4]}
 SkipCheck(
-    pluralise_keys, "returns dictionary with one nested list"
-).when_called_with({"a": 1, "b": 2, "num": [3, 4]}).is_not_same_as(
+    pluralise_keys, "returns dictionary with one key changed"
+).when_called_with(test_dict).returns(
     {"a": 1, "b": 2, "nums": [3, 4]}
 )
 
 SkipCheck(
-    pluralise_keys, "returns dictionary with one nested list"
-).when_called_with({"a": 1, "b": 2, "num": [3, 4]}).returns(
-    {"a": 1, "b": 2, "nums": [3, 4]}
-)
+    pluralise_keys, "returns copy of dictionary with one nested list"
+).when_called_with(test_dict).is_not_same_as(test_dict)
 
-
-SkipCheck(
-    pluralise_keys, "returns dictionary with several lists"
-).when_called_with(
-    {
+# Test dict with multi list 
+test_dict = {
         "name": "Tom",
         "job": ["writing katas", "marking"],
         "favourite_shop": [
             "Paul's Donkey University",
             "Shaq's Taxidermy Shack",
             "Sam's Pet Shop",
-        ],
+        ]
     }
-).is_not_same_as(
-    {
-        "name": "Tom",
-        "jobs": ["writing katas", "marking"],
-        "favourite_shops": [
-            "Paul's Donkey University",
-            "Shaq's Taxidermy Shack",
-            "Sam's Pet Shop",
-        ],
-    }
-)
 SkipCheck(
-    pluralise_keys, "returns dictionary with several lists"
-).when_called_with(
-    {
-        "name": "Tom",
-        "job": ["writing katas", "marking"],
-        "favourite_shop": [
-            "Paul's Donkey University",
-            "Shaq's Taxidermy Shack",
-            "Sam's Pet Shop",
-        ],
-    }
-).returns(
-    {
+    pluralise_keys, "returns dictionary with several keys changed"
+).when_called_with(test_dict).returns({
         "name": "Tom",
         "jobs": ["writing katas", "marking"],
         "favourite_shops": [
             "Paul's Donkey University",
             "Shaq's Taxidermy Shack",
             "Sam's Pet Shop",
-        ],
-    }
-)
+        ]
+    })
+
+SkipCheck(
+    pluralise_keys, "returns copy of dictionary with several lists"
+).when_called_with(test_dict).is_not_same_as(test_dict)
 
 
 """
