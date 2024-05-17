@@ -1,3 +1,6 @@
+import copy
+
+
 class SkipCheck:
     def __init__(self, func, title):
         self.func = func
@@ -6,7 +9,16 @@ class SkipCheck:
     def when_called_with(self, *args):
         return self
 
-    def is_not(self, original_data):
+    def is_same_as(self, original_input):
+        print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
+
+    def is_not_same_as(self, original_data):
+        print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
+
+    def mutates_input(self, label):
+        print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
+
+    def does_not_mutate_input(self, label):
         print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
 
     def is_type(self, data_type):
@@ -14,8 +26,6 @@ class SkipCheck:
 
     def returns(self, return_value):
         print(f"{self.func.__name__}(), Test {self.title}: skipping test...")
-
-    # TODO: Add method for checking for input mutation!
 
 
 class Check:
@@ -25,9 +35,26 @@ class Check:
 
     def when_called_with(self, *args):
         self.args = args
+        self.args_copy = copy.deepcopy(args)
         return self
 
-    def is_not(self, original_data):
+    def is_same_as(self, input_data):
+        self._set_return_value()
+
+        if self.return_value is input_data:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test passed, "
+                "same object returned"
+            )
+        else:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test failed, "
+                "return value should be the same object"
+            )
+
+        print(feedback_msg)
+
+    def is_not_same_as(self, original_data):
         self._set_return_value()
 
         if self.return_value is not original_data:
@@ -40,6 +67,38 @@ class Check:
             feedback_msg = (
                 f"{self.func.__name__}(), Test {self.title}: Test failed, "
                 "return value should be a new object"
+            )
+
+        print(feedback_msg)
+
+    def mutates_input(self, label):
+        self._set_return_value()
+
+        if self.args != self.args_copy:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test passed, "
+                f"{label} successfully mutated"
+            )
+        else:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test failed, "
+                f"{label} has not been mutated"
+            )
+
+        print(feedback_msg)
+
+    def does_not_mutate_input(self, label):
+        self._set_return_value()
+
+        if self.args == self.args_copy:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test passed, "
+                f"{label} not mutated"
+            )
+        else:
+            feedback_msg = (
+                f"{self.func.__name__}(), Test {self.title}: Test failed, "
+                f"{label} should not be mutated"
             )
 
         print(feedback_msg)
@@ -80,5 +139,3 @@ class Check:
             )
 
         print(feedback_msg)
-
-    # TODO: Add method for checking for input mutation!

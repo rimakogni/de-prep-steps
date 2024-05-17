@@ -22,16 +22,23 @@ def add_price_to_product(product, price):
     pass
 
 
-Check(add_price_to_product, 'returns empty dictionary when there is no product')\
-    .when_called_with({}, 2.20).returns({})
+Check(
+    add_price_to_product, "returns empty dictionary when there is no product"
+).when_called_with({}, 2.20).returns({})
 
-Check(add_price_to_product, 'adds price to single product in dictionary')\
-    .when_called_with({"type": "Tofu slices"}, 2.20)\
-    .returns({"type": "Tofu slices", "price": 2.20})
+Check(
+    add_price_to_product, "adds price to single product in dictionary"
+).when_called_with({"type": "Tofu slices"}, 2.20).returns(
+    {"type": "Tofu slices", "price": 2.20}
+)
 
-Check(add_price_to_product, 'adds price to single product with multiple fields')\
-    .when_called_with({"type": "Tofu slices", "flavour": "chocolate"}, 2.50)\
-    .returns({"type": "Tofu slices", "flavour": "chocolate", "price": 2.50})
+Check(
+    add_price_to_product, "adds price to single product with multiple fields"
+).when_called_with(
+    {"type": "Tofu slices", "flavour": "chocolate"}, 2.50
+).returns(
+    {"type": "Tofu slices", "flavour": "chocolate", "price": 2.50}
+)
 
 
 # TODO: refactor to use `is` method
@@ -74,32 +81,89 @@ def add_property_to_product(product, property, value):
 
 
 # ❗ Remember to change SkipCheck to Check!
-SkipCheck(add_property_to_product, 'empty product gains a single property')\
-    .when_called_with({}, "length", "2h 36m").returns({"length": "2h 36"})
+SkipCheck(
+    add_property_to_product, "empty product gains a single property"
+).when_called_with({}, "length", "2h 36m").returns({"length": "2h 36"})
 
-SkipCheck(add_property_to_product, 'string property added to product')\
-    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, "length", "2h 36m")\
-    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, "length": "2h 36m"})
+SkipCheck(
+    add_property_to_product, "string property added to product"
+).when_called_with(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
+    "length",
+    "2h 36m",
+).returns(
+    {
+        "type": "Terminator 2: Judgement Day",
+        "price": "£6.99",
+        "quantity": 1,
+        "length": "2h 36m",
+    }
+)
 
-SkipCheck(add_property_to_product, 'integer property added to product')\
-    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, 36, 42)\
-    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, 36: 42})
+SkipCheck(
+    add_property_to_product, "integer property added to product"
+).when_called_with(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
+    36,
+    42,
+).returns(
+    {
+        "type": "Terminator 2: Judgement Day",
+        "price": "£6.99",
+        "quantity": 1,
+        36: 42,
+    }
+)
 
-SkipCheck(add_property_to_product, 'float property added to product')\
-    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, 36.1, 'dave')\
-    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, 36.1: "dave"})
+SkipCheck(
+    add_property_to_product, "float property added to product"
+).when_called_with(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
+    36.1,
+    "dave",
+).returns(
+    {
+        "type": "Terminator 2: Judgement Day",
+        "price": "£6.99",
+        "quantity": 1,
+        36.1: "dave",
+    }
+)
 
-SkipCheck(add_property_to_product, 'boolean property added to product')\
-    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, True, False)\
-    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1, True: False})
+SkipCheck(
+    add_property_to_product, "boolean property added to product"
+).when_called_with(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
+    True,
+    False,
+).returns(
+    {
+        "type": "Terminator 2: Judgement Day",
+        "price": "£6.99",
+        "quantity": 1,
+        True: False,
+    }
+)
 
-SkipCheck(add_property_to_product, 'list property NOT added to product')\
-    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, [1, 2, 3], 'a')\
-    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1})
+SkipCheck(
+    add_property_to_product, "list property NOT added to product"
+).when_called_with(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
+    [1, 2, 3],
+    "a",
+).returns(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+)
 
-SkipCheck(add_property_to_product, 'dictionary property NOT added to product')\
-    .when_called_with({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}, {"a": "b"}, 'a')\
-    .returns({"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1})
+SkipCheck(
+    add_property_to_product, "dictionary property NOT added to product"
+).when_called_with(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
+    {"a": "b"},
+    "a",
+).returns(
+    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+)
 
 
 # TODO: Rewrite this test to use `is`
@@ -143,17 +207,19 @@ def create_northcoder(name, year_of_birth):
     pass
 
 
-SkipCheck(create_northcoder, "creates northcoder with correct age")\
-    .when_called_with("Joe", 2002)\
-    .returns({"name": "Joe", "age": 21, "language": "Python"})
+SkipCheck(
+    create_northcoder, "creates northcoder with correct age"
+).when_called_with("Joe", 2002).returns(
+    {"name": "Joe", "age": 21, "language": "Python"}
+)
 
-SkipCheck(create_northcoder, "2023 baby is 0 years old")\
-    .when_called_with("Paul", 2023)\
-    .returns({"name": "Paul", "age": 0, "language": "Python"})
+SkipCheck(create_northcoder, "2023 baby is 0 years old").when_called_with(
+    "Paul", 2023
+).returns({"name": "Paul", "age": 0, "language": "Python"})
 
-SkipCheck(create_northcoder, "2123 baby is shows age error")\
-    .when_called_with("Zarkon", 2123)\
-    .returns({"name": "Zarkon", "age": "error", "language": "Python"})
+SkipCheck(create_northcoder, "2123 baby is shows age error").when_called_with(
+    "Zarkon", 2123
+).returns({"name": "Zarkon", "age": "error", "language": "Python"})
 
 
 """
@@ -188,32 +254,57 @@ def delete_many_passwords(users):
     pass
 
 
-SkipCheck(delete_many_passwords, 'changes single password')\
-    .when_called_with([{"name": "Barry", "password": "ilovetea", "department": "Tea"}])\
-    .returns([{"name": "Barry", "department": "Tea"}])
+SkipCheck(delete_many_passwords, "changes single password").when_called_with(
+    [{"name": "Barry", "password": "ilovetea", "department": "Tea"}]
+).returns([{"name": "Barry", "department": "Tea"}])
 
-SkipCheck(delete_many_passwords, 'does not change user without password')\
-    .when_called_with([{"name": "Sandeep", "favourite_drink": "Coffee"}])\
-    .returns([{"name": "Sandeep", "favourite_drink": "Coffee"}])
+SkipCheck(
+    delete_many_passwords, "does not change user without password"
+).when_called_with([{"name": "Sandeep", "favourite_drink": "Coffee"}]).returns(
+    [{"name": "Sandeep", "favourite_drink": "Coffee"}]
+)
 
-SkipCheck(delete_many_passwords, 'changes many users')\
-    .when_called_with([
+SkipCheck(delete_many_passwords, "changes many users").when_called_with(
+    [
         {"name": "Barry", "password": "ilovetea", "department": "Tea"},
-        {"name": "Sandeep", "password": "ilovecoffee", "favourite_drink": "Coffee"},
+        {
+            "name": "Sandeep",
+            "password": "ilovecoffee",
+            "favourite_drink": "Coffee",
+        },
         {"name": "Kavita", "password": "ilovepie", "weakness": "Pie"},
-    ])\
-    .returns([{"name": "Barry", "department": "Tea"}, {"name": "Sandeep", "favourite_drink": "Coffee"}, {"name": "Kavita", "weakness": "Pie"}])
-
-SkipCheck(delete_many_passwords, 'changes many users when some do not have passwords')\
-    .when_called_with([
-        {"name": "Barry", "password": "ilovetea", "department": "Tea"},
-        {"name": "Sandeep", "password": "ilovecoffee", "favourite_drink": "Coffee"},
+    ]
+).returns(
+    [
+        {"name": "Barry", "department": "Tea"},
+        {"name": "Sandeep", "favourite_drink": "Coffee"},
         {"name": "Kavita", "weakness": "Pie"},
-    ])\
-    .returns([{"name": "Barry", "department": "Tea"}, {"name": "Sandeep", "favourite_drink": "Coffee"}, {"name": "Kavita", "weakness": "Pie"}])
+    ]
+)
 
-SkipCheck(delete_many_passwords, 'returns empty list when no users present')\
-    .when_called_with([]).returns([])
+SkipCheck(
+    delete_many_passwords, "changes many users when some do not have passwords"
+).when_called_with(
+    [
+        {"name": "Barry", "password": "ilovetea", "department": "Tea"},
+        {
+            "name": "Sandeep",
+            "password": "ilovecoffee",
+            "favourite_drink": "Coffee",
+        },
+        {"name": "Kavita", "weakness": "Pie"},
+    ]
+).returns(
+    [
+        {"name": "Barry", "department": "Tea"},
+        {"name": "Sandeep", "favourite_drink": "Coffee"},
+        {"name": "Kavita", "weakness": "Pie"},
+    ]
+)
+
+SkipCheck(
+    delete_many_passwords, "returns empty list when no users present"
+).when_called_with([]).returns([])
 
 
 """
@@ -246,20 +337,20 @@ def get_northcoders_names(northcoders):
     pass
 
 
-SkipCheck(get_northcoders_names, 'returns empty list if input is empty')\
-    .when_called_with([])\
-    .returns([])
+SkipCheck(
+    get_northcoders_names, "returns empty list if input is empty"
+).when_called_with([]).returns([])
 
-SkipCheck(get_northcoders_names, 'gets names of northcoders')\
-    .when_called_with([
+SkipCheck(get_northcoders_names, "gets names of northcoders").when_called_with(
+    [
         {"name": "Callum", "age": 31, "language": "JavaScript"},
-        {"name": "Carrie", "age": 32, "language": "Python"}
-    ])\
-    .returns(["Callum", "Carrie"])
+        {"name": "Carrie", "age": 32, "language": "Python"},
+    ]
+).returns(["Callum", "Carrie"])
 
-SkipCheck(get_northcoders_names, 'returns empty list if name is omitted')\
-    .when_called_with([{"age": 32, "language": "Python"}])\
-    .returns([])
+SkipCheck(
+    get_northcoders_names, "returns empty list if name is omitted"
+).when_called_with([{"age": 32, "language": "Python"}]).returns([])
 
 
 """
@@ -303,85 +394,18 @@ def get_user_pet_age(user):
     pass
 
 
-SkipCheck(get_user_pet_age, 'returns pet age')\
-    .when_called_with({"name": "Carrie", "age": 26, "pet": {"name": "Pixie", "age": 4, "type": "gremlin"}})\
-    .returns(4)
-
-SkipCheck(get_user_pet_age, 'returns none if no pet')\
-    .when_called_with({"name": "Carrie", "age": 26})\
-    .returns(None)
-
-SkipCheck(get_user_pet_age, 'returns none if no pet age')\
-    .when_called_with({"name": "Carrie", "age": 26, "pet": {"name": "Pixie", "type": "gremlin"}})\
-    .returns(None)
-
-
-"""
-### update_voter_address ###
-
-Uh-oh! We've got some voters who've registered their addresses incorrectly!
-The `voter` dictionary looks like this:
-
-{
-  'name': "Alex",
-  'age': 39,
-  'address': {
-    'house_number': 2,
-    'street': "Old St",
-    'city: "Chester"
-  }
-}
-
-Let's help them fix those typos by writing a function that will take two
-arguments (`voter` and `correct_house_number`) and change the
-`voter`'s  `house_number` to be the `correct_house_number`.
-
-** Note - The function should NOT return anything **
-
-voter = {
-  'name': "Alex",
-  'age': 39,
-  'address': {
-    'house_number': 2,
-    'street': "Old St",
-    'city': "Chester"
-  }
-}
-
-update_voter_address(voter, 50)
-
-print(voter) # will log:
+SkipCheck(get_user_pet_age, "returns pet age").when_called_with(
     {
-      'name': "Alex",
-      'age': 39,
-      'address': {
-        'house_number': 50,
-        'street': "Old St",
-        'city': "Chester"
-      }
+        "name": "Carrie",
+        "age": 26,
+        "pet": {"name": "Pixie", "age": 4, "type": "gremlin"},
     }
-"""
+).returns(4)
 
+SkipCheck(get_user_pet_age, "returns none if no pet").when_called_with(
+    {"name": "Carrie", "age": 26}
+).returns(None)
 
-def update_voter_address(voter, correct_house_number):
-    # Your code here
-    pass
-
-
-voter = {
-    "name": "Alex",
-    "age": 39,
-    "address": {"house_number": 2, "street": "Old St", "city": "Chester"},
-}
-
-SkipCheck(update_voter_address, 'function should return None')\
-    .when_called_with(voter, 50)\
-    .returns(None)
-
-
-# TODO: Can we refactor this so it is manageable by Check/SkipCheck - context manager?
-if voter["address"]["house_number"] == 50:
-    print(f"{update_voter_address.__name__}(), Test updates address: Test passed")
-else:
-    print(f"{update_voter_address.__name__}(), Test updates address: expected 50, but received {
-          voter["address"]["house_number"]}")
+SkipCheck(get_user_pet_age, "returns none if no pet age").when_called_with(
+    {"name": "Carrie", "age": 26, "pet": {"name": "Pixie", "type": "gremlin"}}
+).returns(None)

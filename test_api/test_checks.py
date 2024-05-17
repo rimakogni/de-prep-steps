@@ -1,4 +1,5 @@
 from checks import SkipCheck, Check
+import copy
 
 
 class TestSkipCheck:
@@ -20,13 +21,14 @@ class TestSkipCheck:
 
         assert skip.when_called_with(2) is skip
 
-    def test_is_not_should_print_skip_test_message(self, capsys):
+    def test_is_not_same_as_should_print_skip_test_message(self, capsys):
         def add(num):
             return num + num
+
         test_title = "add func"
         skip = SkipCheck(add, test_title)
 
-        skip.is_not({"lucky_number": 13})
+        skip.is_not_same_as({"lucky_number": 13})
 
         captured = capsys.readouterr()
         log_message = f"{add.__name__}(), Test {test_title}: skipping test..."
@@ -36,6 +38,7 @@ class TestSkipCheck:
     def test_is_type_should_print_skip_test_message(self, capsys):
         def add(num):
             return num + num
+
         test_title = "add func"
 
         skip = SkipCheck(add, test_title)
@@ -125,27 +128,29 @@ class TestCheck:
 
         assert check.return_value == 3
 
-    def test_is_not_prints_helpful_message_when_return_value_IS_the_given_object(
+    def test_is_not_same_as_prints_helpful_message_when_return_value_IS_the_given_object(
         self, capsys
     ):
         def return_list(some_list):
             return some_list
+
         test_title = "returns different list"
 
         check = Check(return_list, test_title)
 
         test_list = [1, 2, 3]
 
-        check.when_called_with(test_list).is_not(test_list)
+        check.when_called_with(test_list).is_not_same_as(test_list)
 
         captured = capsys.readouterr()
         log_message = (
             f"{return_list.__name__}(), Test {test_title}: Test failed, "
-            "return value should be a new object")
+            "return value should be a new object"
+        )
 
         assert log_message in captured.out
 
-    def test_is_not_prints_helpful_message_when_return_value_IS_NOT_the_given_object(
+    def test_is_not_same_as_prints_helpful_message_when_return_value_IS_NOT_same_as_the_given_object(
         self, capsys
     ):
         def return_list(some_list):
@@ -156,7 +161,7 @@ class TestCheck:
 
         test_list = [1, 2, 3]
 
-        check.when_called_with(test_list).is_not(test_list)
+        check.when_called_with(test_list).is_not_same_as(test_list)
 
         captured = capsys.readouterr()
         log_message = (
@@ -187,7 +192,7 @@ class TestCheck:
 
         assert log_message in captured.out
 
-    def test_is_type_prints_helpful_message_when_return_value_IS_NOT_correct_type(
+    def test_is_type_prints_helpful_message_when_return_value_IS_NOT_same_as_correct_type(
         self, capsys
     ):
         def return_list(some_list):
@@ -223,7 +228,7 @@ class TestCheck:
 
         assert log_message in captured.out
 
-    def test_returns_prints_message_when_return_value_is_not_expected(
+    def test_returns_prints_message_when_return_value_is_not_same_as_expected(
         self, capsys
     ):
         test_title = "returns 8"
@@ -236,6 +241,83 @@ class TestCheck:
 
         captured = capsys.readouterr()
         log_message = (
-            f"{add.__name__}(), Test {test_title}: expected 8, but received 9")
+            f"{add.__name__}(), Test {test_title}: expected 8, but received 9"
+        )
+
+        assert log_message in captured.out
+
+    def test_is_same_as_should_print_test_passed_message(self, capsys):
+        def return_list(some_list):
+            return some_list
+
+        test_title = "same object returned"
+        check = Check(return_list, test_title)
+
+        test_list = [1, 2, 3]
+
+        check.when_called_with(test_list).is_same_as(test_list)
+
+        captured = capsys.readouterr()
+        log_message = (
+            f"{return_list.__name__}(), Test {test_title}: Test passed, "
+            "same object returned"
+        )
+
+        assert log_message in captured.out
+
+    def test_is_same_as_should_print_test_failed_message(self, capsys):
+        def return_list(some_list):
+            return [el for el in some_list]
+
+        test_title = "same object returned"
+        check = Check(return_list, test_title)
+
+        test_list = [1, 2, 3]
+
+        check.when_called_with(test_list).is_same_as(test_list)
+
+        captured = capsys.readouterr()
+        log_message = (
+            f"{return_list.__name__}(), Test {test_title}: Test failed, "
+            "return value should be the same object"
+        )
+
+        assert log_message in captured.out
+
+    def test_mutates_input_should_print_test_passed_message(self, capsys):
+        def add_one_to_list(some_list):
+            some_list.append(1)
+
+        test_title = "mutates input"
+        check = Check(add_one_to_list, test_title)
+
+        test_list = [1, 2, 3]
+
+        check.when_called_with(test_list).mutates_input("frogs")
+
+        captured = capsys.readouterr()
+        log_message = (
+            f"{add_one_to_list.__name__}(), Test {test_title}: Test passed, "
+            "frogs successfully mutated"
+        )
+
+        assert log_message in captured.out
+
+    def test_mutates_input_should_print_test_failed_message(self, capsys):
+        def add_one_to_list(some_list):
+            return some_list
+
+        test_title = "mutates input"
+        check = Check(add_one_to_list, test_title)
+
+        test_list = [1, 2, 3]
+
+        check.when_called_with(test_list).mutates_input("bananas")
+
+        captured = capsys.readouterr()
+        log_message = (
+            f"{add_one_to_list.__name__}(), Test {test_title}: Test failed, "
+            "bananas has not been mutated"
+        )
 
         assert log_message in captured.out

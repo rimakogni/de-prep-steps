@@ -18,38 +18,34 @@ flip_booleans([]) # returns []
 
 
 def flip_booleans(bools):
-    # Your code here
     pass
 
 
-def test_empty_list_returns_empty_list():
-    assert flip_booleans([]) == []
+Check(
+    flip_booleans, "returns empty list when passed empty list"
+).when_called_with([]).returns([])
 
+Check(
+    flip_booleans, "returns single False when passed single True"
+).when_called_with([True]).returns([False])
 
-def test_single_true_returns_single_false():
-    assert flip_booleans([True]) == [False]
+Check(
+    flip_booleans, "returns single True when passed single False"
+).when_called_with([False]).returns([True])
 
+Check(
+    flip_booleans, "returns all Falses when passed all Trues"
+).when_called_with([True, True, True]).returns([False, False, False])
 
-def test_single_false_returns_single_true():
-    assert flip_booleans([False]) == [True]
+Check(
+    flip_booleans, "returns all Trues when passed all Falses"
+).when_called_with([False, False, False]).returns([True, True, True])
 
-
-def test_all_falses_returns_all_true():
-    assert flip_booleans([False, False, False]) == [True, True, True]
-
-
-def test_all_trues_returns_all_falses():
-    assert flip_booleans([True, True, True]) == [False, False, False]
-
-
-def test_mixed_trues_and_falses_flipped_correctly():
-    assert flip_booleans([True, False, False, True]) == [
-        False,
-        True,
-        True,
-        False,
-    ]
-
+Check(
+    flip_booleans, "returns mixed Trues and Falses flipped correctly"
+).when_called_with([True, False, False, True]).returns(
+    [False, True, True, False]
+)
 
 """
 Northcoders is expanding to France!
@@ -84,36 +80,35 @@ translate_key(student, 'prénom', 'first_name') # should return the following:
 
 
 def translate_key(student, key_to_change, translation):
-    # Your code here
     pass
 
 
-def test_return_copy_of_empty_data_unchanged():
-    student = {}
-    assert translate_key(student, "prénom", "first_name") == {}
-    assert translate_key(student, "prénom", "first_name") is not student
+Check(
+    translate_key,
+    "returns empty dictionary unchanged when passed empty dictionary and key not present",
+).when_called_with({}, "prénom", "first_name").returns({})
 
+Check(translate_key, "returns unchanged if key not present").when_called_with(
+    {"first_name": "Carla", "surname": "Bruni", "job": "Artist"},
+    "prénom",
+    "first_name",
+).returns({"first_name": "Carla", "surname": "Bruni", "job": "Artist"})
 
-def test_return_unchanged_if_key_not_present():
-    student = {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
-    assert translate_key(student, "prénom", "first_name") == student
-    assert translate_key(student, "prénom", "first_name") is not student
+Check(
+    translate_key, "returns new dictionary with key translated"
+).when_called_with(
+    {"prénom": "Carla", "surname": "Bruni", "job": "Artist"},
+    "prénom",
+    "first_name",
+).returns(
+    {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
+)
 
-
-def test_translate_key_if_required():
-    student1 = {"prénom": "Carla", "surname": "Bruni", "job": "Artist"}
-    expected1 = {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
-    result1 = translate_key(student1, "prénom", "first_name")
-
-    assert result1 == expected1
-    assert result1 is not student1
-
-    student2 = {"first_name": "Jean", "surname": "Reno", "emploi": "Actor"}
-    expected2 = {"first_name": "Jean", "surname": "Reno", "job": "Actor"}
-    result2 = translate_key(student2, "emploi", "job")
-
-    assert result2 == expected2
-    assert result2 is not student2
+Check(translate_key, "returns new dictionary if required").when_called_with(
+    {"first_name": "Jean", "surname": "Reno", "emploi": "Actor"},
+    "emploi",
+    "job",
+).returns({"first_name": "Jean", "surname": "Reno", "job": "Actor"})
 
 
 """
@@ -138,43 +133,34 @@ find_first_dentist([{'name': 'Callum', 'is_dentist': True},
 
 
 def find_first_dentist(people):
-    # Your code here
     pass
 
 
-def test_empty_list_returns_none():
-    assert find_first_dentist([]) is None
+Check(
+    find_first_dentist, "returns None when passed empty list"
+).when_called_with([]).returns(None)
 
+Check(
+    find_first_dentist, "returns None if person not dentist"
+).when_called_with([{"name": "Callum", "is_dentist": False}]).returns(None)
 
-def test_returns_none_if_person_not_dentist():
-    assert (
-        find_first_dentist([{"name": "Callum", "is_dentist": False}]) is None
-    )
+Check(find_first_dentist, "returns person if dentist").when_called_with(
+    [{"name": "Callum", "is_dentist": True}]
+).returns({"name": "Callum", "is_dentist": True})
 
-
-def test_returns_person_if_dentist():
-    dentist = {"name": "Callum", "is_dentist": True}
-    assert (
-        find_first_dentist([{"name": "Callum", "is_dentist": True}]) == dentist
-    )
-
-
-def test_returns_first_dentist():
-    first_dentist = {"name": "Carrie", "is_dentist": True}
-    dentists = [
+Check(find_first_dentist, "returns first dentist").when_called_with(
+    [
         {"name": "Callum", "is_dentist": False},
         {"name": "Carrie", "is_dentist": True},
     ]
-    assert find_first_dentist(dentists) == first_dentist
+).returns({"name": "Carrie", "is_dentist": True})
 
-
-def test_returns_first_dentist_of_many():
-    dentist = {"name": "Callum", "is_dentist": True}
-    dentists = [
+Check(find_first_dentist, "returns first dentist of many").when_called_with(
+    [
         {"name": "Callum", "is_dentist": True},
         {"name": "Carrie", "is_dentist": True},
     ]
-    assert find_first_dentist(dentists) == dentist
+).returns({"name": "Callum", "is_dentist": True})
 
 
 """
@@ -225,38 +211,46 @@ tally_people_in_manchester([]) # returns 0
 
 
 def tally_people_in_manchester(people):
-    # Your code here
     pass
 
 
-def test_empty_list():
-    assert tally_people_in_manchester([]) == 0
+Check(
+    tally_people_in_manchester, "returns 0 when passed empty list"
+).when_called_with([]).returns(0)
 
-
-def test_single_person_not_in_manchester():
-    people = [
+Check(
+    tally_people_in_manchester, "returns 0 when no one in Manchester"
+).when_called_with(
+    [
         {
             "name": "Carrie",
             "lives": {"country": "UK", "city": "Leeds"},
             "age": 32,
         }
     ]
-    assert tally_people_in_manchester(people) == 0
+).returns(
+    0
+)
 
-
-def test_single_person_in_manchester():
-    people = [
+Check(
+    tally_people_in_manchester, "returns 1 when one person in Manchester"
+).when_called_with(
+    [
         {
             "name": "Emmeline",
             "lives": {"country": "UK", "city": "Manchester"},
             "age": 32,
         }
     ]
-    assert tally_people_in_manchester(people) == 1
+).returns(
+    1
+)
 
-
-def test_several_people():
-    people = [
+Check(
+    tally_people_in_manchester,
+    "returns the number of people in Manchester when passed multiple",
+).when_called_with(
+    [
         {
             "name": "Carrie",
             "lives": {"country": "UK", "city": "Leeds"},
@@ -283,7 +277,9 @@ def test_several_people():
             "age": 22,
         },
     ]
-    assert tally_people_in_manchester(people) == 3
+).returns(
+    3
+)
 
 
 """
@@ -306,49 +302,40 @@ get_pug_owners([]) # returns []
 
 
 def get_pug_owners(dogs):
-    # Your code here
     pass
 
 
-def test_empty_list():
-    assert get_pug_owners([]) == []
+Check(
+    get_pug_owners, "returns empty list when passed empty list"
+).when_called_with([]).returns([])
 
+Check(get_pug_owners, "returns empty list when no pugs").when_called_with(
+    [
+        {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
+    ]
+).returns([])
 
-def test_single_invalid_dog():
-    assert (
-        get_pug_owners(
-            [
-                {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
-            ]
-        )
-        == []
-    )
+Check(get_pug_owners, "returns single pug owner").when_called_with(
+    [
+        {"name": "Beatrice", "breed": "Pug", "owner": "Tom"},
+    ]
+).returns(["Tom"])
 
-
-def test_single_valid_dog():
-    assert get_pug_owners(
-        [
-            {"name": "Beatrice", "breed": "Pug", "owner": "Tom"},
-        ]
-    ) == ["Tom"]
-
-
-def test_many_invalid_dogs():
-    dogs = [
+Check(get_pug_owners, "test multiple invalid dogs").when_called_with(
+    [
         {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
         {"name": "Max", "breed": "Dalmation", "owner": "Izzi"},
         {"name": "Poppy", "breed": "Alsatian", "owner": "Anat"},
     ]
-    assert get_pug_owners(dogs) == []
+).returns([])
 
-
-def test_mixed_list():
-    dogs = [
+Check(get_pug_owners, "test mixed list").when_called_with(
+    [
         {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
         {"name": "Max", "breed": "Pug", "owner": "Izzi"},
         {"name": "Poppy", "breed": "Pug", "owner": "Anat"},
     ]
-    assert get_pug_owners(dogs) == ["Izzi", "Anat"]
+).returns(["Izzi", "Anat"])
 
 
 """
@@ -384,34 +371,42 @@ with any keys that contain lists pluralised (an 's' added to the end.)
 
 
 def pluralise_keys(dictionary):
-    # Your code here
     pass
 
 
-def test_empty_dictionary():
-    assert pluralise_keys({}) == {}
+Check(
+    pluralise_keys, "returns empty dictionary when passed empty dictionary"
+).when_called_with({}).returns({})
+
+Check(
+    pluralise_keys, "returns copy of dictionary with no arrays"
+).when_called_with({"a": 1, "b": 2, "c": 3}).is_not_same_as(
+    {"a": 1, "b": 2, "c": 3}
+)
+
+Check(
+    pluralise_keys, "returns copy of dictionary with nested dicts"
+).when_called_with({"a": 1, "b": 2, "c": {"d": 3, "e": 4}}).is_not_same_as(
+    {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
+)
+
+Check(
+    pluralise_keys, "returns dictionary with one nested list"
+).when_called_with({"a": 1, "b": 2, "num": [3, 4]}).is_not_same_as(
+    {"a": 1, "b": 2, "nums": [3, 4]}
+)
+
+Check(
+    pluralise_keys, "returns dictionary with one nested list"
+).when_called_with({"a": 1, "b": 2, "num": [3, 4]}).returns(
+    {"a": 1, "b": 2, "nums": [3, 4]}
+)
 
 
-def test_dictionary_with_no_arrays_returns_copy():
-    data = {"a": 1, "b": 2, "c": 3}
-    assert pluralise_keys(data) == {"a": 1, "b": 2, "c": 3}
-    assert pluralise_keys(data) is not data
-
-
-def test_dictionary_with_nested_dicts_returns_copy():
-    data = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
-    assert pluralise_keys(data) == {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
-    assert pluralise_keys(data) is not data
-
-
-def test_dictionary_with_one_nested_list():
-    data = {"a": 1, "b": 2, "num": [3, 4]}
-    assert pluralise_keys(data) == {"a": 1, "b": 2, "nums": [3, 4]}
-    assert pluralise_keys(data) is not data
-
-
-def test_dictionary_with_several_lists():
-    data = {
+Check(
+    pluralise_keys, "returns dictionary with several lists"
+).when_called_with(
+    {
         "name": "Tom",
         "job": ["writing katas", "marking"],
         "favourite_shop": [
@@ -420,8 +415,8 @@ def test_dictionary_with_several_lists():
             "Sam's Pet Shop",
         ],
     }
-    result = pluralise_keys(data)
-    assert result == {
+).is_not_same_as(
+    {
         "name": "Tom",
         "jobs": ["writing katas", "marking"],
         "favourite_shops": [
@@ -430,7 +425,30 @@ def test_dictionary_with_several_lists():
             "Sam's Pet Shop",
         ],
     }
-    assert result is not data
+)
+Check(
+    pluralise_keys, "returns dictionary with several lists"
+).when_called_with(
+    {
+        "name": "Tom",
+        "job": ["writing katas", "marking"],
+        "favourite_shop": [
+            "Paul's Donkey University",
+            "Shaq's Taxidermy Shack",
+            "Sam's Pet Shop",
+        ],
+    }
+).returns(
+    {
+        "name": "Tom",
+        "jobs": ["writing katas", "marking"],
+        "favourite_shops": [
+            "Paul's Donkey University",
+            "Shaq's Taxidermy Shack",
+            "Sam's Pet Shop",
+        ],
+    }
+)
 
 
 """
@@ -567,5 +585,3 @@ def test_several_words():
     assert (
         replace_letters_with_x("Do you like coding?") == "XX XXX XXXX XXXXXX?"
     )
-
-
