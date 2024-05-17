@@ -153,7 +153,7 @@ test_list = [1, 2, 3]
 SkipCheck(
     remove_item,
     "returns a new list"
-).when_called_with(test_list, 2).is_not(test_list)
+).when_called_with(test_list, 2).is_not_same_as(test_list)
 
 
 # TODO: THIS TEST NEEDS CHANGING!
