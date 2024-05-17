@@ -1,3 +1,5 @@
+from test_api.checks import Check, SkipCheck
+
 """
 Write a function that takes a string of a mobile number (`mobile_number`).
 It should return `True` if the number is a valid UK number and `False` if not.
@@ -23,60 +25,53 @@ is_valid_mobile_number('0712345678!') # returns False
 
 
 def is_valid_mobile_number(mobile_number):
-    # Your code here
     pass
 
 
-def test_empty_string_invalid():
-    assert not is_valid_mobile_number("")
+Check(is_valid_mobile_number, "empty string is invalid").when_called_with(
+    ""
+).returns(False)
 
+Check(
+    is_valid_mobile_number, "length less than eleven is false"
+).when_called_with("0754321").returns(False)
 
-def test_length_less_than_eleven_is_false():
-    assert not is_valid_mobile_number("0754321")
+Check(
+    is_valid_mobile_number, "length more than eleven is false"
+).when_called_with("004471234567890").returns(False)
 
+Check(is_valid_mobile_number, "valid eleven digit number").when_called_with(
+    "07123456789"
+).returns(True)
 
-def test_length_more_than_fourteen_invalid():
-    assert not is_valid_mobile_number("004471234567890")
+Check(is_valid_mobile_number, "invalid eleven digit number").when_called_with(
+    "+4471234567"
+).returns(False)
 
+Check(is_valid_mobile_number, "invalid twelve digit number").when_called_with(
+    "071234567890"
+).returns(False)
 
-def test_valid_examples_length_eleven():
-    assert is_valid_mobile_number("07123456789")
-    assert is_valid_mobile_number("07284619462")
+Check(is_valid_mobile_number, "valid thirteen digit number").when_called_with(
+    "+447123456789"
+).returns(True)
 
+Check(
+    is_valid_mobile_number, "invalid thirteen digit number"
+).when_called_with("0044712345678").returns(False)
 
-def test_invalid_examples_length_eleven():
-    assert not is_valid_mobile_number("+4471234567")
-    assert not is_valid_mobile_number("00447876543")
+Check(is_valid_mobile_number, "valid fourteen digit number").when_called_with(
+    "00447123456789"
+).returns(True)
 
+Check(
+    is_valid_mobile_number, "invalid fourteen digit number"
+).when_called_with("+4471234567890").returns(False)
 
-def test_length_twelve_invalid():
-    assert not is_valid_mobile_number("071234567890")
-
-
-def test_valid_examples_length_thirteen():
-    assert is_valid_mobile_number("+447123456789")
-    assert is_valid_mobile_number("+447395612859")
-
-
-def test_invalid_examples_length_thirteen():
-    assert not is_valid_mobile_number("0044712345678")
-    assert not is_valid_mobile_number("0739561285901")
-
-
-def test_valid_examples_length_fourteen():
-    assert is_valid_mobile_number("00447123456789")
-    assert is_valid_mobile_number("00447654297190")
-
-
-def test_invalid_examples_length_fourteen():
-    assert not is_valid_mobile_number("+4471234567890")
-    assert not is_valid_mobile_number("07102938475610")
-
-
-def test_invalid_if_contains_non_numeric_characters_other_than_first():
-    assert not is_valid_mobile_number("0728461a462")
-    assert not is_valid_mobile_number("+4473956+2859")
-    assert not is_valid_mobile_number("00447123!56789")
+Check(
+    is_valid_mobile_number,
+    "invalid if contains non-numeric characters other than first",
+).when_called_with("0728461a462").returns(False)
 
 
 """
@@ -99,37 +94,36 @@ sum_digits_from_string('northcoders') # returns 0
 
 
 def sum_digits_from_string(string):
-    # Your code here
     pass
 
 
-def test_empty_string():
-    assert sum_digits_from_string("") == 0
+SkipCheck(sum_digits_from_string, "empty string returns 0").when_called_with(
+    ""
+).returns(0)
 
+SkipCheck(sum_digits_from_string, "non numeric returns 0").when_called_with(
+    "a"
+).returns(0)
 
-def test_single_non_numeric_digit():
-    assert sum_digits_from_string("a") == 0
+SkipCheck(
+    sum_digits_from_string, "single digit returns integer"
+).when_called_with("5").returns(5)
 
+SkipCheck(sum_digits_from_string, "two digits returns sum").when_called_with(
+    "16"
+).returns(7)
 
-def test_single_numeral():
-    assert sum_digits_from_string("5") == 5
-    assert sum_digits_from_string("8") == 8
-    assert sum_digits_from_string("0") == 0
+SkipCheck(sum_digits_from_string, "three digits returns sum").when_called_with(
+    "255"
+).returns(12)
 
+SkipCheck(sum_digits_from_string, "mixed string returns sum").when_called_with(
+    "he12ll3"
+).returns(6)
 
-def test_numeral_string():
-    assert sum_digits_from_string("168") == 15
-    assert sum_digits_from_string("25580") == 20
-
-
-def test_mixed_string():
-    assert sum_digits_from_string("he12ll3") == 6
-    assert sum_digits_from_string("We always play 4-4-2") == 10
-
-
-def test_string_with_no_numbers():
-    assert sum_digits_from_string("northcoders") == 0
-    assert sum_digits_from_string("A fine bootcamp") == 0
+SkipCheck(sum_digits_from_string, "no numbers returns 0").when_called_with(
+    "northcoders"
+).returns(0)
 
 
 """
@@ -153,37 +147,30 @@ get_williams(['William David', 'Cole Williamson']) # returns []
 
 
 def get_williams(names):
-    # Your code here
     pass
 
 
-def test_empty_list():
-    assert get_williams([]) == []
+SkipCheck(get_williams, "empty list").when_called_with([]).returns([])
 
+SkipCheck(get_williams, "single invalid item").when_called_with(
+    ["Kirsty February"]
+).returns([])
 
-def test_single_invalid_item():
-    assert get_williams(["Kirsty February"]) == []
+SkipCheck(get_williams, "single valid item").when_called_with(
+    ["David Williams"]
+).returns(["David Williams"])
 
+SkipCheck(get_williams, "several valid items").when_called_with(
+    ["David Williams", "Sarah Williams"]
+).returns(["David Williams", "Sarah Williams"])
 
-def test_single_valid_item():
-    assert get_williams(["David Williams"]) == ["David Williams"]
+SkipCheck(get_williams, "mixed items").when_called_with(
+    ["Kirsty February", "Sam Williams"]
+).returns(["Sam Williams"])
 
-
-def test_several_valid_items():
-    assert get_williams(["David Williams", "Sarah Williams"]) == [
-        "David Williams",
-        "Sarah Williams",
-    ]
-
-
-def test_mixed_items():
-    assert get_williams(["Kirsty February", "Sam Williams"]) == [
-        "Sam Williams"
-    ]
-
-
-def test_rogue_williams():
-    assert get_williams(["William David", "Cole Williamson"]) == []
+SkipCheck(get_williams, "mixed items with rogue Williams").when_called_with(
+    ["William David", "Cole Williamson"]
+).returns([])
 
 
 """
@@ -207,24 +194,23 @@ get_factorials([]) # returns []
 
 
 def get_factorials(numbers):
-    # Your code here
     pass
 
 
-def test_empty_list_generates_empty_list():
-    assert get_factorials([]) == []
+SkipCheck(get_factorials, "empty list generates empty list").when_called_with(
+    []
+).returns([])
+
+SkipCheck(get_factorials, "single item").when_called_with([3]).returns([6])
 
 
-def test_one_item():
-    assert get_factorials([3]) == [6]
+SkipCheck(get_factorials, "two items").when_called_with([3, 4]).returns(
+    [6, 24]
+)
 
-
-def test_number_one():
-    assert get_factorials([1]) == [1]
-
-
-def test_two_items():
-    assert get_factorials([3, 4]) == [6, 24]
+SkipCheck(get_factorials, "The infamous number 1").when_called_with(
+    [1]
+).returns([1])
 
 
 """
@@ -246,39 +232,41 @@ def largest_number(number):
     pass
 
 
-def test_single_digit():
-    assert largest_number(3) == 3
-    assert largest_number(9) == 9
+SkipCheck(largest_number, "single digit").when_called_with(3).returns(3)
+
+SkipCheck(largest_number, "double digits correct order").when_called_with(
+    43
+).returns(43)
 
 
-def test_double_digits_correct_order():
-    assert largest_number(43) == 43
+SkipCheck(largest_number, "double digits incorrect order").when_called_with(
+    34
+).returns(43)
 
 
-def test_double_digits_incorrect_order():
-    assert largest_number(34) == 43
+SkipCheck(largest_number, "double digits repeated").when_called_with(
+    44
+).returns(44)
 
 
-def test_double_digits_repeated():
-    assert largest_number(44) == 44
+SkipCheck(largest_number, "triple digits correct order").when_called_with(
+    321
+).returns(321)
 
 
-def test_triple_digits_correct_order():
-    assert largest_number(321) == 321
+SkipCheck(largest_number, "triple digits incorrect order").when_called_with(
+    213
+).returns(321)
 
 
-def test_triple_digits_incorrect_order():
-    assert largest_number(213) == 321
+SkipCheck(largest_number, "triple digits two repeated").when_called_with(
+    233
+).returns(332)
 
 
-def test_triple_digits_two_repeated():
-    assert largest_number(233) == 332
-
-
-def test_lots_of_digits():
-    assert largest_number(937846) == 987643
-    assert largest_number(8456329456) == 9866554432
-
+SkipCheck(largest_number, "lots of digits").when_called_with(
+    8456329456
+).returns(9866554432)
 
 """
 Write a function that takes a `number` and returns a matrix of nested lists
@@ -300,40 +288,27 @@ generate_matrix(3) # returns [
 
 
 def generate_matrix(number):
-    # Your code here
     pass
 
 
-def test_zero_generates_empty_list():
-    assert generate_matrix(0) == []
+SkipCheck(generate_matrix, "zero generates empty list").when_called_with(
+    0
+).returns([])
+
+SkipCheck(
+    generate_matrix, "single digit generates single nested list"
+).when_called_with(1).returns([[None]])
+
+SkipCheck(
+    generate_matrix, "two digits generates two nested lists"
+).when_called_with(2).returns([[None, None], [None, None]])
 
 
-def test_one():
-    assert generate_matrix(1) == [[None]]
-
-
-def test_two():
-    assert generate_matrix(2) == [[None, None], [None, None]]
-
-
-def test_three():
-    assert generate_matrix(3) == [
-        [None, None, None],
-        [None, None, None],
-        [None, None, None],
-    ]
-
-
-def test_arbitrary():
-    import random
-
-    number = random.randint(4, 20)
-    result = generate_matrix(number)
-    assert len(result) == number
-    for j in range(number):
-        assert len(result[j]) == number
-        for k in range(number):
-            assert result[j][k] == None  # noqa
+SkipCheck(
+    generate_matrix, "three digits generates three nested lists"
+).when_called_with(3).returns(
+    [[None, None, None], [None, None, None], [None, None, None]]
+)
 
 
 """
@@ -365,28 +340,28 @@ one is the right way round with less than 3 pieces of fruit
 
 
 def find_wrong_way_fruit(orchard):
-    # Your code here
     pass
 
 
-def test_returns_zero_for_singleton_list():
-    assert find_wrong_way_fruit(["apple"]) == 0
+SkipCheck(
+    find_wrong_way_fruit, "returns zero for singleton list"
+).when_called_with(["apple"]).returns(0)
 
+SkipCheck(
+    find_wrong_way_fruit, "returns zero for list length two"
+).when_called_with(["grape", "eparg"]).returns(0)
 
-def test_returns_zero_for_list_length_two():
-    assert find_wrong_way_fruit(["grape", "eparg"]) == 0
+SkipCheck(
+    find_wrong_way_fruit, "finds last item if reversed"
+).when_called_with(["apple", "apple", "elppa"]).returns(2)
 
+SkipCheck(
+    find_wrong_way_fruit, "finds first item if reversed"
+).when_called_with(["elppa", "apple", "apple"]).returns(0)
 
-def test_finds_last_item_if_reversed():
-    assert find_wrong_way_fruit(["apple", "apple", "elppa"]) == 2
-
-
-def test_finds_first_item_if_reversed():
-    assert find_wrong_way_fruit(["elppa", "apple", "apple"]) == 0
-
-
-def test_finds_intermediate_reversed_item():
-    assert find_wrong_way_fruit(["banana", "ananab", "banana", "banana"]) == 1
+SkipCheck(
+    find_wrong_way_fruit, "finds intermediate reversed item"
+).when_called_with(["banana", "ananab", "banana", "banana"]).returns(1)
 
 
 """
@@ -413,43 +388,61 @@ dna_pairs('gat') # returns ['GC', 'AT', 'TA']
 
 
 def dna_pairs(dna_string):
-    # Your code here
     pass
 
 
-def test_empty_string_produces_empty_list():
-    assert dna_pairs("") == []
+SkipCheck(dna_pairs, "empty string produces empty list").when_called_with(
+    ""
+).returns([])
 
+SkipCheck(
+    dna_pairs, "single invalid letter produces empty list"
+).when_called_with("B").returns([])
 
-def test_invalid_letters_ignored():
-    assert dna_pairs("B") == []
-    assert dna_pairs("z") == []
+SkipCheck(dna_pairs, "single valid uppercase letter G").when_called_with(
+    "G"
+).returns(["GC"])
 
+SkipCheck(dna_pairs, "single valid uppercase letter C").when_called_with(
+    "C"
+).returns(["CG"])
 
-def test_single_valid_uppercase_returns_correct_pair():
-    assert dna_pairs("G") == ["GC"]
-    assert dna_pairs("C") == ["CG"]
-    assert dna_pairs("T") == ["TA"]
-    assert dna_pairs("A") == ["AT"]
+SkipCheck(dna_pairs, "single valid uppercase letter T").when_called_with(
+    "T"
+).returns(["TA"])
 
+SkipCheck(dna_pairs, "single valid uppercase letter A").when_called_with(
+    "A"
+).returns(["AT"])
 
-def test_single_valid_lowercase_returns_correct_uppercase_results():
-    assert dna_pairs("g") == ["GC"]
-    assert dna_pairs("c") == ["CG"]
-    assert dna_pairs("t") == ["TA"]
-    assert dna_pairs("a") == ["AT"]
+SkipCheck(dna_pairs, "single valid lowercase letter g").when_called_with(
+    "g"
+).returns(["GC"])
 
+SkipCheck(dna_pairs, "single valid lowercase letter c").when_called_with(
+    "c"
+).returns(["CG"])
 
-def test_long_valid_uppercase_string_returns_valid_list():
-    assert dna_pairs("GAT") == ["GC", "AT", "TA"]
+SkipCheck(dna_pairs, "single valid lowercase letter t").when_called_with(
+    "t"
+).returns(["TA"])
 
+SkipCheck(dna_pairs, "single valid lowercase letter a").when_called_with(
+    "a"
+).returns(["AT"])
 
-def test_long_uppercase_with_invalid_chars_returns_valid_list():
-    assert dna_pairs("GYTC") == ["GC", "TA", "CG"]
+SkipCheck(
+    dna_pairs, "long valid uppercase string returns valid list"
+).when_called_with("GAT").returns(["GC", "AT", "TA"])
 
+SkipCheck(
+    dna_pairs, "long uppercase string with invalid chars returns valid list"
+).when_called_with("GYTC").returns(["GC", "TA", "CG"])
 
-def test_mixed_string_returns_valid_list():
-    assert dna_pairs("CGauTzgAcj") == [
+SkipCheck(dna_pairs, "mixed string returns valid list").when_called_with(
+    "CGauTzgAcj"
+).returns(
+    [
         "CG",
         "GC",
         "AT",
@@ -458,6 +451,7 @@ def test_mixed_string_returns_valid_list():
         "AT",
         "CG",
     ]
+)
 
 
 """
@@ -480,42 +474,44 @@ def tally_hashtags_and_mentions(tweet):
     pass
 
 
-def test_empty_tweet():
-    assert tally_hashtags_and_mentions("") == {"hashtags": 0, "mentions": 0}
+SkipCheck(tally_hashtags_and_mentions, "test empty tweet").when_called_with(
+    ""
+).returns({"hashtags": 0, "mentions": 0})
 
+SkipCheck(tally_hashtags_and_mentions, "test single hashtag").when_called_with(
+    "#omg"
+).returns({"hashtags": 1, "mentions": 0})
 
-def test_single_hashtag():
-    assert tally_hashtags_and_mentions("#omg") == {
-        "hashtags": 1,
-        "mentions": 0,
-    }
+SkipCheck(tally_hashtags_and_mentions, "test single mention").when_called_with(
+    "@paul_c"
+).returns({"hashtags": 0, "mentions": 1})
 
+SkipCheck(
+    tally_hashtags_and_mentions, "test tweet containing single hashtag"
+).when_called_with("Best place to learn #python?").returns(
+    {"hashtags": 1, "mentions": 0}
+)
 
-def test_single_mention():
-    assert tally_hashtags_and_mentions("@paul_c") == {
-        "hashtags": 0,
-        "mentions": 1,
-    }
+SkipCheck(
+    tally_hashtags_and_mentions, "test tweet containing single mention"
+).when_called_with("Need coding help, paging @Danika ...").returns(
+    {"hashtags": 0, "mentions": 1}
+)
 
+SkipCheck(
+    tally_hashtags_and_mentions,
+    "test tweet containing several hashtags and mentions",
+).when_called_with(
+    "So excited to start at @northcoders on Monday! #learntocode #codingbootcamp"
+).returns(
+    {"hashtags": 2, "mentions": 1}
+)
 
-def test_tweet_containing_single_hashtag():
-    tweet = "Best place to learn #python?"
-    assert tally_hashtags_and_mentions(tweet) == {"hashtags": 1, "mentions": 0}
-
-
-def test_tweet_containing_single_mention():
-    tweet = "Need coding help, paging @Danika ..."
-    assert tally_hashtags_and_mentions(tweet) == {"hashtags": 0, "mentions": 1}
-
-
-def test_tweet_containing_several_hashtags_and_mentions():
-    tweet1 = "So excited to start at @northcoders on Monday! #learntocode #codingbootcamp"  # noqa
-    assert tally_hashtags_and_mentions(tweet1) == {
-        "hashtags": 2,
-        "mentions": 1,
-    }
-    tweet2 = "Thanks to @Alex and @Cat for helping with my #python #coding"
-    assert tally_hashtags_and_mentions(tweet2) == {
-        "hashtags": 2,
-        "mentions": 2,
-    }
+SkipCheck(
+    tally_hashtags_and_mentions,
+    "test tweet containing several hashtags and mentions",
+).when_called_with(
+    "Thanks to @Alex and @Cat for helping with my #python #coding"
+).returns(
+    {"hashtags": 2, "mentions": 2}
+)
