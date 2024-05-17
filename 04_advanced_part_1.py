@@ -83,18 +83,22 @@ def translate_key(student, key_to_change, translation):
     pass
 
 
-Check(
+SkipCheck(
     translate_key,
     "returns empty dictionary unchanged when passed empty dictionary and key not present",
 ).when_called_with({}, "prénom", "first_name").returns({})
 
-Check(translate_key, "returns unchanged if key not present").when_called_with(
+SkipCheck(
+    translate_key, "returns unchanged if key not present"
+).when_called_with(
     {"first_name": "Carla", "surname": "Bruni", "job": "Artist"},
     "prénom",
     "first_name",
-).returns({"first_name": "Carla", "surname": "Bruni", "job": "Artist"})
+).returns(
+    {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
+)
 
-Check(
+SkipCheck(
     translate_key, "returns new dictionary with key translated"
 ).when_called_with(
     {"prénom": "Carla", "surname": "Bruni", "job": "Artist"},
@@ -104,11 +108,15 @@ Check(
     {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
 )
 
-Check(translate_key, "returns new dictionary if required").when_called_with(
+SkipCheck(
+    translate_key, "returns new dictionary if required"
+).when_called_with(
     {"first_name": "Jean", "surname": "Reno", "emploi": "Actor"},
     "emploi",
     "job",
-).returns({"first_name": "Jean", "surname": "Reno", "job": "Actor"})
+).returns(
+    {"first_name": "Jean", "surname": "Reno", "job": "Actor"}
+)
 
 
 """
@@ -136,31 +144,35 @@ def find_first_dentist(people):
     pass
 
 
-Check(
+SkipCheck(
     find_first_dentist, "returns None when passed empty list"
 ).when_called_with([]).returns(None)
 
-Check(
+SkipCheck(
     find_first_dentist, "returns None if person not dentist"
 ).when_called_with([{"name": "Callum", "is_dentist": False}]).returns(None)
 
-Check(find_first_dentist, "returns person if dentist").when_called_with(
+SkipCheck(find_first_dentist, "returns person if dentist").when_called_with(
     [{"name": "Callum", "is_dentist": True}]
 ).returns({"name": "Callum", "is_dentist": True})
 
-Check(find_first_dentist, "returns first dentist").when_called_with(
+SkipCheck(find_first_dentist, "returns first dentist").when_called_with(
     [
         {"name": "Callum", "is_dentist": False},
         {"name": "Carrie", "is_dentist": True},
     ]
 ).returns({"name": "Carrie", "is_dentist": True})
 
-Check(find_first_dentist, "returns first dentist of many").when_called_with(
+SkipCheck(
+    find_first_dentist, "returns first dentist of many"
+).when_called_with(
     [
         {"name": "Callum", "is_dentist": True},
         {"name": "Carrie", "is_dentist": True},
     ]
-).returns({"name": "Callum", "is_dentist": True})
+).returns(
+    {"name": "Callum", "is_dentist": True}
+)
 
 
 """
@@ -214,11 +226,11 @@ def tally_people_in_manchester(people):
     pass
 
 
-Check(
+SkipCheck(
     tally_people_in_manchester, "returns 0 when passed empty list"
 ).when_called_with([]).returns(0)
 
-Check(
+SkipCheck(
     tally_people_in_manchester, "returns 0 when no one in Manchester"
 ).when_called_with(
     [
@@ -232,7 +244,7 @@ Check(
     0
 )
 
-Check(
+SkipCheck(
     tally_people_in_manchester, "returns 1 when one person in Manchester"
 ).when_called_with(
     [
@@ -246,7 +258,7 @@ Check(
     1
 )
 
-Check(
+SkipCheck(
     tally_people_in_manchester,
     "returns the number of people in Manchester when passed multiple",
 ).when_called_with(
@@ -305,23 +317,23 @@ def get_pug_owners(dogs):
     pass
 
 
-Check(
+SkipCheck(
     get_pug_owners, "returns empty list when passed empty list"
 ).when_called_with([]).returns([])
 
-Check(get_pug_owners, "returns empty list when no pugs").when_called_with(
+SkipCheck(get_pug_owners, "returns empty list when no pugs").when_called_with(
     [
         {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
     ]
 ).returns([])
 
-Check(get_pug_owners, "returns single pug owner").when_called_with(
+SkipCheck(get_pug_owners, "returns single pug owner").when_called_with(
     [
         {"name": "Beatrice", "breed": "Pug", "owner": "Tom"},
     ]
 ).returns(["Tom"])
 
-Check(get_pug_owners, "test multiple invalid dogs").when_called_with(
+SkipCheck(get_pug_owners, "test multiple invalid dogs").when_called_with(
     [
         {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
         {"name": "Max", "breed": "Dalmation", "owner": "Izzi"},
@@ -329,7 +341,7 @@ Check(get_pug_owners, "test multiple invalid dogs").when_called_with(
     ]
 ).returns([])
 
-Check(get_pug_owners, "test mixed list").when_called_with(
+SkipCheck(get_pug_owners, "test mixed list").when_called_with(
     [
         {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
         {"name": "Max", "breed": "Pug", "owner": "Izzi"},
@@ -374,36 +386,36 @@ def pluralise_keys(dictionary):
     pass
 
 
-Check(
+SkipCheck(
     pluralise_keys, "returns empty dictionary when passed empty dictionary"
 ).when_called_with({}).returns({})
 
-Check(
+SkipCheck(
     pluralise_keys, "returns copy of dictionary with no arrays"
 ).when_called_with({"a": 1, "b": 2, "c": 3}).is_not_same_as(
     {"a": 1, "b": 2, "c": 3}
 )
 
-Check(
+SkipCheck(
     pluralise_keys, "returns copy of dictionary with nested dicts"
 ).when_called_with({"a": 1, "b": 2, "c": {"d": 3, "e": 4}}).is_not_same_as(
     {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
 )
 
-Check(
+SkipCheck(
     pluralise_keys, "returns dictionary with one nested list"
 ).when_called_with({"a": 1, "b": 2, "num": [3, 4]}).is_not_same_as(
     {"a": 1, "b": 2, "nums": [3, 4]}
 )
 
-Check(
+SkipCheck(
     pluralise_keys, "returns dictionary with one nested list"
 ).when_called_with({"a": 1, "b": 2, "num": [3, 4]}).returns(
     {"a": 1, "b": 2, "nums": [3, 4]}
 )
 
 
-Check(
+SkipCheck(
     pluralise_keys, "returns dictionary with several lists"
 ).when_called_with(
     {
@@ -426,7 +438,7 @@ Check(
         ],
     }
 )
-Check(
+SkipCheck(
     pluralise_keys, "returns dictionary with several lists"
 ).when_called_with(
     {
@@ -470,26 +482,24 @@ get_word_lengths('') # returns []
 
 
 def get_word_lengths(string):
-    # Your code here
     pass
 
 
-def test_empty_string():
-    assert get_word_lengths("") == []
+SkipCheck(
+    get_word_lengths, "returns empty list when passed empty string"
+).when_called_with("").returns([])
 
+SkipCheck(get_word_lengths, "returns single word length").when_called_with(
+    "hello"
+).returns([5])
 
-def test_single_word():
-    assert get_word_lengths("hello") == [5]
-    assert get_word_lengths("sesquipedalian") == [14]
+SkipCheck(get_word_lengths, "returns two word lengths").when_called_with(
+    "hello everyone"
+).returns([5, 8])
 
-
-def test_two_words():
-    assert get_word_lengths("hello everyone") == [5, 8]
-
-
-def test_many_words():
-    assert get_word_lengths("this is a sentence") == [4, 2, 1, 8]
-
+SkipCheck(get_word_lengths, "returns multiple word lengths").when_called_with(
+    "It is a pleasure to meet you new coder"
+).returns([2, 2, 1, 8, 2, 4, 3, 3, 5])
 
 """
 Write a function that takes a list of `words` and returns a list containing
@@ -509,28 +519,28 @@ get_palindromes([]) # returns []
 
 
 def get_palindromes(words):
-    # Your code here
     pass
 
 
-def test_empty_list():
-    assert get_palindromes([]) == []
+SkipCheck(
+    get_palindromes, "returns empty list when passed empty list"
+).when_called_with([]).returns([])
 
+SkipCheck(
+    get_palindromes, "returns empty list when passed invalid item"
+).when_called_with(["boom"]).returns([])
 
-def test_single_invalid_item():
-    assert get_palindromes(["boom"]) == []
+SkipCheck(get_palindromes, "returns single valid item").when_called_with(
+    ["racecar"]
+).returns(["racecar"])
 
+SkipCheck(get_palindromes, "returns multiple items").when_called_with(
+    ["dog", "dud", "car", "mum"]
+).returns(["dud", "mum"])
 
-def test_single_valid_item():
-    assert get_palindromes(["racecar"]) == ["racecar"]
-
-
-def test_several_items():
-    assert get_palindromes(["dog", "dud", "car", "mum"]) == ["dud", "mum"]
-
-
-def test_several_invalid_items():
-    assert get_palindromes(["apple", "orange", "banana"]) == []
+SkipCheck(get_palindromes, "returns no items").when_called_with(
+    ["apple", "orange", "banana"]
+).returns([])
 
 
 """
@@ -553,35 +563,46 @@ replace_letters_with_x('Do you like coding?') # returns 'XX XXX XXXX XXXXXX?'
 
 
 def replace_letters_with_x(string):
-    # Your code here
     pass
 
 
-def test_empty_string():
-    assert replace_letters_with_x("") == ""
+SkipCheck(
+    replace_letters_with_x, "returns empty string when passed empty string"
+).when_called_with("").returns("")
+
+SkipCheck(
+    replace_letters_with_x, "returns single non-letter character"
+).when_called_with("5").returns("5")
+
+SkipCheck(
+    replace_letters_with_x, "returns single special character"
+).when_called_with("&").returns("&")
+
+SkipCheck(
+    replace_letters_with_x, "returns single letter changed to X"
+).when_called_with("a").returns("X")
+
+SkipCheck(
+    replace_letters_with_x, "returns single letter changed to X"
+).when_called_with("K").returns("X")
+
+SkipCheck(
+    replace_letters_with_x, "returns single word changed to X"
+).when_called_with("hello").returns("XXXXX")
+
+SkipCheck(
+    replace_letters_with_x, "returns single word changed to X"
+).when_called_with("NoRtHcOdErS").returns("XXXXXXXXXXX")
 
 
-def test_single_non_letter_character():
-    assert replace_letters_with_x("5") == "5"
-    assert replace_letters_with_x("&") == "&"
+SkipCheck(
+    replace_letters_with_x, "returns single word changed to X with punctuation"
+).when_called_with("Kaboom!").returns("XXXXXX!")
 
+SkipCheck(
+    replace_letters_with_x, "returns single word changed to X with punctuation"
+).when_called_with("Northcoders?").returns("XXXXXXXXXXX?")
 
-def test_single_letter():
-    assert replace_letters_with_x("a") == "X"
-    assert replace_letters_with_x("K") == "X"
-
-
-def test_several_letters():
-    assert replace_letters_with_x("Kaboom") == "XXXXXX"
-    assert replace_letters_with_x("Northcoders") == "XXXXXXXXXXX"
-
-
-def test_several_characters():
-    assert replace_letters_with_x("Kaboom!") == "XXXXXX!"
-    assert replace_letters_with_x("Northcoders?") == "XXXXXXXXXXX?"
-
-
-def test_several_words():
-    assert (
-        replace_letters_with_x("Do you like coding?") == "XX XXX XXXX XXXXXX?"
-    )
+SkipCheck(replace_letters_with_x, "returns several words").when_called_with(
+    "Do you like coding?"
+).returns("XX XXX XXXX XXXXXX?")
