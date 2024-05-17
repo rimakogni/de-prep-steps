@@ -1,5 +1,4 @@
 from test_api.checks import Check, SkipCheck
-import typing
 
 """
 ### add_price_to_product ###
