@@ -39,13 +39,10 @@ Check(
     {"type": "Tofu slices", "flavour": "chocolate", "price": 2.50}
 )
 
-
-# TODO: refactor to use `is` method
-def test_same_dictionary_is_returned():
-    product = {"type": "Tofu slices"}
-    result = add_price_to_product(product, 2.20)
-    assert product == {"type": "Tofu slices", "price": 2.20}
-    assert result is product
+product = {"type": "Tofu slices"}
+Check(
+    add_price_to_product, "should return the *original* product dictionary"
+).when_called_with(product, 2.20).is_same_as(product)
 
 
 """
@@ -164,17 +161,15 @@ SkipCheck(
     {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
 )
 
-
-# TODO: Rewrite this test to use `is`
-def test_same_dictionary_returned():
-    product = {
+product = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
         "quantity": 1,
     }
-    result = add_property_to_product(product, "length", "2h 36m")
-    assert result is product
-    assert product["length"] == "2h 36m"
+
+SkipCheck(
+    add_property_to_product, "should return the *original* product dictionary"
+).when_called_with(product, "length", "2h 36m").is_same_as(product)
 
 
 """

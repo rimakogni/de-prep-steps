@@ -156,11 +156,9 @@ SkipCheck(
 ).when_called_with(test_list, 2).is_not_same_as(test_list)
 
 
-# TODO: THIS TEST NEEDS CHANGING!
-def test_element_is_still_included_in_original_list():
-    nums = [1, 2, 3]
-    remove_item(nums, 2)
-    assert nums == [1, 2, 3], "Item should not be removed from original list"
+Check(remove_item, "should not mutate original list")\
+    .when_called_with([1, 2, 3], 2).does_not_mutate_input('items')
+
 
 
 """
@@ -198,14 +196,9 @@ SkipCheck(
     merge_lists, 'merges two lists when both are empty'
 ).when_called_with([], []).returns([])
 
-
-# TODO: THIS TEST NEEDS CHANGING!
-def test_original_lists_are_unchanged():
-    list1 = [1, 2, 3]
-    list2 = [4, 5, 6]
-    merge_lists(list1, list2)
-    assert list1 == [1, 2, 3], "list1 should not be changed"
-    assert list2 == [4, 5, 6], "list2 should not be changed"
+SkipCheck(
+    merge_lists, 'should not mutate original lists'
+).when_called_with([1, 2, 3], [4, 5, 6]).does_not_mutate_input('lists')
 
 
 """
