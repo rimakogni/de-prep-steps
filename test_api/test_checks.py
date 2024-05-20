@@ -31,7 +31,7 @@ class TestSkipCheck:
 
         captured = capsys.readouterr()
         log_message = f"Test {test_title}: skipping test..."
-    
+
         assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
 
@@ -166,7 +166,8 @@ class TestCheck:
         check.when_called_with(test_list).is_not_same_as(test_list)
 
         captured = capsys.readouterr()
-        log_message = f"Test {test_title}: Test passed, new Python object returned"
+        log_message = f"Test {
+            test_title}: Test passed, new Python object returned"
 
         assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
@@ -185,7 +186,8 @@ class TestCheck:
         check.when_called_with(test_list).is_type(list)
 
         captured = capsys.readouterr()
-        log_message = f"Test {test_title}: Test passed, correct data type returned"
+        log_message = f"Test {
+            test_title}: Test passed, correct data type returned"
 
         assert f"{return_list.__name__}()" in captured.out
         assert log_message in captured.out
@@ -240,7 +242,7 @@ class TestCheck:
         check.when_called_with(4, 4).returns(8)
 
         captured = capsys.readouterr()
-        log_message = f"Test {test_title}: expected 8, but received 9"
+        log_message = f"Test {test_title}: expected '8', but received '9'"
 
         assert f"{add.__name__}()" in captured.out
         assert log_message in captured.out
