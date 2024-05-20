@@ -12,6 +12,8 @@ serverless-output.yaml
 **/.vscode
 **/*_cache
 **/*pycache
+**/__pycache__
+.pytest_cache
 *coverage*
 venv/
 *.zip

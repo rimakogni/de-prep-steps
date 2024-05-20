@@ -13,7 +13,7 @@ https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions:~:tex
 
 Or the following guide on SpeedSheet: https://speedsheet.io/s/python#gL31
 
-If you run pytest on this file, all tests should pass.
+If you run python on this file, all tests should pass.
 """
 
 
@@ -40,7 +40,7 @@ exclamation mark "!".
 
 Refactor `shout_names` to use a list comprehension.
 
-If you run pytest on this file, all tests should pass.
+If you run python on this file, all tests should pass.
 """
 
 
@@ -70,7 +70,7 @@ https://speedsheet.io/s/python#PEU2
 
 The food items look like this: {'name': 'chocolate', 'flavour': 'sweet'}
 
-If you run pytest on this file, all tests should pass.
+If you run python on this file, all tests should pass.
 """
 
 
@@ -105,7 +105,7 @@ of the full stops (.) replaced by exclamation marks (!).
 Refactor get_excited to use a string method. All of this code can be rewritten
 in just one line with one string method...
 
-If you run pytest on this file, all tests should pass.
+If you run python on this file, all tests should pass.
 """
 
 
@@ -139,7 +139,7 @@ returns a list of only the characters from the film franchise, Shrek.
 
 Refactor shrek_characters to use a comprehension.
 
-If you run pytest on this file, all tests should pass.
+If you run python on this file, all tests should pass.
 """
 
 
