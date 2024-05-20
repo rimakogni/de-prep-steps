@@ -12,6 +12,8 @@ serverless-output.yaml
 **/.vscode
 **/*_cache
 **/*pycache
+**/__pycache__
+.pytest_cache
 *coverage*
 venv/
 *.zip
@@ -19,3 +21,4 @@ venv/
 terraform/init.sh
 zen.txt
 *.tfstate*
+test_api/plan_playground.py
