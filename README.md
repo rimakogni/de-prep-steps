@@ -82,14 +82,14 @@ notes on functions first.
 
 To test how you coded these functions we will you the pre-written tests.
 
-For example, the file `counter.py` in the `00_demonstration` folder has a very simple function that is going wrong. You
+For example, the file `00_demonstration.py` file has a very simple function that is going wrong. You
 should be able to test this by typing (at the command prompt):
 
 ```bash
 python 00_demonstration.py
 ```
 
-You should see a message saying that one of the tests is passing and one is being skipped. Now, in VS Code, navigate to the `counter.py` file.
+You should see a message saying that one of the tests is passing and one is being skipped. Now, in VS Code, navigate to the `00_demonstration.py` file.
 
 Change the `SkipCheck` on line 30 to `Check`.
 
