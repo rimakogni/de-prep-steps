@@ -19,22 +19,34 @@ class SkipCheck:
         return self
 
     def is_same_as(self, original_input):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
+        print(
+            f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}"  # noqa
+        )
 
     def is_not_same_as(self, original_data):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
+        print(
+            f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}"  # noqa
+        )
 
     def mutates_input(self, label):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
+        print(
+            f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}"  # noqa
+        )
 
     def does_not_mutate_input(self, label):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
+        print(
+            f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}"  # noqa
+        )
 
     def is_type(self, data_type):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
+        print(
+            f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}"  # noqa
+        )
 
     def returns(self, return_value):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
+        print(
+            f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}"  # noqa
+        )
 
 
 class Check:
@@ -51,17 +63,10 @@ class Check:
         self._set_return_value()
 
         if self.return_value is input_data:
-            feedback_msg = (
-                f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {
-                    self.title}: Test passed, "
-                f"same object returned{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {self.title}: Test passed, same object returned{DEFAULT}"  # noqa
+
         else:
-            feedback_msg = (
-                f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {
-                    self.title}: Test failed, "
-                f"return value should be the same object{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {self.title}: Test failed, return value should be the same object{DEFAULT}"  # noqa
 
         print(feedback_msg)
 
@@ -69,19 +74,10 @@ class Check:
         self._set_return_value()
 
         if self.return_value is not original_data:
-            feedback_msg = (
-                f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {
-                    self.title}: Test passed, "
-                f"new Python object returned{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {self.title}: Test passed, new Python object returned{DEFAULT}"  # noqa
 
         else:
-            feedback_msg = (
-                f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {
-                    self.title}: Test "
-                f"failed, return value should be a new {
-                    type(original_data).__name__}{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {self.title}: Test failed, return value should be a new {type(original_data).__name__}{DEFAULT}"  # noqa
 
         print(feedback_msg)
 
@@ -89,17 +85,9 @@ class Check:
         self._set_return_value()
 
         if self.args != self.args_copy:
-            feedback_msg = (
-                f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {
-                    self.title}: Test passed, "
-                f"{label} successfully mutated{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {self.title}: Test passed, {label} successfully mutated{DEFAULT}"  # noqa
         else:
-            feedback_msg = (
-                f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {
-                    self.title}: Test failed, "
-                f"{label} has not been mutated{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {self.title}: Test failed, {label} has not been mutated{DEFAULT}"  # noqa
 
         print(feedback_msg)
 
@@ -107,17 +95,9 @@ class Check:
         self._set_return_value()
 
         if self.args == self.args_copy:
-            feedback_msg = (
-                f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {
-                    self.title}: Test passed, "
-                f"{label} not mutated{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {self.title}: Test passed, {label} not mutated{DEFAULT}"  # noqa
         else:
-            feedback_msg = (
-                f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {
-                    self.title}: Test failed, "
-                f"{label} should not be mutated{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {self.title}: Test failed, {label} should not be mutated{DEFAULT}"  # noqa
 
         print(feedback_msg)
 
@@ -125,18 +105,9 @@ class Check:
         self._set_return_value()
 
         if isinstance(self.return_value, data_type):
-            feedback_msg = (
-                f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {
-                    self.title}: Test "
-                f"passed, correct data type returned{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {self.title}: Test passed, correct data type returned{DEFAULT}"  # noqa
         else:
-            feedback_msg = (
-                f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {
-                    self.title}: Return "
-                f"value should be of type {
-                    self.return_value.__class__.__name__}{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {self.title}: Return value should be of type {self.return_value.__class__.__name__}{DEFAULT}"  # noqa
 
         print(feedback_msg)
 
@@ -150,17 +121,8 @@ class Check:
         self._set_return_value()
 
         if self.return_value == expected_return_value:
-            feedback_msg = (
-                f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {
-                    self.title}: Test "
-                f"passed{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_GREEN}{self.func.__name__}(){NORMAL_GREEN}, Test {self.title}: Test passed{DEFAULT}"  # noqa
         else:
-            feedback_msg = (
-                f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {
-                    self.title}: "
-                f"expected '{expected_return_value}', but received '{
-                    self.return_value}'{DEFAULT}"
-            )
+            feedback_msg = f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, Test {self.title}: expected '{expected_return_value}', but received '{self.return_value}'{DEFAULT}"  # noqa
 
         print(feedback_msg)
