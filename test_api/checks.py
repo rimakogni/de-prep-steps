@@ -19,28 +19,22 @@ class SkipCheck:
         return self
 
     def is_same_as(self, original_input):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {
-              self.title}: skipping test...{DEFAULT}")
+        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
 
     def is_not_same_as(self, original_data):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {
-              self.title}: skipping test...{DEFAULT}")
+        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
 
     def mutates_input(self, label):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {
-              self.title}: skipping test...{DEFAULT}")
+        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
 
     def does_not_mutate_input(self, label):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {
-              self.title}: skipping test...{DEFAULT}")
+        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
 
     def is_type(self, data_type):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {
-              self.title}: skipping test...{DEFAULT}")
+        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
 
     def returns(self, return_value):
-        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {
-              self.title}: skipping test...{DEFAULT}")
+        print(f"{BOLD_YELLOW}{self.func.__name__}(){NORMAL_YELLOW}, Test {self.title}: skipping test...{DEFAULT}")  # noqa
 
 
 class Check:
