@@ -1,4 +1,5 @@
-from checks import SkipCheck, Check
+from checks import SkipCheck, Check, BOLD_RED, NORMAL_RED, DEFAULT
+from unittest.mock import patch, call
 import pytest
 
 
@@ -131,25 +132,26 @@ class TestCheck:
 
         assert check.return_value == 3
 
-    def test_set_return_value_prints_helpful_message_and_stack_trace_if_an_exception_is_raised(self, capsys):
-        def func_that_causes_exception_no_args():
+    @patch('checks.print')
+    def test_set_return_value_prints_helpful_message_and_stack_trace_if_an_exception_is_raised(self, mock_print, capsys):
+        def func_that_causes_exception():
             invalid_key = [1, 2, 3]
             test_dict = {}
 
             test_dict[invalid_key] = True
 
-        check = Check(func_that_causes_exception_no_args, "adds key to dict")
+        test_title = "adds key to dict"
+        check = Check(func_that_causes_exception, test_title)
 
-        with pytest.raises(Exception, match="unhashable type: 'list'") as e:
+        with pytest.raises(Exception, match="unhashable type: 'list'"):
             check.returns({})
 
-        # NOTE: I feel like the following assertions is missing from the test however
-        # pytest seems to swallow the print message that occurs prior to the exception
-        # being re-raised so at the moment there doesn't seem to be a way of testing it
+        feedback_msg = (f"{BOLD_RED}func_that_causes_exception(){NORMAL_RED}, "
+                        f"Test {test_title}: Test failed, see error "
+                        f"message below{DEFAULT}\n")
+        expected_calls = [call(feedback_msg)]
 
-        # # captured = capsys.readouterr()
-        # # log_message = "Test adds key to dict: Test failed, see error message below"
-        # # assert log_message in captured.out
+        assert mock_print.mock_calls == expected_calls
 
     def test_is_not_same_as_prints_helpful_message_when_return_value_IS_the_given_object(
         self, capsys
