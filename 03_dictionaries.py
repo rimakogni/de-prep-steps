@@ -90,7 +90,7 @@ def add_property_to_product(product, property, value):
 # ❗ Remember to change SkipCheck to Check!
 SkipCheck(
     add_property_to_product, "empty product gains a single property"
-).when_called_with({}, "length", "2h 36m").returns({"length": "2h 36"})
+).when_called_with({}, "length", "2h 36m").returns({"length": "2h 36m"})
 
 SkipCheck(
     add_property_to_product, "string property added to product"
