@@ -143,7 +143,7 @@ class TestCheck:
         with pytest.raises(Exception, match="unhashable type: 'list'") as e:
             check.returns({})
 
-        # NOTE: I feel like the following asses is missing from the test however
+        # NOTE: I feel like the following assertions is missing from the test however
         # pytest seems to swallow the print message that occurs prior to the exception
         # being re-raised so at the moment there doesn't seem to be a way of testing it
 
