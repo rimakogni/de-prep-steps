@@ -68,6 +68,17 @@ add_property_to_product(
     # 'quantity': 1,
     # 'length': '2h 36m'
     # }
+
+NOTE: Only certain types of data are able to be set a dictionary key. Your
+function should take this into consideration and only allow the following data
+types to be set as a key:
+- string
+- integer
+- float
+- boolean
+
+If the given `property` argument is not one of these types then it should be
+ignored and the product returned unchanged!
 """
 
 
@@ -79,7 +90,7 @@ def add_property_to_product(product, property, value):
 # ❗ Remember to change SkipCheck to Check!
 SkipCheck(
     add_property_to_product, "empty product gains a single property"
-).when_called_with({}, "length", "2h 36m").returns({"length": "2h 36"})
+).when_called_with({}, "length", "2h 36m").returns({"length": "2h 36m"})
 
 SkipCheck(
     add_property_to_product, "string property added to product"
@@ -162,10 +173,10 @@ SkipCheck(
 )
 
 product = {
-        "type": "Terminator 2: Judgement Day",
-        "price": "£6.99",
-        "quantity": 1,
-    }
+    "type": "Terminator 2: Judgement Day",
+    "price": "£6.99",
+    "quantity": 1,
+}
 
 SkipCheck(
     add_property_to_product, "should return the *original* product dictionary"

@@ -1,4 +1,6 @@
-from checks import SkipCheck, Check
+from checks import SkipCheck, Check, BOLD_RED, NORMAL_RED, DEFAULT
+from unittest.mock import patch, call
+import pytest
 
 
 class TestSkipCheck:
@@ -129,6 +131,27 @@ class TestCheck:
         check._set_return_value()
 
         assert check.return_value == 3
+
+    @patch('checks.print')
+    def test_set_return_value_prints_helpful_message_and_stack_trace_if_an_exception_is_raised(self, mock_print, capsys):
+        def func_that_causes_exception():
+            invalid_key = [1, 2, 3]
+            test_dict = {}
+
+            test_dict[invalid_key] = True
+
+        test_title = "adds key to dict"
+        check = Check(func_that_causes_exception, test_title)
+
+        with pytest.raises(Exception, match="unhashable type: 'list'"):
+            check.returns({})
+
+        feedback_msg = (f"{BOLD_RED}func_that_causes_exception(){NORMAL_RED}, "
+                        f"Test {test_title}: Test failed, see error "
+                        f"message below{DEFAULT}\n")
+        expected_calls = [call(feedback_msg)]
+
+        assert mock_print.mock_calls == expected_calls
 
     def test_is_not_same_as_prints_helpful_message_when_return_value_IS_the_given_object(
         self, capsys
