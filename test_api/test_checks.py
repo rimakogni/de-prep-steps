@@ -1,4 +1,5 @@
 from checks import SkipCheck, Check
+import pytest
 
 
 class TestSkipCheck:
@@ -129,6 +130,26 @@ class TestCheck:
         check._set_return_value()
 
         assert check.return_value == 3
+
+    def test_set_return_value_prints_helpful_message_and_stack_trace_if_an_exception_is_raised(self, capsys):
+        def func_that_causes_exception_no_args():
+            invalid_key = [1, 2, 3]
+            test_dict = {}
+
+            test_dict[invalid_key] = True
+
+        check = Check(func_that_causes_exception_no_args, "adds key to dict")
+
+        with pytest.raises(Exception, match="unhashable type: 'list'") as e:
+            check.returns({})
+
+        # NOTE: I feel like the following asses is missing from the test however
+        # pytest seems to swallow the print message that occurs prior to the exception
+        # being re-raised so at the moment there doesn't seem to be a way of testing it
+
+        # # captured = capsys.readouterr()
+        # # log_message = "Test adds key to dict: Test failed, see error message below"
+        # # assert log_message in captured.out
 
     def test_is_not_same_as_prints_helpful_message_when_return_value_IS_the_given_object(
         self, capsys

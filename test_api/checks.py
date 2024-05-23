@@ -112,10 +112,17 @@ class Check:
         print(feedback_msg)
 
     def _set_return_value(self):
-        if hasattr(self, "args"):
-            self.return_value = self.func(*self.args)
-        else:
-            self.return_value = self.func()
+        try:
+            if hasattr(self, "args"):
+                self.return_value = self.func(*self.args)
+            else:
+                self.return_value = self.func()
+        except Exception:
+            feedback_msg = (f"{BOLD_RED}{self.func.__name__}(){NORMAL_RED}, "
+                            f"Test {self.title}: Test failed, see error "
+                            f"message below{DEFAULT}\n")
+            print(feedback_msg)
+            raise
 
     def returns(self, expected_return_value):
         self._set_return_value()
