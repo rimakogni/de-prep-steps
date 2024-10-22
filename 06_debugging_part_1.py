@@ -68,4 +68,4 @@ def add_bread(person, loaf):
 
 Check(add_bread, "adds favourite bread - rye").when_called_with({'name': 'Joe'}, 'rye').returns({'name': 'Joe', 'fave_bread': 'rye'})
 Check(add_bread, "adds favourite bread - granary").when_called_with({'name': 'Paul'}, 'granary').returns({'name': 'Paul', 'fave_bread': 'granary'})
-Check(add_bread, "adds favourite bread - granary").when_called_with({'name': 'Poonam'}).returns({'name': 'Poonam', 'fave_bread': 'granary'})
+Check(add_bread, "adds default favourite bread as granary when not specified").when_called_with({'name': 'Poonam'}).returns({'name': 'Poonam', 'fave_bread': 'granary'})
