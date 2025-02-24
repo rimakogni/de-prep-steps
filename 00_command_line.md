@@ -18,7 +18,7 @@
 
 ## 5
 
-- Create some directories inside northcoders called `intro-week`, `fundamentals`, `data`, `toolkit` and `project`.
+- Create some directories inside northcoders called `fundamentals`, `data`, `toolkit`, `ai_ml` and `project`.
 
 - List all the directory contents of `northcoders` - you should be able to see the 5 directories you’ve just created.
 
