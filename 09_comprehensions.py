@@ -1,9 +1,3 @@
-#Task 1:  1 Create Greeting Strings (LIST) ✅
-#Task 2: 4 Increment Even Numbers (LIST)✅
-#Task 3: 8 Switch Name and ID (Dict)✅
-#Task 4: 11 Find Average Games (Dict)
-#Task 5: 12 Get Unique Departments (SET)
-
 from test_api.checks import run_test, skip_test, format_err_msg
 
 """
@@ -115,6 +109,7 @@ def test_increment_even_numbers_mixed_even_and_odd():
 
 """
 ### switch_name_and_id ###
+
 The function should accept a dictionary. In this dictionary, each key is a staff member's name and the value will be their ID number. The function should return a dictionary with the keys and values switched around. It should work in the following way:
 
 ```py
@@ -212,7 +207,7 @@ def test_switch_name_and_id_returns_dict_with_swapped_keys_and_values():
             }
         ),
     )
-    
+
 """
 ### find_average_games ###
 
@@ -305,6 +300,134 @@ def test_find_average_games_returns_dict_with_average_games_mixed_scoring():
         ]
     ) == {"The Sims 2": 50, "World of Warcraft": 33}
 
+"""
+### get_unique_departments ###
+
+Next, we will be taking a look at **set comprehensions**!
+
+The function should accept a list of staff members, and each staff member belongs to a department. The function should extract the departments names into a [set](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset). It should work in the following way:
+
+```py
+get_unique_departments(
+    [
+        {
+            "name": "Simon",
+            "department": "HR"
+        },
+        {
+            "name": "Danika",
+            "department": "IT Support"
+        },
+        {
+            "name": "Cat",
+            "department": "Marketing"
+        },
+        {
+            "name": "Joe",
+            "department": "Technology"
+        },
+        {
+            "name": "Chon",
+            "department": "HR"
+        },
+        {
+            "name": "Kyle",
+            "department": "IT Support"
+        }
+    ]
+)
+
+# This should return a collection containing the strings: 
+# "HR", "IT Support", "Marketing", "Technology"
+```
+
+
+This function is currently working exactly as it should, but it could be much more concise.
+
+Please refactor `get_unique_departments` to use a **set comprehension**. Think about how you could leverage the set data type to meet your requirements.
+"""
+
+
+def get_unique_departments(employees):
+    unique_departments = []
+
+    for employee in employees:
+        if employee["department"] not in unique_departments:
+            unique_departments.append(employee["department"])
+
+    return unique_departments
+
+
+@run_test
+def test_get_unique_departments():
+    assert len(get_unique_departments([])) == 0, format_err_msg(
+        [], get_unique_departments([])
+    )
+
+
+@skip_test
+def test_get_unique_departments_single():
+    output = get_unique_departments([{"name": "Simon", "department": "HR"}])
+
+    assert "HR" in output, format_err_msg(True, "HR" in output)
+    assert len(output) == 1, format_err_msg(1, len(output))
+
+
+@run_test
+def test_get_unique_departments_multiple_employee_unique_departments():
+    output = get_unique_departments(
+        [
+            {"name": "Simon", "department": "HR"},
+            {"name": "Danika", "department": "IT Support"},
+            {"name": "Cat", "department": "Marketing"},
+        ]
+    )
+
+    assert all(
+        el in output for el in ["HR", "IT Support", "Marketing"]
+    ), format_err_msg(
+        True, all(el in output for el in ["HR", "IT Support", "Marketing"])
+    )
+    assert len(output) == 3, format_err_msg(3, len(output))
+
+
+@skip_test
+def test_get_unique_departments_multi_employee_single_department():
+    output = get_unique_departments(
+        [
+            {"name": "Simon", "department": "HR"},
+            {"name": "Danika", "department": "HR"},
+            {"name": "Cat", "department": "HR"},
+        ]
+    )
+
+    assert "HR" in output, format_err_msg(True, "HR" in output)
+    assert len(output) == 1, format_err_msg(1, len(output))
+
+
+@skip_test
+def test_get_unique_departments_multi_employee_multi_department():
+    output = get_unique_departments(
+        [
+            {"name": "Simon", "department": "HR"},
+            {"name": "Danika", "department": "IT Support"},
+            {"name": "Cat", "department": "Marketing"},
+            {"name": "Joe", "department": "Technology"},
+            {"name": "Chon", "department": "HR"},
+            {"name": "Kyle", "department": "IT Support"},
+        ]
+    )
+
+    assert all(
+        el in output for el in ["HR", "IT Support", "Marketing", "Technology"]
+    ), format_err_msg(
+        True,
+        all(
+            el in output
+            for el in ["HR", "IT Support", "Marketing", "Technology"]
+        ),
+    )
+    assert len(output) == 4, format_err_msg(4, len(output))
 
 
 if __name__ == "__main__":
@@ -323,3 +446,8 @@ if __name__ == "__main__":
     test_find_average_games_returns_empty_dict_when_only_highly_rated_games()
     test_find_average_games_returns_empty_dict_when_only_poorly_rated_games()
     test_find_average_games_returns_dict_with_average_games_mixed_scoring()
+    test_get_unique_departments()
+    test_get_unique_departments_single()
+    test_get_unique_departments_multiple_employee_unique_departments()
+    test_get_unique_departments_multi_employee_single_department()
+    test_get_unique_departments_multi_employee_multi_department()
