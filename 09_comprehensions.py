@@ -2,7 +2,7 @@
 #Task 2: 4 Increment Even Numbers (LIST)✅
 #Task 3: 8 Switch Name and ID (Dict)✅
 #Task 4: 11 Find Average Games (Dict)
-#ßTask 5: 12 Get Unique Departments (SET)
+#Task 5: 12 Get Unique Departments (SET)
 
 from test_api.checks import run_test, skip_test, format_err_msg
 
@@ -212,6 +212,100 @@ def test_switch_name_and_id_returns_dict_with_swapped_keys_and_values():
             }
         ),
     )
+    
+"""
+### find_average_games ###
+
+The function should accept a list of lists. Each list contains the name of a game and the critic score. The function should return a dictionary with only the average scoring game. For the purposes of this function, an average score would be **greater than 25** and **less than 75**. It should work in the following way:
+
+```py
+find_average_games([["Baldur's Gate 3", 0]]) # {}
+find_average_games([["Old School Runescape", 100]]) # {}
+find_average_games([["Minecraft", 67]]) # {"Minecraft": 67}
+find_average_games(
+  [["Deep Rock Galactic", 24], ["Farming Simulator 22", 11], 
+  ["Old School Runescape", 100], ["The Sims 2", 50], ["World of Warcraft", 33]]) 
+# {"The Sims 2": 50, "World of Warcraft": 33}
+```
+
+There is no existing code for you to refactor. Instead, you should solve `find_average_games` using a **dictionary comprehension**.
+"""
+
+def find_average_games(games):
+    pass
+
+
+@skip_test
+def test_find_average_games_passed_empty_list_returns_empty_dict():
+    assert find_average_games([]) == {}
+
+
+@skip_test
+def test_find_average_games_returns_dict_with_average_games():
+    assert find_average_games([["Minecraft", 67]]) == {"Minecraft": 67}
+    assert find_average_games(
+        [["The Sims 2", 50], ["World of Warcraft", 33]]
+    ) == {"The Sims 2": 50, "World of Warcraft": 33}
+
+
+@skip_test
+def test_find_average_games_returns_empty_dict_when_only_highly_rated_games():
+    assert find_average_games([["Old School Runescape", 100]]) == {}
+    assert (
+        find_average_games([["Terraria", 89], ["Age of Empires 2", 95]]) == {}
+    )
+    assert (
+        find_average_games(
+            [
+                ["The Elder Scrolls IV: Oblivion", 82],
+                ["Halo 3", 79],
+                ["Tony Hawk's Pro Skater 2", 99],
+            ]
+        )
+        == {}
+    )
+
+
+@skip_test
+def test_find_average_games_returns_empty_dict_when_only_poorly_rated_games():
+    assert find_average_games([["Baldur's Gate 3", 0]]) == {}
+    assert find_average_games([["Call of Duty", 5], ["Farmville", 17]]) == {}
+    assert (
+        find_average_games(
+            [
+                ["Deep Rock Galactic", 24],
+                ["Farming Simulator 22", 11],
+                ["Overcooked 2", 1],
+            ]
+        )
+        == {}
+    )
+
+
+@skip_test
+def test_find_average_games_returns_dict_with_average_games_mixed_scoring():
+    assert find_average_games([["Minecraft", 67], ["Baldur's Gate 3", 0]]) == {
+        "Minecraft": 67
+    }
+    assert find_average_games(
+        [
+            ["The Elder Scrolls IV: Oblivion", 82],
+            ["Minecraft", 67],
+            ["Tony Hawk's Pro Skater 2", 99],
+            ["Baldur's Gate 3", 0],
+        ]
+    ) == {"Minecraft": 67}
+    assert find_average_games(
+        [
+            ["Deep Rock Galactic", 24],
+            ["Farming Simulator 22", 11],
+            ["Old School Runescape", 100],
+            ["The Sims 2", 50],
+            ["World of Warcraft", 33],
+        ]
+    ) == {"The Sims 2": 50, "World of Warcraft": 33}
+
+
 
 if __name__ == "__main__":
     test_create_greeting_strings_return_empty_list()
@@ -224,3 +318,8 @@ if __name__ == "__main__":
     test_switch_name_and_id_passed_empty_dict_returns_empty_dict_()
     test_switch_name_and_id_returns_dict_with_single_swapped_key_and_value()
     test_switch_name_and_id_returns_dict_with_swapped_keys_and_values()
+    test_find_average_games_passed_empty_list_returns_empty_dict()
+    test_find_average_games_returns_dict_with_average_games()
+    test_find_average_games_returns_empty_dict_when_only_highly_rated_games()
+    test_find_average_games_returns_empty_dict_when_only_poorly_rated_games()
+    test_find_average_games_returns_dict_with_average_games_mixed_scoring()
