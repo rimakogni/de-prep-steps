@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 """
 Write a function that takes a list of booleans (`bools`) and returns a `list`
@@ -21,31 +21,47 @@ def flip_booleans(bools):
     pass
 
 
-Check(
-    flip_booleans, "returns empty list when passed empty list"
-).when_called_with([]).returns([])
+@run_test
+def flip_booleans_should_return_empty_list_when_passed_empty_list():
+    result = flip_booleans([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-Check(
-    flip_booleans, "returns single False when passed single True"
-).when_called_with([True]).returns([False])
 
-Check(
-    flip_booleans, "returns single True when passed single False"
-).when_called_with([False]).returns([True])
+@run_test
+def flip_booleans_should_return_single_false_when_passed_single_true():
+    result = flip_booleans([True])
+    expected = [False]
+    assert result == expected, format_err_msg(expected, result)
 
-Check(
-    flip_booleans, "returns all Falses when passed all Trues"
-).when_called_with([True, True, True]).returns([False, False, False])
 
-Check(
-    flip_booleans, "returns all Trues when passed all Falses"
-).when_called_with([False, False, False]).returns([True, True, True])
+@run_test
+def flip_booleans_should_return_single_true_when_passed_single_false():
+    result = flip_booleans([False])
+    expected = [True]
+    assert result == expected, format_err_msg(expected, result)
 
-Check(
-    flip_booleans, "returns mixed Trues and Falses flipped correctly"
-).when_called_with([True, False, False, True]).returns(
-    [False, True, True, False]
-)
+
+@run_test
+def flip_booleans_should_return_all_false_when_passed_all_true():
+    result = flip_booleans([True, True, True])
+    expected = [False, False, False]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def flip_booleans_should_return_all_true_when_passed_all_false():
+    result = flip_booleans([False, False, False])
+    expected = [True, True, True]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def flip_booleans_should_return_mixed_true_and_false_flipped_correctly():
+    result = flip_booleans([True, False, False, True])
+    expected = [False, True, True, False]
+    assert result == expected, format_err_msg(expected, result)
+
 
 """
 Northcoders is expanding to France!
@@ -83,40 +99,40 @@ def translate_key(student, key_to_change, translation):
     pass
 
 
-SkipCheck(
-    translate_key,
-    "returns empty dictionary unchanged when passed empty dictionary and key not present",
-).when_called_with({}, "prénom", "first_name").returns({})
+@skip_test
+def translate_key_should_return_empty_dictionary_when_passed_empty_dictionary():
+    result = translate_key({}, "prénom", "first_name")
+    expected = {}
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    translate_key, "returns unchanged if key not present"
-).when_called_with(
-    {"first_name": "Carla", "surname": "Bruni", "job": "Artist"},
-    "prénom",
-    "first_name",
-).returns(
-    {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
-)
 
-SkipCheck(
-    translate_key, "returns new dictionary with key translated"
-).when_called_with(
-    {"prénom": "Carla", "surname": "Bruni", "job": "Artist"},
-    "prénom",
-    "first_name",
-).returns(
-    {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
-)
+@skip_test
+def translate_key_should_return_unchanged_if_key_not_present():
+    result = translate_key(
+        {"first_name": "Carla", "surname": "Bruni", "job": "Artist"},
+        "prénom",
+        "first_name",
+    )
+    expected = {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    translate_key, "returns new dictionary if required"
-).when_called_with(
-    {"first_name": "Jean", "surname": "Reno", "emploi": "Actor"},
-    "emploi",
-    "job",
-).returns(
-    {"first_name": "Jean", "surname": "Reno", "job": "Actor"}
-)
+
+@skip_test
+def translate_key_should_return_new_dictionary_with_key_translated():
+    result = translate_key(
+        {"prénom": "Carla", "surname": "Bruni", "job": "Artist"}, "prénom", "first_name"
+    )
+    expected = {"first_name": "Carla", "surname": "Bruni", "job": "Artist"}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def translate_key_should_return_new_dictionary():
+    result = translate_key(
+        {"first_name": "Jean", "surname": "Reno", "emploi": "Actor"}, "emploi", "job"
+    )
+    expected = {"first_name": "Jean", "surname": "Reno", "job": "Actor"}
+    assert result is not expected, format_err_msg("new dictionary", "input dictionary")
 
 
 """
@@ -144,35 +160,49 @@ def find_first_dentist(people):
     pass
 
 
-SkipCheck(
-    find_first_dentist, "returns None when passed empty list"
-).when_called_with([]).returns(None)
+@skip_test
+def find_first_dentist_should_return_none_when_passed_empty_list():
+    result = find_first_dentist([])
+    expected = None
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    find_first_dentist, "returns None if person not dentist"
-).when_called_with([{"name": "Callum", "is_dentist": False}]).returns(None)
 
-SkipCheck(find_first_dentist, "returns person if dentist").when_called_with(
-    [{"name": "Callum", "is_dentist": True}]
-).returns({"name": "Callum", "is_dentist": True})
+@skip_test
+def find_first_dentist_should_return_none_if_person_not_dentist():
+    result = find_first_dentist([{"name": "Callum", "is_dentist": False}])
+    expected = None
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(find_first_dentist, "returns first dentist").when_called_with(
-    [
-        {"name": "Callum", "is_dentist": False},
-        {"name": "Carrie", "is_dentist": True},
-    ]
-).returns({"name": "Carrie", "is_dentist": True})
 
-SkipCheck(
-    find_first_dentist, "returns first dentist of many"
-).when_called_with(
-    [
-        {"name": "Callum", "is_dentist": True},
-        {"name": "Carrie", "is_dentist": True},
-    ]
-).returns(
-    {"name": "Callum", "is_dentist": True}
-)
+@skip_test
+def find_first_dentist_should_return_person_if_dentist():
+    result = find_first_dentist([{"name": "Callum", "is_dentist": True}])
+    expected = {"name": "Callum", "is_dentist": True}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def find_first_dentist_should_return_first_dentist():
+    result = find_first_dentist(
+        [
+            {"name": "Callum", "is_dentist": False},
+            {"name": "Carrie", "is_dentist": True},
+        ]
+    )
+    expected = {"name": "Carrie", "is_dentist": True}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def find_first_dentist_should_return_first_dentist_of_many():
+    result = find_first_dentist(
+        [
+            {"name": "Callum", "is_dentist": True},
+            {"name": "Carrie", "is_dentist": True},
+        ]
+    )
+    expected = {"name": "Callum", "is_dentist": True}
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -226,72 +256,76 @@ def tally_people_in_manchester(people):
     pass
 
 
-SkipCheck(
-    tally_people_in_manchester, "returns 0 when passed empty list"
-).when_called_with([]).returns(0)
+@skip_test
+def tally_people_in_manchester_should_return_0_when_passed_empty_list():
+    result = tally_people_in_manchester([])
+    expected = 0
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    tally_people_in_manchester, "returns 0 when no one in Manchester"
-).when_called_with(
-    [
-        {
-            "name": "Carrie",
-            "lives": {"country": "UK", "city": "Leeds"},
-            "age": 32,
-        }
-    ]
-).returns(
-    0
-)
 
-SkipCheck(
-    tally_people_in_manchester, "returns 1 when one person in Manchester"
-).when_called_with(
-    [
-        {
-            "name": "Emmeline",
-            "lives": {"country": "UK", "city": "Manchester"},
-            "age": 32,
-        }
-    ]
-).returns(
-    1
-)
+@skip_test
+def tally_people_in_manchester_should_return_0_when_no_one_in_manchester():
+    result = tally_people_in_manchester(
+        [
+            {
+                "name": "Carrie",
+                "lives": {"country": "UK", "city": "Leeds"},
+                "age": 32,
+            }
+        ]
+    )
+    expected = 0
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    tally_people_in_manchester,
-    "returns the number of people in Manchester when passed multiple",
-).when_called_with(
-    [
-        {
-            "name": "Carrie",
-            "lives": {"country": "UK", "city": "Leeds"},
-            "age": 32,
-        },
-        {
-            "name": "Ray",
-            "lives": {"country": "UK", "city": "Manchester"},
-            "age": 31,
-        },
-        {
-            "name": "Simon",
-            "lives": {"country": "Middle Earth", "city": "Moria"},
-            "age": 275,
-        },
-        {
-            "name": "Cat",
-            "lives": {"country": "UK", "city": "Manchester"},
-            "age": 42,
-        },
-        {
-            "name": "Danika",
-            "lives": {"country": "UK", "city": "Manchester"},
-            "age": 22,
-        },
-    ]
-).returns(
-    3
-)
+
+@skip_test
+def tally_people_in_manchester_should_return_1_when_one_person_in_manchester():
+    result = tally_people_in_manchester(
+        [
+            {
+                "name": "Emmeline",
+                "lives": {"country": "UK", "city": "Manchester"},
+                "age": 32,
+            }
+        ]
+    )
+    expected = 1
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def tally_people_in_manchester_should_return_number_of_people_in_manchester_when_passed_multiple():
+    result = tally_people_in_manchester(
+        [
+            {
+                "name": "Carrie",
+                "lives": {"country": "UK", "city": "Leeds"},
+                "age": 32,
+            },
+            {
+                "name": "Ray",
+                "lives": {"country": "UK", "city": "Manchester"},
+                "age": 31,
+            },
+            {
+                "name": "Simon",
+                "lives": {"country": "Middle Earth", "city": "Moria"},
+                "age": 275,
+            },
+            {
+                "name": "Cat",
+                "lives": {"country": "UK", "city": "Manchester"},
+                "age": 42,
+            },
+            {
+                "name": "Danika",
+                "lives": {"country": "UK", "city": "Manchester"},
+                "age": 22,
+            },
+        ]
+    )
+    expected = 3
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -317,37 +351,58 @@ def get_pug_owners(dogs):
     pass
 
 
-SkipCheck(
-    get_pug_owners, "returns empty list when passed empty list"
-).when_called_with([]).returns([])
+@skip_test
+def get_pug_owners_should_return_empty_list_when_passed_empty_list():
+    result = get_pug_owners([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_pug_owners, "returns empty list when no pugs").when_called_with(
-    [
-        {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
-    ]
-).returns([])
 
-SkipCheck(get_pug_owners, "returns single pug owner").when_called_with(
-    [
-        {"name": "Beatrice", "breed": "Pug", "owner": "Tom"},
-    ]
-).returns(["Tom"])
+@skip_test
+def get_pug_owners_should_return_empty_list_when_no_pugs():
+    result = get_pug_owners(
+        [
+            {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
+        ]
+    )
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_pug_owners, "test multiple invalid dogs").when_called_with(
-    [
-        {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
-        {"name": "Max", "breed": "Dalmation", "owner": "Izzi"},
-        {"name": "Poppy", "breed": "Alsatian", "owner": "Anat"},
-    ]
-).returns([])
 
-SkipCheck(get_pug_owners, "test mixed list").when_called_with(
-    [
-        {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
-        {"name": "Max", "breed": "Pug", "owner": "Izzi"},
-        {"name": "Poppy", "breed": "Pug", "owner": "Anat"},
-    ]
-).returns(["Izzi", "Anat"])
+@skip_test
+def get_pug_owners_should_return_single_pug_owner():
+    result = get_pug_owners(
+        [
+            {"name": "Beatrice", "breed": "Pug", "owner": "Tom"},
+        ]
+    )
+    expected = ["Tom"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_pug_owners_should_return_multiple_pug_owners():
+    result = get_pug_owners(
+        [
+            {"name": "Max", "breed": "Pug", "owner": "Izzi"},
+            {"name": "Poppy", "breed": "Pug", "owner": "Anat"},
+        ]
+    )
+    expected = ["Izzi", "Anat"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_pug_owners_should_return_mixed_list():
+    result = get_pug_owners(
+        [
+            {"name": "Beatrice", "breed": "Lurcher", "owner": "Tom"},
+            {"name": "Max", "breed": "Pug", "owner": "Izzi"},
+            {"name": "Poppy", "breed": "Pug", "owner": "Anat"},
+        ]
+    )
+    expected = ["Izzi", "Anat"]
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -386,67 +441,101 @@ def pluralise_keys(dictionary):
     pass
 
 
-SkipCheck(
-    pluralise_keys, "returns empty dictionary when passed empty dictionary"
-).when_called_with({}).returns({})
+@skip_test
+def pluralise_keys_should_return_empty_dictionary_when_passed_empty_dictionary():
+    result = pluralise_keys({})
+    expected = {}
+    assert result == expected, format_err_msg(expected, result)
 
-# Test unnested dict
-test_dict = {"a": 1, "b": 2, "c": 3}
-SkipCheck(
-    pluralise_keys, "returns unchanged dictionary when there are no lists"
-).when_called_with(test_dict).returns({"a": 1, "b": 2, "c": 3})
 
-SkipCheck(
-    pluralise_keys, "returns copy of dictionary when there are no lists"
-).when_called_with(test_dict).is_not_same_as(test_dict)
+@skip_test
+def pluralise_keys_should_return_unchanged_dictionary_when_there_are_no_lists():
+    test_dict = {"a": 1, "b": 2, "c": 3}
+    result = pluralise_keys(test_dict)
+    expected = {"a": 1, "b": 2, "c": 3}
+    assert result == expected, format_err_msg(expected, result)
 
-# Test nested dict
-test_dict = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
-SkipCheck(
-    pluralise_keys, "returns unchanged dictionary with nested dicts"
-).when_called_with(test_dict).returns({"a": 1, "b": 2, "c": {"d": 3, "e": 4}})
 
-SkipCheck(
-    pluralise_keys, "returns copy of dictionary with nested dicts"
-).when_called_with(test_dict).is_not_same_as(test_dict)
+@skip_test
+def pluralise_keys_should_return_copy_of_dictionary_when_there_are_no_lists():
+    test_dict = {"a": 1, "b": 2, "c": 3}
+    result = pluralise_keys(test_dict)
+    assert result is not test_dict, format_err_msg(
+        "new dictionary returned", "input dictionary returned"
+    )
 
-# Test dict with one list 
-test_dict = {"a": 1, "b": 2, "num": [3, 4]}
-SkipCheck(
-    pluralise_keys, "returns dictionary with one key changed"
-).when_called_with(test_dict).returns(
-    {"a": 1, "b": 2, "nums": [3, 4]}
-)
 
-SkipCheck(
-    pluralise_keys, "returns copy of dictionary with one nested list"
-).when_called_with(test_dict).is_not_same_as(test_dict)
+@skip_test
+def pluralise_keys_should_return_unchanged_dictionary_with_nested_dicts():
+    test_dict = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
+    result = pluralise_keys(test_dict)
+    expected = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
+    assert result == expected, format_err_msg(expected, result)
 
-# Test dict with multi list 
-test_dict = {
+
+@skip_test
+def pluralise_keys_should_return_copy_of_dictionary_with_nested_dicts():
+    test_dict = {"a": 1, "b": 2, "c": {"d": 3, "e": 4}}
+    result = pluralise_keys(test_dict)
+    assert result is not test_dict, format_err_msg("new dictionary", "input dictionary")
+
+
+@skip_test
+def pluralise_keys_should_return_dictionary_with_one_key_changed():
+    test_dict = {"a": 1, "b": 2, "num": [3, 4]}
+    result = pluralise_keys(test_dict)
+    expected = {"a": 1, "b": 2, "nums": [3, 4]}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def pluralise_keys_should_return_copy_of_dictionary_with_one_nested_list():
+    test_dict = {"a": 1, "b": 2, "num": [3, 4]}
+    result = pluralise_keys(test_dict)
+    assert result is not test_dict, format_err_msg(
+        "new dictionary returned", "input dictionary returned"
+    )
+
+
+@skip_test
+def pluralise_keys_should_return_dictionary_with_several_keys_changed():
+    test_dict = {
         "name": "Tom",
         "job": ["writing katas", "marking"],
         "favourite_shop": [
             "Paul's Donkey University",
             "Shaq's Taxidermy Shack",
             "Sam's Pet Shop",
-        ]
+        ],
     }
-SkipCheck(
-    pluralise_keys, "returns dictionary with several keys changed"
-).when_called_with(test_dict).returns({
+    result = pluralise_keys(test_dict)
+    expected = {
         "name": "Tom",
         "jobs": ["writing katas", "marking"],
         "favourite_shops": [
             "Paul's Donkey University",
             "Shaq's Taxidermy Shack",
             "Sam's Pet Shop",
-        ]
-    })
+        ],
+    }
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    pluralise_keys, "returns copy of dictionary with several lists"
-).when_called_with(test_dict).is_not_same_as(test_dict)
+
+@skip_test
+def pluralise_keys_should_return_copy_of_dictionary_with_several_lists():
+    test_dict = {
+        "name": "Tom",
+        "job": ["writing katas", "marking"],
+        "favourite_shop": [
+            "Paul's Donkey University",
+            "Shaq's Taxidermy Shack",
+            "Sam's Pet Shop",
+        ],
+    }
+    result = pluralise_keys(test_dict)
+    assert result is not test_dict, format_err_msg(
+        "new dictionary returned", "input dictionary returned"
+    )
 
 
 """
@@ -471,21 +560,33 @@ def get_word_lengths(string):
     pass
 
 
-SkipCheck(
-    get_word_lengths, "returns empty list when passed empty string"
-).when_called_with("").returns([])
+@skip_test
+def get_word_lengths_should_return_empty_list_when_passed_empty_string():
+    result = get_word_lengths("")
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_word_lengths, "returns single word length").when_called_with(
-    "hello"
-).returns([5])
 
-SkipCheck(get_word_lengths, "returns two word lengths").when_called_with(
-    "hello everyone"
-).returns([5, 8])
+@skip_test
+def get_word_lengths_should_return_single_word_length():
+    result = get_word_lengths("hello")
+    expected = [5]
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_word_lengths, "returns multiple word lengths").when_called_with(
-    "It is a pleasure to meet you new coder"
-).returns([2, 2, 1, 8, 2, 4, 3, 3, 5])
+
+@skip_test
+def get_word_lengths_should_return_two_word_lengths():
+    result = get_word_lengths("hello everyone")
+    expected = [5, 8]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_word_lengths_should_return_multiple_word_lengths():
+    result = get_word_lengths("It is a pleasure to meet you new coder")
+    expected = [2, 2, 1, 8, 2, 4, 3, 3, 5]
+    assert result == expected, format_err_msg(expected, result)
+
 
 """
 Write a function that takes a list of `words` and returns a list containing
@@ -508,25 +609,39 @@ def get_palindromes(words):
     pass
 
 
-SkipCheck(
-    get_palindromes, "returns empty list when passed empty list"
-).when_called_with([]).returns([])
+@skip_test
+def get_palindromes_should_return_empty_list_when_passed_empty_list():
+    result = get_palindromes([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    get_palindromes, "returns empty list when passed invalid item"
-).when_called_with(["boom"]).returns([])
 
-SkipCheck(get_palindromes, "returns single valid item").when_called_with(
-    ["racecar"]
-).returns(["racecar"])
+@skip_test
+def get_palindromes_should_return_empty_list_when_passed_no_palindromes():
+    result = get_palindromes(["boom"])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_palindromes, "returns multiple items").when_called_with(
-    ["dog", "dud", "car", "mum"]
-).returns(["dud", "mum"])
 
-SkipCheck(get_palindromes, "returns no items").when_called_with(
-    ["apple", "orange", "banana"]
-).returns([])
+@skip_test
+def get_palindromes_should_return_single_palindrome():
+    result = get_palindromes(["racecar"])
+    expected = ["racecar"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_palindromes_should_return_multiple_palindromes_from_assorted_list():
+    result = get_palindromes(["dog", "dud", "car", "mum"])
+    expected = ["dud", "mum"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_palindromes_should_return_empty_list_when_no_palindromes_in_list():
+    result = get_palindromes(["apple", "orange", "banana"])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -552,43 +667,134 @@ def replace_letters_with_x(string):
     pass
 
 
-SkipCheck(
-    replace_letters_with_x, "returns empty string when passed empty string"
-).when_called_with("").returns("")
-
-SkipCheck(
-    replace_letters_with_x, "returns single non-letter character"
-).when_called_with("5").returns("5")
-
-SkipCheck(
-    replace_letters_with_x, "returns single special character"
-).when_called_with("&").returns("&")
-
-SkipCheck(
-    replace_letters_with_x, "returns single letter changed to X"
-).when_called_with("a").returns("X")
-
-SkipCheck(
-    replace_letters_with_x, "returns single letter changed to X"
-).when_called_with("K").returns("X")
-
-SkipCheck(
-    replace_letters_with_x, "returns single word changed to X"
-).when_called_with("hello").returns("XXXXX")
-
-SkipCheck(
-    replace_letters_with_x, "returns single word changed to X"
-).when_called_with("NoRtHcOdErS").returns("XXXXXXXXXXX")
+@skip_test
+def replace_letters_with_x_should_return_empty_string_when_passed_empty_string():
+    result = replace_letters_with_x("")
+    expected = ""
+    assert result == expected, format_err_msg(expected, result)
 
 
-SkipCheck(
-    replace_letters_with_x, "returns single word changed to X with punctuation"
-).when_called_with("Kaboom!").returns("XXXXXX!")
+@skip_test
+def replace_letters_with_x_should_return_single_non_letter_character():
+    result = replace_letters_with_x("5")
+    expected = "5"
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    replace_letters_with_x, "returns single word changed to X with punctuation"
-).when_called_with("Northcoders?").returns("XXXXXXXXXXX?")
 
-SkipCheck(replace_letters_with_x, "returns several words").when_called_with(
-    "Do you like coding?"
-).returns("XX XXX XXXX XXXXXX?")
+@skip_test
+def replace_letters_with_x_should_return_single_special_character():
+    result = replace_letters_with_x("&")
+    expected = "&"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_single_letter_changed_to_X():
+    result = replace_letters_with_x("a")
+    expected = "X"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_single_letter_changed_to_X_uppercase():
+    result = replace_letters_with_x("K")
+    expected = "X"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_single_word_changed_to_X():
+    result = replace_letters_with_x("hello")
+    expected = "XXXXX"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_single_word_changed_to_X_mixed_case():
+    result = replace_letters_with_x("NoRtHcOdErS")
+    expected = "XXXXXXXXXXX"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_single_word_changed_to_X_with_punctuation_exclamation_mark():
+    result = replace_letters_with_x("Kaboom!")
+    expected = "XXXXXX!"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_single_word_changed_to_X_with_punctuation_question_mark():
+    result = replace_letters_with_x("Northcoders?")
+    expected = "XXXXXXXXXXX?"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def replace_letters_with_x_should_return_several_words():
+    result = replace_letters_with_x("Do you like coding?")
+    expected = "XX XXX XXXX XXXXXX?"
+    assert result == expected, format_err_msg(expected, result)
+
+
+if __name__ == "__main__":
+    flip_booleans_should_return_empty_list_when_passed_empty_list()
+    flip_booleans_should_return_single_false_when_passed_single_true()
+    flip_booleans_should_return_single_true_when_passed_single_false()
+    flip_booleans_should_return_all_false_when_passed_all_true()
+    flip_booleans_should_return_all_true_when_passed_all_false()
+    flip_booleans_should_return_mixed_true_and_false_flipped_correctly()
+
+    translate_key_should_return_empty_dictionary_when_passed_empty_dictionary()
+    translate_key_should_return_unchanged_if_key_not_present()
+    translate_key_should_return_new_dictionary_with_key_translated()
+    translate_key_should_return_new_dictionary()
+
+    find_first_dentist_should_return_none_when_passed_empty_list()
+    find_first_dentist_should_return_none_if_person_not_dentist()
+    find_first_dentist_should_return_person_if_dentist()
+    find_first_dentist_should_return_first_dentist()
+    find_first_dentist_should_return_first_dentist_of_many()
+
+    tally_people_in_manchester_should_return_0_when_passed_empty_list()
+    tally_people_in_manchester_should_return_0_when_no_one_in_manchester()
+    tally_people_in_manchester_should_return_1_when_one_person_in_manchester()
+    tally_people_in_manchester_should_return_number_of_people_in_manchester_when_passed_multiple()
+
+    get_pug_owners_should_return_empty_list_when_passed_empty_list()
+    get_pug_owners_should_return_empty_list_when_no_pugs()
+    get_pug_owners_should_return_single_pug_owner()
+    get_pug_owners_should_return_multiple_pug_owners()
+    get_pug_owners_should_return_mixed_list()
+
+    pluralise_keys_should_return_empty_dictionary_when_passed_empty_dictionary()
+    pluralise_keys_should_return_unchanged_dictionary_when_there_are_no_lists()
+    pluralise_keys_should_return_copy_of_dictionary_when_there_are_no_lists()
+    pluralise_keys_should_return_unchanged_dictionary_with_nested_dicts()
+    pluralise_keys_should_return_copy_of_dictionary_with_nested_dicts()
+    pluralise_keys_should_return_dictionary_with_one_key_changed()
+    pluralise_keys_should_return_copy_of_dictionary_with_one_nested_list()
+    pluralise_keys_should_return_dictionary_with_several_keys_changed()
+    pluralise_keys_should_return_copy_of_dictionary_with_several_lists()
+
+    get_word_lengths_should_return_empty_list_when_passed_empty_string()
+    get_word_lengths_should_return_single_word_length()
+    get_word_lengths_should_return_two_word_lengths()
+    get_word_lengths_should_return_multiple_word_lengths()
+
+    get_palindromes_should_return_empty_list_when_passed_empty_list()
+    get_palindromes_should_return_empty_list_when_passed_no_palindromes()
+    get_palindromes_should_return_single_palindrome()
+    get_palindromes_should_return_multiple_palindromes_from_assorted_list()
+    get_palindromes_should_return_empty_list_when_no_palindromes_in_list()
+
+    replace_letters_with_x_should_return_empty_string_when_passed_empty_string()
+    replace_letters_with_x_should_return_single_non_letter_character()
+    replace_letters_with_x_should_return_single_special_character()
+    replace_letters_with_x_should_return_single_letter_changed_to_X()
+    replace_letters_with_x_should_return_single_letter_changed_to_X_uppercase()
+    replace_letters_with_x_should_return_single_word_changed_to_X()
+    replace_letters_with_x_should_return_single_word_changed_to_X_mixed_case()
+    replace_letters_with_x_should_return_single_word_changed_to_X_with_punctuation_exclamation_mark()
+    replace_letters_with_x_should_return_single_word_changed_to_X_with_punctuation_question_mark()
+    replace_letters_with_x_should_return_several_words()
