@@ -40,3 +40,23 @@ We can continue to work on the repo and commit changes at appropriate points.
 2. Confirm that these changes have been successful with `git status` and `git log`.
 
 ---
+
+## 5. Multiple changes:
+
+Most real world work will involve making changes to more than one file. When making commits, we can be selective about which changes are staged and committed.
+
+1. Add a final film to `films.txt`.
+2. Create another file called `snacks.txt` and add your favourite film night snacks to it.
+3. As the above changes are unrelated, make two separate commits for these changes. Remember, you will need to add and commit the files individually.
+
+**Tip:** There are lots of conventions for writing commit messages. We will follow a standard practice of writing commits in the present tense that describe the change they make, e.g. "fix bug" rather than "fixed bug".
+
+This matches the style git itself uses in auto-generated messages and forms a timeline.
+
+Imagine you are coming back to work on this project in 6 months time. The commit message should tell you what's happening at any point in time.
+
+If you're struggling to describe your changes, a good rule of thumb is to complete the sentence:
+
+This commit will "commit message here"
+
+---
