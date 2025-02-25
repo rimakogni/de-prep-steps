@@ -1,4 +1,4 @@
-# Data Engineering Pre-Course Exercises
+# Data Engineering Prep Steps Exercises
 
 ## Purpose
 
@@ -12,7 +12,7 @@ When you have cloned the repository to the local machine, then open it with Visu
 (or the IDE of your choice).
 
 Before you start, you should have the latest version of Python 3 installed. If you have not already
-done so, follow the steps described in `Preparing For The Course` in the Pre-Course notes.
+done so, follow the steps described in `Preparing For The Course` in the Prep Steps notes.
 
 To test if Python is installed correctly, type at the terminal command prompt:
 
@@ -77,7 +77,7 @@ To terminate the REPL session, type `exit()` or hit `Ctrl+d`
 
 ### Function Exercises
 
-The remaining exercises all require you to write (or rewrite) some Python _functions_. Make sure you have read the pre-course
+The remaining exercises all require you to write (or rewrite) some Python _functions_. Make sure you have read the Prep Steps
 notes on functions first.
 
 To test how you coded these functions we will you the pre-written tests.
