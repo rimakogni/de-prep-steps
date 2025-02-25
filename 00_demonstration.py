@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 """
 This is a demonstration problem to help you learn how to use the pre-made
@@ -26,5 +26,18 @@ def count_to_two():
     return counter
 
 
-Check(count_to_two, 'returns integer').is_type(int)
-SkipCheck(count_to_two, 'returns 2').returns(2)  # Switch SkipCheck to Check
+@run_test
+def count_to_two_should_return_integer():
+    result = count_to_two()
+    assert isinstance(result, int), format_err_msg(True, isinstance(result, int))
+
+
+@skip_test  # Switch skip_test to run_test
+def count_to_two_should_return_two():
+    result = count_to_two()
+    assert result == 2, format_err_msg(2, count_to_two())
+
+
+if __name__ == "__main__":
+    count_to_two_should_return_integer()
+    count_to_two_should_return_two()
