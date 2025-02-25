@@ -2,9 +2,9 @@
 
 ---
 
-## Commit and push
+## 1. Commit and push:
 
-1. Using the terminal, create a new file called `git-terminology.txt` and add the snippet below to the file:
+1. Using the terminal, create a new file called `git-terminology.txt` inside your `11_git_exercises_part_2` directory, and add the snippet below to the file:
 
 ```txt
 git clone <github-link-here> - makes a local copy of the remote repo at the specified link
@@ -17,3 +17,23 @@ git commit -m "<message-here>" - makes a commit including all changes in the sta
 3. Push this new change up to GitHub.
 
 At this point, press refresh on the GitHub page. You should be able to see the newly added file.
+
+---
+
+## Amend Github file
+
+1. On the github website, navigate to your repository, click the folder `11_git_exercises_part_2`
+2. Once inside the folder, click your `git-terminology.txt` file
+3. Click the pencil icon to edit this file and add the following to the file
+
+```txt
+git log - shows the most recent commits
+git push origin main - pushes any recent, locally made commits to the remote repo ('origin') on the main branch
+git pull origin main - brings any recent changes to the remote repo's main branch into your local repo
+```
+
+4. Commit the changes with a descriptive commit message
+
+This file should now be updated
+
+---
