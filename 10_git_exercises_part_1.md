@@ -20,3 +20,14 @@ Git is now watching for changes made inside this directory.
 2. Run `git status` to see that this change you've made is currently untracked by git.
 
 ---
+
+## 3. Commit your changes
+
+Now that we have changes to our files, we can save those changes to our branch. This is called a `commit`.
+
+1. Add the file you've created to git's staging area.
+2. Once you've added the file, run `git status` again to confirm that this file is now in the staging area.
+3. Now the file is added, commit the changes. Make sure you write an informative message about the change being made.
+4. To confirm the commit has been made successfully, run `git log` to view the history. Press `Q` to exit the log.
+
+---
