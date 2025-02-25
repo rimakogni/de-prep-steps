@@ -20,7 +20,7 @@ At this point, press refresh on the GitHub page. You should be able to see the n
 
 ---
 
-## Amend Github file
+## Amend Github file:
 
 1. On the github website, navigate to your repository, click the folder `11_git_exercises_part_2`
 2. Once inside the folder, click your `git-terminology.txt` file
@@ -35,5 +35,15 @@ git pull origin main - brings any recent changes to the remote repo's main branc
 4. Commit the changes with a descriptive commit message
 
 This file should now be updated
+
+---
+
+## Pull from main
+
+In order to have the remote changes to the repo reflected locally, we will need to pull from our Main branch.
+
+1. Pull down the most recent commits.
+2. Add a new fact to `fun-facts.txt` and commit this change.
+3. Push up your changes to GitHub.
 
 ---
