@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 """
 ### get_first_item ###
@@ -19,8 +19,19 @@ def get_first_item(my_list):
 
 # Do not change tests!
 
-Check(get_first_item, 'gets first number item').when_called_with([1, 2, 3, 4]).returns(1)
-Check(get_first_item, 'gets first string item').when_called_with(['black', 'khaki', 'cyan']).returns('black')
+
+@run_test
+def get_first_item_should_return_first_number_item():
+    result = get_first_item([1, 2, 3, 4])
+    expected = 1
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def get_first_item_should_return_first_string_item():
+    result = get_first_item(["black", "khaki", "cyan"])
+    expected = "black"
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -41,8 +52,19 @@ def split_string():
 
 # Do not change tests!
 
-Check(split_string, 'splits lowercase string').when_called_with('string').returns(['s', 't', 'r', 'i', 'n', 'g'])
-Check(split_string, 'splits titlecase string').when_called_with('Northcoders').returns(['N', 'o', 'r', 't', 'h', 'c', 'o', 'd', 'e', 'r', 's'])
+
+@skip_test
+def split_string_should_split_lowercase_string():
+    result = split_string("string")
+    expected = ["s", "t", "r", "i", "n", "g"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def split_string_should_split_titlecase_string():
+    result = split_string("Northcoders")
+    expected = ["N", "o", "r", "t", "h", "c", "o", "d", "e", "r", "s"]
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -60,12 +82,39 @@ Can you work out what needs changing to make the function pass all the tests?
 
 
 def add_bread(person, loaf):
-    person['loaf'] == loaf
+    person["loaf"] == loaf
     return
 
 
 # Do not change tests!
+@skip_test
+def add_bread_should_add_favourite_bread_rye():
+    result = add_bread({"name": "Joe"}, "rye")
+    expected = {"name": "Joe", "fave_bread": "rye"}
+    assert result == expected, format_err_msg(expected, result)
 
-Check(add_bread, "adds favourite bread - rye").when_called_with({'name': 'Joe'}, 'rye').returns({'name': 'Joe', 'fave_bread': 'rye'})
-Check(add_bread, "adds favourite bread - granary").when_called_with({'name': 'Paul'}, 'granary').returns({'name': 'Paul', 'fave_bread': 'granary'})
-Check(add_bread, "adds default favourite bread as granary when not specified").when_called_with({'name': 'Poonam'}).returns({'name': 'Poonam', 'fave_bread': 'granary'})
+
+@skip_test
+def add_bread_should_add_favourite_bread_granary():
+    result = add_bread({"name": "Paul"}, "granary")
+    expected = {"name": "Paul", "fave_bread": "granary"}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def add_bread_should_add_default_favourite_bread_granary():
+    result = add_bread({"name": "Poonam"})
+    expected = {"name": "Poonam", "fave_bread": "granary"}
+    assert result == expected, format_err_msg(expected, result)
+
+
+if __name__ == "__main__":
+    get_first_item_should_return_first_number_item()
+    get_first_item_should_return_first_string_item()
+
+    split_string_should_split_lowercase_string()
+    split_string_should_split_titlecase_string()
+
+    add_bread_should_add_favourite_bread_rye()
+    add_bread_should_add_favourite_bread_granary()
+    add_bread_should_add_default_favourite_bread_granary()
