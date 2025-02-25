@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 
 """
@@ -16,25 +16,28 @@ def get_even_nums(nums):
     pass
 
 
-Check(
-    get_even_nums,
-    "returns an empty list when there are no numbers"
-).when_called_with([]).returns([])
+@run_test
+def get_even_nums_should_return_empty_list_when_no_numbers():
+    assert get_even_nums([]) == [], format_err_msg([], get_even_nums([]))
 
-Check(
-    get_even_nums,
-    "returns given list when all numbers are even"
-).when_called_with([2, 4, 6]).returns([2, 4, 6])
 
-Check(
-    get_even_nums,
-    "returns empty list when all numbers are odd"
-).when_called_with([1, 3, 5]).returns([])
+@run_test
+def get_even_nums_should_return_given_list_when_all_numbers_are_even():
+    assert get_even_nums([2, 4, 6]) == [2, 4, 6], format_err_msg(
+        [2, 4, 6], get_even_nums([2, 4, 6])
+    )
 
-Check(
-    get_even_nums,
-    "returns empty list when numbers are mixed, even and odd"
-).when_called_with([1, 3, 5]).returns([])
+
+@run_test
+def get_even_nums_should_return_empty_list_when_all_numbers_are_odd():
+    assert get_even_nums([1, 3, 5]) == [], format_err_msg([], get_even_nums([1, 3, 5]))
+
+
+@run_test
+def get_even_nums_should_return_list_of_just_even_numbers_when_numbers_are_mixed_even_and_odd():
+    assert get_even_nums([1, 2, 3, 4, 5]) == [2, 4], format_err_msg(
+        [2, 4], get_even_nums([1, 2, 3, 4, 5])
+    )
 
 
 """
@@ -57,22 +60,33 @@ def get_items_longer_than(strs, max_len):
     pass
 
 
-# ❗ Remember to change SkipCheck to Check!
-SkipCheck(
-    get_items_longer_than, "returns an empty list when there are no strings"
-).when_called_with([], 1).returns([])
+# ❗ Remember to change @skip_test to @run_test!
+@skip_test
+def get_items_longer_than_should_return_empty_list_when_no_strings():
+    assert get_items_longer_than([], 1) == [], format_err_msg(
+        [], get_items_longer_than([], 1)
+    )
 
-SkipCheck(
-    get_items_longer_than, "returns all strings longer than the max len"
-).when_called_with(["a", "bb"], 0).returns(["a", "bb"])
 
-SkipCheck(
-    get_items_longer_than, "excludes strings shorter than the max len"
-).when_called_with(["a", "bb"], 3).returns([])
+@skip_test
+def get_items_longer_than_should_return_all_strings_longer_than_max_len():
+    assert get_items_longer_than(["a", "bb"], 0) == ["a", "bb"], format_err_msg(
+        ["a", "bb"], get_items_longer_than(["a", "bb"], 0)
+    )
 
-SkipCheck(
-    get_items_longer_than, "excludes strings equal to the max len"
-).when_called_with(["a", "bb", "ccc"], 2).returns(["ccc"])
+
+@skip_test
+def get_items_longer_than_should_exclude_strings_shorter_than_max_len():
+    assert get_items_longer_than(["a", "bb"], 3) == [], format_err_msg(
+        [], get_items_longer_than(["a", "bb"], 3)
+    )
+
+
+@skip_test
+def get_items_longer_than_should_exclude_strings_equal_to_max_len():
+    assert get_items_longer_than(["a", "bb", "ccc"], 2) == ["ccc"], format_err_msg(
+        ["ccc"], get_items_longer_than(["a", "bb", "ccc"], 2)
+    )
 
 
 """
@@ -98,23 +112,33 @@ def get_sandwich_filling(sandwich):
     pass
 
 
-SkipCheck(
-    get_sandwich_filling, "returns a list with a single filling"
-).when_called_with(
-    ["bread", "lonely slice of cheese", "bread"]
-).returns(["lonely slice of cheese"])
+@skip_test
+def get_sandwich_filling_should_return_list_with_single_filling():
+    assert get_sandwich_filling(["bread", "lonely slice of cheese", "bread"]) == [
+        "lonely slice of cheese"
+    ], format_err_msg(
+        ["lonely slice of cheese"],
+        get_sandwich_filling(["bread", "lonely slice of cheese", "bread"]),
+    )
 
-SkipCheck(
-    get_sandwich_filling, "returns a list with a multiple fillings"
-).when_called_with(
-    ["bread", "tomato", "lettuce", "cheese", "patty", "bread"]
-).returns(["tomato", "lettuce", "cheese", "patty"])
 
-SkipCheck(
-    get_sandwich_filling, "returns an empty list when there are no fillings"
-).when_called_with(
-    ["bread", "bread"]
-).returns([])
+@skip_test
+def get_sandwich_filling_should_return_list_with_multiple_fillings():
+    assert get_sandwich_filling(
+        ["bread", "tomato", "lettuce", "cheese", "patty", "bread"]
+    ) == ["tomato", "lettuce", "cheese", "patty"], format_err_msg(
+        ["tomato", "lettuce", "cheese", "patty"],
+        get_sandwich_filling(
+            ["bread", "tomato", "lettuce", "cheese", "patty", "bread"]
+        ),
+    )
+
+
+@skip_test
+def get_sandwich_filling_should_return_empty_list_when_no_fillings():
+    assert get_sandwich_filling(["bread", "bread"]) == [], format_err_msg(
+        [], get_sandwich_filling(["bread", "bread"])
+    )
 
 
 """
@@ -135,30 +159,37 @@ def remove_item(items, n):
     pass
 
 
-SkipCheck(
-    remove_item, "returns a list with specified element removed"
-).when_called_with([1], 0).returns([])
-
-SkipCheck(
-    remove_item,
-    "returns a list containing all elements that haven't been removed"
-).when_called_with([1, 2, 3, 4, 5], 2).returns([1, 2, 4, 5])
-
-SkipCheck(
-    remove_item,
-    "only removes the value at the specified index"
-).when_called_with([1, 2, 1, 2, 1], 2).returns([1, 2, 2, 1])
-
-test_list = [1, 2, 3]
-SkipCheck(
-    remove_item,
-    "returns a new list"
-).when_called_with(test_list, 2).is_not_same_as(test_list)
+@skip_test
+def remove_item_should_return_list_with_specified_element_removed():
+    assert remove_item([1], 0) == [], format_err_msg([], remove_item([1], 0))
 
 
-Check(remove_item, "should not mutate original list")\
-    .when_called_with([1, 2, 3], 2).does_not_mutate_input('items')
+@skip_test
+def remove_item_should_return_list_containing_all_elements_that_havent_been_removed():
+    assert remove_item([1, 2, 3, 4, 5], 2) == [1, 2, 4, 5], format_err_msg(
+        [1, 2, 4, 5], remove_item([1, 2, 3, 4, 5], 2)
+    )
 
+
+@skip_test
+def remove_item_should_only_remove_value_at_specified_index():
+    assert remove_item([1, 2, 1, 2, 1], 2) == [1, 2, 2, 1], format_err_msg(
+        [1, 2, 2, 1], remove_item([1, 2, 1, 2, 1], 2)
+    )
+
+
+@skip_test
+def remove_item_should_return_new_list():
+    items = [1, 2, 3]
+    result = remove_item(items, 2)
+    assert result is not items, format_err_msg(True, result is not items)
+
+
+@skip_test
+def remove_item_should_not_mutate_original_list():
+    items = [1, 2, 3]
+    remove_item(items, 2)
+    assert items == [1, 2, 3], format_err_msg(True, items == [1, 2, 3])
 
 
 """
@@ -180,25 +211,39 @@ def merge_lists(list1, list2):
     pass
 
 
-SkipCheck(
-    merge_lists, 'merges two single element lists together'
-).when_called_with([1], [2]).returns([1, 2])
+@skip_test
+def merge_lists_should_merge_two_single_element_lists_together():
+    assert merge_lists([1], [2]) == [1, 2], format_err_msg(
+        [1, 2], merge_lists([1], [2])
+    )
 
-SkipCheck(
-    merge_lists, 'merges two multi element lists together'
-).when_called_with([1, 2, 3], [4, 5, 6]).returns([1, 2, 3, 4, 5, 6])
 
-SkipCheck(
-    merge_lists, 'merges two lists when one is empty'
-).when_called_with([1, 2, 3], []).returns([1, 2, 3])
+@skip_test
+def merge_lists_should_merge_two_multi_element_lists_together():
+    assert merge_lists([1, 2, 3], [4, 5, 6]) == [1, 2, 3, 4, 5, 6], format_err_msg(
+        [1, 2, 3, 4, 5, 6], merge_lists([1, 2, 3], [4, 5, 6])
+    )
 
-SkipCheck(
-    merge_lists, 'merges two lists when both are empty'
-).when_called_with([], []).returns([])
 
-SkipCheck(
-    merge_lists, 'should not mutate original lists'
-).when_called_with([1, 2, 3], [4, 5, 6]).does_not_mutate_input('lists')
+@skip_test
+def merge_lists_should_merge_two_lists_when_one_is_empty():
+    assert merge_lists([1, 2, 3], []) == [1, 2, 3], format_err_msg(
+        [1, 2, 3], merge_lists([1, 2, 3], [])
+    )
+
+
+@skip_test
+def merge_lists_should_merge_two_lists_when_both_are_empty():
+    assert merge_lists([], []) == [], format_err_msg([], merge_lists([], []))
+
+
+@skip_test
+def merge_lists_should_not_mutate_original_lists():
+    list1 = [1, 2, 3]
+    list2 = [4, 5, 6]
+    merge_lists(list1, list2)
+    assert list1 == [1, 2, 3], format_err_msg(True, list1 == [1, 2, 3])
+    assert list2 == [4, 5, 6], format_err_msg(True, list2 == [4, 5, 6])
 
 
 """
@@ -225,22 +270,35 @@ def is_item_omnipresent(lists, item):
     pass
 
 
-SkipCheck(
-    is_item_omnipresent, "returns false if item is missing from all lists"
-).when_called_with([[1], [2]], 3).returns(False)
+@skip_test
+def is_item_omnipresent_should_return_false_if_item_is_missing_from_all_lists():
+    assert is_item_omnipresent([[1], [2]], 3) is False, format_err_msg(
+        False, is_item_omnipresent([[1], [2]], 3)
+    )
 
-SkipCheck(
-    is_item_omnipresent, "returns false if item is missing from a single list"
-).when_called_with([[1], [2]], 1).returns(False)
 
-SkipCheck(
-    is_item_omnipresent, "returns True if item is present in all lists"
-).when_called_with([[1], [1], [1]], 1).returns(True)
+@skip_test
+def is_item_omnipresent_should_return_false_if_item_is_missing_from_a_single_list():
+    assert is_item_omnipresent([[1], [2]], 1) is False, format_err_msg(
+        False, is_item_omnipresent([[1], [2]], 1)
+    )
 
-SkipCheck(
-    is_item_omnipresent,
-    "returns True if item is present amongst other elements in mixed lists"
-).when_called_with([[1], [1], [1]], 1).returns(True)
+
+@skip_test
+def is_item_omnipresent_should_return_true_if_item_is_present_in_all_lists():
+    assert is_item_omnipresent([[1], [1], [1]], 1) is True, format_err_msg(
+        True, is_item_omnipresent([[1], [1], [1]], 1)
+    )
+
+
+@skip_test
+def is_item_omnipresent_should_return_true_if_item_is_present_amongst_other_elements_in_mixed_lists():
+    assert is_item_omnipresent([[5, 4, 3, 2, 1], [1, 4, 4], [9, 1, 1]], 1) is True, (
+        format_err_msg(
+            True,
+            is_item_omnipresent([[5, 4, 3, 2, 1], [1, 4, 4], [9, 1, 1]], 1),
+        )
+    )
 
 
 """
@@ -263,14 +321,68 @@ def flatten_list_by_one(nested_lists):
     pass
 
 
-SkipCheck(
-    flatten_list_by_one, 'removes single layer of nesting'
-).when_called_with([[1], [2]]).returns([1, 2])
+@skip_test
+def flatten_list_by_one_should_remove_single_layer_of_nesting():
+    assert flatten_list_by_one([[1], [2]]) == [1, 2], format_err_msg(
+        [1, 2], flatten_list_by_one([[1], [2]])
+    )
 
-SkipCheck(
-    flatten_list_by_one, 'subsequent layers of nesting are preserved'
-).when_called_with([[[1, 2]], [[3, 4]]]).returns([[1, 2], [3, 4]])
 
-SkipCheck(
-    flatten_list_by_one, 'combines levels of nesting'
-).when_called_with([[1, 2], [3, [4, 5]]]).returns([1, 2, 3, [4, 5]])
+@skip_test
+def flatten_list_by_one_should_preserve_subsequent_layers_of_nesting():
+    assert flatten_list_by_one([[[1, 2]], [[3, 4]]]) == [
+        [1, 2],
+        [3, 4],
+    ], format_err_msg(
+        [
+            [1, 2],
+            [3, 4],
+        ],
+        flatten_list_by_one(
+            [
+                [[1, 2]],
+                [[3, 4]],
+            ]
+        ),
+    )
+
+
+@skip_test
+def flatten_list_by_one_should_combine_levels_of_nesting():
+    assert flatten_list_by_one([[1, 2], [3, [4, 5]]]) == [
+        1,
+        2,
+        3,
+        [4, 5],
+    ], format_err_msg([1, 2, 3, [4, 5]], flatten_list_by_one([[1, 2], [3, [4, 5]]]))
+
+
+if __name__ == "__main__":
+    get_even_nums_should_return_empty_list_when_no_numbers()
+    get_even_nums_should_return_given_list_when_all_numbers_are_even()
+    get_even_nums_should_return_empty_list_when_all_numbers_are_odd()
+    get_even_nums_should_return_list_of_just_even_numbers_when_numbers_are_mixed_even_and_odd()
+    get_items_longer_than_should_return_empty_list_when_no_strings()
+    get_items_longer_than_should_return_all_strings_longer_than_max_len()
+    get_items_longer_than_should_exclude_strings_shorter_than_max_len()
+    get_items_longer_than_should_exclude_strings_equal_to_max_len()
+    get_sandwich_filling_should_return_list_with_single_filling()
+    get_sandwich_filling_should_return_list_with_multiple_fillings()
+    get_sandwich_filling_should_return_empty_list_when_no_fillings()
+    remove_item_should_return_list_with_specified_element_removed()
+    remove_item_should_return_list_containing_all_elements_that_havent_been_removed()
+    remove_item_should_only_remove_value_at_specified_index()
+    remove_item_should_return_new_list()
+    remove_item_should_not_mutate_original_list()
+    merge_lists_should_merge_two_single_element_lists_together()
+    merge_lists_should_merge_two_multi_element_lists_together()
+    merge_lists_should_merge_two_lists_when_one_is_empty()
+    merge_lists_should_merge_two_lists_when_both_are_empty()
+    merge_lists_should_not_mutate_original_lists()
+    is_item_omnipresent_should_return_false_if_item_is_missing_from_all_lists()
+    is_item_omnipresent_should_return_false_if_item_is_missing_from_a_single_list()
+    is_item_omnipresent_should_return_true_if_item_is_present_in_all_lists()
+    is_item_omnipresent_should_return_true_if_item_is_present_amongst_other_elements_in_mixed_lists()
+    flatten_list_by_one_should_remove_single_layer_of_nesting()
+    flatten_list_by_one_should_preserve_subsequent_layers_of_nesting()
+    flatten_list_by_one_should_combine_levels_of_nesting()
