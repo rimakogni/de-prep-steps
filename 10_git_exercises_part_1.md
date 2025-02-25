@@ -21,7 +21,7 @@ Git is now watching for changes made inside this directory.
 
 ---
 
-## 3. Commit your changes
+## 3. Commit your changes:
 
 Now that we have changes to our files, we can save those changes to our branch. This is called a `commit`.
 
@@ -29,5 +29,14 @@ Now that we have changes to our files, we can save those changes to our branch. 
 2. Once you've added the file, run `git status` again to confirm that this file is now in the staging area.
 3. Now the file is added, commit the changes. Make sure you write an informative message about the change being made.
 4. To confirm the commit has been made successfully, run `git log` to view the history. Press `Q` to exit the log.
+
+---
+
+## 4. Further changes:
+
+We can continue to work on the repo and commit changes at appropriate points.
+
+1. Add another film to the `films.txt` file, then repeat the steps from before to commit that change.
+2. Confirm that these changes have been successful with `git status` and `git log`.
 
 ---
