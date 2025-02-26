@@ -152,9 +152,7 @@ def sum_digits_from_string(string):
     pass
 
 
-skip_test
-
-
+@skip_test
 def sum_digits_from_string_should_return_0_for_empty_string():
     result = sum_digits_from_string("")
     expected = 0
@@ -648,7 +646,6 @@ tally_hashtags_and_mentions(tweet) # returns {'hashtags': 2, 'mentions': 1}
 
 
 def tally_hashtags_and_mentions(tweet):
-    # Your code here
     pass
 
 
