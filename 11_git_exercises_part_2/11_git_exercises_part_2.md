@@ -2,7 +2,7 @@
 
 ---
 
-## 1. Commit and push:
+## Commit and push:
 
 1. Using the terminal, create a new file called `git-terminology.txt` inside your `11_git_exercises_part_2` directory, and add the snippet below to the file:
 
@@ -22,9 +22,9 @@ At this point, press refresh on the GitHub page. You should be able to see the n
 
 ## Amend Github file:
 
-1. On the github website, navigate to your repository, click the folder `11_git_exercises_part_2`
-2. Once inside the folder, click your `git-terminology.txt` file
-3. Click the pencil icon to edit this file and add the following to the file
+1. On the github website, navigate to your repository, click the folder `11_git_exercises_part_2`.
+2. Once inside the folder, click your `git-terminology.txt` file.
+3. Click the pencil icon to edit this file and add the following to the file:
 
 ```txt
 git log - shows the most recent commits
@@ -32,13 +32,13 @@ git push origin main - pushes any recent, locally made commits to the remote rep
 git pull origin main - brings any recent changes to the remote repo's main branch into your local repo
 ```
 
-4. Commit the changes with a descriptive commit message
+4. Commit the changes with a descriptive commit message.
 
-This file should now be updated
+This file should now be updated.
 
 ---
 
-## Pull from main
+## Pull from main:
 
 In order to have the remote changes to the repo reflected locally, we will need to pull from our Main branch.
 
@@ -47,3 +47,25 @@ In order to have the remote changes to the repo reflected locally, we will need 
 3. Push up your changes to GitHub.
 
 ---
+
+## Get the last 10 words:
+
+1. Create a file called `last_10_words.txt` containing the last 10 words from `word_list`.
+
+---
+
+## Get the word count:
+
+1. Create a file called `word_count.txt` containing a count of all the words in the `word_list`.
+
+---
+
+## Reversed words
+
+1. Create a file called `reversed_words.txt` with all the of the words from `word_list` but in reverse order.
+
+---
+
+## Painful Words
+
+1. Create a file called `painful_words.txt` featuring all the words in the list that contain the letters "ouch" somewhere in them (e.g. "p**ouch**" or "v**ouch**er"). Research `grep` for this problem.
