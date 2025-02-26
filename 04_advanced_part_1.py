@@ -492,9 +492,7 @@ def pluralise_keys_should_return_dictionary_with_one_key_changed():
 def pluralise_keys_should_return_copy_of_dictionary_with_one_nested_list():
     test_dict = {"a": 1, "b": 2, "num": [3, 4]}
     result = pluralise_keys(test_dict)
-    assert result is not test_dict, format_err_msg(
-        "new dictionary returned", "input dictionary returned"
-    )
+    assert result is not test_dict, format_err_msg("new dictionary", "input dictionary")
 
 
 @skip_test
@@ -533,9 +531,7 @@ def pluralise_keys_should_return_copy_of_dictionary_with_several_lists():
         ],
     }
     result = pluralise_keys(test_dict)
-    assert result is not test_dict, format_err_msg(
-        "new dictionary returned", "input dictionary returned"
-    )
+    assert result is not test_dict, format_err_msg("new dictionary", "input dictionary")
 
 
 """
