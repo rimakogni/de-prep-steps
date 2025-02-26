@@ -182,14 +182,16 @@ def remove_item_should_only_remove_value_at_specified_index():
 def remove_item_should_return_new_list():
     items = [1, 2, 3]
     result = remove_item(items, 2)
-    assert result is not items, format_err_msg(True, result is not items)
+    assert result is not items, format_err_msg("a new list", "original input list")
 
 
 @skip_test
 def remove_item_should_not_mutate_original_list():
     items = [1, 2, 3]
     remove_item(items, 2)
-    assert items == [1, 2, 3], format_err_msg(True, items == [1, 2, 3])
+    assert items == [1, 2, 3], format_err_msg(
+        "orginal list to be unchanged", "mutated input list"
+    )
 
 
 """
@@ -242,8 +244,12 @@ def merge_lists_should_not_mutate_original_lists():
     list1 = [1, 2, 3]
     list2 = [4, 5, 6]
     merge_lists(list1, list2)
-    assert list1 == [1, 2, 3], format_err_msg(True, list1 == [1, 2, 3])
-    assert list2 == [4, 5, 6], format_err_msg(True, list2 == [4, 5, 6])
+    assert list1 == [1, 2, 3], format_err_msg(
+        "list 1 to be unchanged", "mutated input list 1"
+    )
+    assert list2 == [4, 5, 6], format_err_msg(
+        "list 2 to be unchanged", "mutated input list 2"
+    )
 
 
 """
