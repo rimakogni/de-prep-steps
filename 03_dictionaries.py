@@ -18,10 +18,7 @@ add_price_to_product({ 'type': 'Tofu slices' }, 2.20) # returns
 
 def add_price_to_product(product, price):
     # Your code here
-    # product = product.copy()
-    if product:
-        product["price"] = price
-    return product
+    pass
 
 
 @run_test
@@ -63,13 +60,13 @@ Write a function that takes three arguments:
 
  - a dictionary (`product`) that looks like this: `{'type': 'Terminator 2:
  Judgement Day', 'price': '£6.99', 'quantity': 1 }`
- - a `property` to add
- - a `value` corresponding to the property
+ - a `key` to add
+ - a `value` corresponding to the key
 
-It should then update the `product` to include this new property and return
+It should then update the `product` to include this new attribute and return
 the updated `product`.
 
-add_property_to_product(
+add_attribute_to_product(
     {'type': 'Terminator 2: Judgement Day', 'price': '£6.99', 'quantity': 1 },
     'length', '2h 36m'
     )
@@ -88,28 +85,28 @@ types to be set as a key:
 - float
 - boolean
 
-If the given `property` argument is not one of these types then it should be
+If the given `key` argument is not one of these types then it should be
 ignored and the product returned unchanged!
 """
 
 
-def add_property_to_product(product, property, value):
+def add_attribute_to_product(product, key, value):
     # Your code here
     pass
 
 
 # ❗ Remember to change @skip_test to @run_test!
 @skip_test
-def add_property_to_product_should_add_single_property_to_empty_product():
-    result = add_property_to_product({}, "length", "2h 36m")
+def add_attribute_to_product_should_add_single_attribute_to_empty_product():
+    result = add_attribute_to_product({}, "length", "2h 36m")
     expected = {"length": "2h 36m"}
     assert result == expected, format_err_msg(expected, result)
 
 
 @skip_test
-def add_property_to_product_should_add_string_property_to_product():
+def add_attribute_to_product_should_add_string_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, "length", "2h 36m")
+    result = add_attribute_to_product(product, "length", "2h 36m")
     expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
@@ -120,9 +117,9 @@ def add_property_to_product_should_add_string_property_to_product():
 
 
 @skip_test
-def add_property_to_product_should_add_integer_property_to_product():
+def add_attribute_to_product_should_add_integer_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, 36, 42)
+    result = add_attribute_to_product(product, 36, 42)
     expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
@@ -133,9 +130,9 @@ def add_property_to_product_should_add_integer_property_to_product():
 
 
 @skip_test
-def add_property_to_product_should_add_float_property_to_product():
+def add_attribute_to_product_should_add_float_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, 36.1, "dave")
+    result = add_attribute_to_product(product, 36.1, "dave")
     expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
@@ -146,9 +143,9 @@ def add_property_to_product_should_add_float_property_to_product():
 
 
 @skip_test
-def add_property_to_product_should_add_boolean_property_to_product():
+def add_attribute_to_product_should_add_boolean_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, True, False)
+    result = add_attribute_to_product(product, True, False)
     expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
@@ -159,27 +156,27 @@ def add_property_to_product_should_add_boolean_property_to_product():
 
 
 @skip_test
-def add_property_to_product_should_not_add_list_property_to_product():
+def add_attribute_to_product_should_not_add_list_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, [1, 2, 3], "a")
+    result = add_attribute_to_product(product, [1, 2, 3], "a")
     expected = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     assert result == expected, format_err_msg(expected, result)
 
 
 @skip_test
-def add_property_to_product_should_not_add_dictionary_property_to_product():
+def add_attribute_to_product_should_not_add_dictionary_attribute_to_product():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, {"a": "b"}, "a")
+    result = add_attribute_to_product(product, {"a": "b"}, "a")
     expected = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
     assert result == expected, format_err_msg(expected, result)
 
 
 @skip_test
-def add_property_to_product_should_return_the_original_product_dictionary():
+def add_attribute_to_product_should_return_the_original_product_dictionary():
     product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-    result = add_property_to_product(product, "length", "2h 36m")
+    result = add_attribute_to_product(product, "length", "2h 36m")
     assert result is product, format_err_msg(
-        "original dictionary to be updated", "new dictionary"
+        "original input dictionary", "new dictionary"
     )
 
 
@@ -459,14 +456,14 @@ if __name__ == "__main__":
     add_price_to_product_should_update_product_with_single_key()
     add_price_to_product_should_update_multi_field_product()
     add_price_to_product_should_modify_original()
-    add_property_to_product_should_add_single_property_to_empty_product()
-    add_property_to_product_should_add_string_property_to_product()
-    add_property_to_product_should_add_integer_property_to_product()
-    add_property_to_product_should_add_float_property_to_product()
-    add_property_to_product_should_add_boolean_property_to_product()
-    add_property_to_product_should_not_add_list_property_to_product()
-    add_property_to_product_should_not_add_dictionary_property_to_product()
-    add_property_to_product_should_return_the_original_product_dictionary()
+    add_attribute_to_product_should_add_single_attribute_to_empty_product()
+    add_attribute_to_product_should_add_string_attribute_to_product()
+    add_attribute_to_product_should_add_integer_attribute_to_product()
+    add_attribute_to_product_should_add_float_attribute_to_product()
+    add_attribute_to_product_should_add_boolean_attribute_to_product()
+    add_attribute_to_product_should_not_add_list_attribute_to_product()
+    add_attribute_to_product_should_not_add_dictionary_attribute_to_product()
+    add_attribute_to_product_should_return_the_original_product_dictionary()
     create_northcoder_should_create_northcoder_with_correct_age()
     create_northcoder_should_add_age_as_0_for_birth_year_2023()
     create_northcoder_should_show_age_error_if_birth_year_is_after_2023()
