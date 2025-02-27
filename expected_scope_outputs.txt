@@ -1,0 +1,14 @@
+Tea
+Jurgen Klopp!
+Jurgen Klopp!
+Sonic
+Burger King
+20 nuggets
+[0, 1, 2, 3, 4]
+4
+[0, 1, 2, 3, 4] << NUMBERS
+Traceback (most recent call last):
+  File "/Users/you/Desktop/de-prep-steps/09_scope.py", line 77, in <module>
+    print(j)
+          ^
+NameError: name 'j' is not defined
