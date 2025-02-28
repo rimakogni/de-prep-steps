@@ -1,0 +1,3 @@
+First of all, we need to check that all of the bakers have been put into the table correctly.
+
+Use the SELECT command to look at all of the bakers. Paste the results below:
