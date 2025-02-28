@@ -1,17 +1,9 @@
-from checks import (
-    run_test,
-    skip_test,
-    format_err_msg,
-    BOLD_GREEN,
-    NORMAL_GREEN,
-    BOLD_RED,
-    NORMAL_RED,
-    BOLD_YELLOW,
-    NORMAL_YELLOW,
-    DEFAULT,
-)
-from unittest.mock import patch, call, Mock
+from unittest.mock import Mock, call, patch
+
 import pytest
+from checks import (BOLD_GREEN, BOLD_RED, BOLD_YELLOW, DEFAULT, NORMAL_GREEN,
+                    NORMAL_RED, NORMAL_YELLOW, format_err_msg, run_test,
+                    skip_test)
 
 
 class TestRunTestDecorator:

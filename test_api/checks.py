@@ -28,9 +28,7 @@ def run_test(testing_func):
             )
             print(feedback_msg)
             raise
-
     return wrapper
-
 
 def skip_test(testing_func):
     @functools.wraps(testing_func)
