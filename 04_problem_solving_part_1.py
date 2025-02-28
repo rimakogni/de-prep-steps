@@ -13,7 +13,7 @@ def check_word_ends_with_ing():
     pass
 
 
-@skip_test
+@run_test
 def test_check_word_ends_with_ing():
     assert check_word_ends_with_ing("doing") is True, \
         format_err_msg(True, check_word_ends_with_ing("doing"))
