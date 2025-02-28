@@ -1,7 +1,8 @@
-import os
 import sys
+from pathlib import Path
 
-sys.path.append(os.getcwd())
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 from test_api.checks import run_test, skip_test
 
 # DO NOT CHANGE CODE ABOVE THIS LINE
