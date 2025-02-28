@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 """
 ### triple_nums ###
@@ -26,9 +26,26 @@ def triple_nums(nums):
 
 # Do not change tests!
 
-Check(triple_nums, 'returns list').when_called_with([]).is_type(list)
-Check(triple_nums, 'when passed empty list returns empty list').when_called_with([]).returns([])
-Check(triple_nums, 'returns list of all numbers multiplied by three').when_called_with([10, 25, 30, 40]).returns([30, 75, 90, 120])
+
+@run_test
+def triple_nums_should_return_list():
+    result = triple_nums([])
+    expected = []
+    assert isinstance(result, list), format_err_msg(expected, result)
+
+
+@run_test
+def triple_nums_should_return_empty_list_when_passed_empty_list():
+    result = triple_nums([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def triple_nums_should_return_list_of_all_numbers_multiplied_by_three():
+    result = triple_nums([10, 25, 30, 40])
+    expected = [30, 75, 90, 120]
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -53,9 +70,26 @@ def shout_names(names):
 
 # Do not change tests!
 
-Check(shout_names, 'returns a list').when_called_with([]).is_type(list)
-Check(shout_names, 'when passed empty list returns empty list').when_called_with([]).returns([])
-Check(shout_names, 'shouts names').when_called_with(["Carrie", "Diya", "Kyle", "Christian"]).returns(["CARRIE!", "DIYA!", "KYLE!", "CHRISTIAN!"])
+
+@skip_test
+def shout_names_should_return_a_list():
+    result = shout_names([])
+    expected = []
+    assert isinstance(result, list), format_err_msg(expected, result)
+
+
+@skip_test
+def shout_names_should_return_empty_list_when_passed_empty_list():
+    result = shout_names([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def shout_names_should_shout_names():
+    result = shout_names(["Carrie", "Diya", "Kyle", "Christian"])
+    expected = ["CARRIE!", "DIYA!", "KYLE!", "CHRISTIAN!"]
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -83,17 +117,44 @@ def is_sweet_enough(food_items):
 
 # Do not change tests!
 
-Check(is_sweet_enough, 'returns True when all foods are sweet')\
-    .when_called_with([{"name": "chocolate", "flavour": "sweet"}, {"name": "banana", "flavour": "sweet"}, {"name": "barfi", "flavour": "sweet"}])\
-    .returns(True)
 
-Check(is_sweet_enough, 'returns False when no foods are sweet')\
-    .when_called_with([{"name": "samosa", "flavour": "savoury"}, {"name": "lemon", "flavour": "sour"}, {"name": "olive", "flavour": "bitter"}])\
-    .returns(False)
+@skip_test
+def is_sweet_enough_should_return_true_when_all_foods_are_sweet():
+    result = is_sweet_enough(
+        [
+            {"name": "chocolate", "flavour": "sweet"},
+            {"name": "banana", "flavour": "sweet"},
+            {"name": "barfi", "flavour": "sweet"},
+        ]
+    )
+    expected = True
+    assert result == expected, format_err_msg(expected, result)
 
-Check(is_sweet_enough, 'returns False when any foods are NOT sweet')\
-    .when_called_with([{"name": "stollen", "flavour": "sweet"}, {"name": "cranberries", "flavour": "sour"}, {"name": "mince pie", "flavour": "sweet"}])\
-    .returns(False)
+
+@skip_test
+def is_sweet_enough_should_return_false_when_no_foods_are_sweet():
+    result = is_sweet_enough(
+        [
+            {"name": "samosa", "flavour": "savoury"},
+            {"name": "lemon", "flavour": "sour"},
+            {"name": "olive", "flavour": "bitter"},
+        ]
+    )
+    expected = False
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def is_sweet_enough_should_return_false_when_any_foods_are_not_sweet():
+    result = is_sweet_enough(
+        [
+            {"name": "stollen", "flavour": "sweet"},
+            {"name": "cranberries", "flavour": "sour"},
+            {"name": "mince pie", "flavour": "sweet"},
+        ]
+    )
+    expected = False
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -119,16 +180,32 @@ def get_excited(text):
     return new_text
 
 
-Check(get_excited, 'returns empty string when passed empty string').when_called_with('').returns('')
-Check(get_excited, 'returns unchanged string when no full stops present')\
-    .when_called_with("the quick brown fox jumps over the lazy dog")\
-    .returns("the quick brown fox jumps over the lazy dog")
-Check(get_excited, 'replaces full stops with exclamation marks - single full stop')\
-    .when_called_with("We're gonna need a bigger boat.")\
-    .returns("We're gonna need a bigger boat!")
-Check(get_excited, 'replaces full stops with exclamation marks - multiple full stops')\
-    .when_called_with("Woo. Woo. Woo. Who's ready to code?")\
-    .returns("Woo! Woo! Woo! Who's ready to code?")
+@skip_test
+def get_excited_should_return_empty_string_when_passed_empty_string():
+    result = get_excited("")
+    expected = ""
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_excited_should_return_unchanged_string_when_no_full_stops_present():
+    result = get_excited("the quick brown fox jumps over the lazy dog")
+    expected = "the quick brown fox jumps over the lazy dog"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_excited_should_replace_full_stops_with_exclamation_marks_single_full_stop():
+    result = get_excited("We're gonna need a bigger boat.")
+    expected = "We're gonna need a bigger boat!"
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_excited_should_replace_full_stops_with_exclamation_marks_multiple_full_stops():
+    result = get_excited("Woo. Woo. Woo. Who's ready to code?")
+    expected = "Woo! Woo! Woo! Who's ready to code?"
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -153,27 +230,58 @@ def shrek_characters(characters):
 
 # Do not change tests!
 
-Check(shrek_characters, 'when passed an empty list returns an empty list').when_called_with([]).returns([])
-Check(shrek_characters, 'returns an empty list when list that contains no Shrek characters')\
-    .when_called_with([
-        {
-            "name": "Cedric Diggory",
-            "movie": "Harry Potter and the Goblet of Fire",
-        },
-        {"name": "Elle Woods", "movie": "Legally Blonde"},
-        {"name": "Paddington Bear", "movie": "Paddington 2"},
-    ]).returns([])
 
-Check(shrek_characters, 'returns given list when list only contains Shrek characters')\
-    .when_called_with([
-        {
-            "name": "Shrek",
-            "movie": "Shrek",
-        },
-        {"name": "Lord Farquaad", "movie": "Shrek"},
-        {"name": "Magic Mirror", "movie": "Shrek"},
-    ]).returns([
-        "Shrek",
-        "Lord Farquaad",
-        "Magic Mirror",
-    ])
+@skip_test
+def shrek_characters_should_return_empty_list_when_passed_empty_list():
+    result = shrek_characters([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def shrek_characters_should_return_empty_list_when_no_shrek_characters():
+    result = shrek_characters(
+        [
+            {"name": "Cedric Diggory", "movie": "Harry Potter and the Goblet of Fire"},
+            {"name": "Elle Woods", "movie": "Legally Blonde"},
+            {"name": "Paddington Bear", "movie": "Paddington 2"},
+        ]
+    )
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def shrek_characters_should_return_list_of_shrek_characters():
+    result = shrek_characters(
+        [
+            {"name": "Shrek", "movie": "Shrek"},
+            {"name": "Lord Farquaad", "movie": "Shrek"},
+            {"name": "Magic Mirror", "movie": "Shrek"},
+        ]
+    )
+    expected = ["Shrek", "Lord Farquaad", "Magic Mirror"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+if __name__ == "__main__":
+    triple_nums_should_return_list()
+    triple_nums_should_return_empty_list_when_passed_empty_list()
+    triple_nums_should_return_list_of_all_numbers_multiplied_by_three()
+
+    shout_names_should_return_a_list()
+    shout_names_should_return_empty_list_when_passed_empty_list()
+    shout_names_should_shout_names()
+
+    is_sweet_enough_should_return_true_when_all_foods_are_sweet()
+    is_sweet_enough_should_return_false_when_no_foods_are_sweet()
+    is_sweet_enough_should_return_false_when_any_foods_are_not_sweet()
+
+    get_excited_should_return_empty_string_when_passed_empty_string()
+    get_excited_should_return_unchanged_string_when_no_full_stops_present()
+    get_excited_should_replace_full_stops_with_exclamation_marks_single_full_stop()
+    get_excited_should_replace_full_stops_with_exclamation_marks_multiple_full_stops()
+
+    shrek_characters_should_return_empty_list_when_passed_empty_list()
+    shrek_characters_should_return_empty_list_when_no_shrek_characters()
+    shrek_characters_should_return_list_of_shrek_characters()

@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 """
 ### count_occurrences ###
@@ -23,10 +23,34 @@ def count_occurrences(list_to_check, value):
 
 # Do not change tests!
 
-Check(count_occurrences, 'returns 0 if no match - empty list').when_called_with([], 'a').returns(0)
-Check(count_occurrences, 'returns 0 if no match - non empty list').when_called_with(['a', 'b', 'c'], 'd').returns(0)
-Check(count_occurrences, 'counts occurrences in simple list').when_called_with(['a', 'b', 'c'], 'b').returns(1)
-Check(count_occurrences, 'counts occurrences in mixed list').when_called_with(['1', 'a', 2, '2', 'b', 1, 'a', '1', '2', 'c', 3, '2', 2], 2).returns(2)
+@run_test
+def count_occurrences_should_return_0_if_no_match_empty_list():
+    result = count_occurrences([], "a")
+    expected = 0
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def count_occurrences_should_return_0_if_no_match_non_empty_list():
+    result = count_occurrences(["a", "b", "c"], "d")
+    expected = 0
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def count_occurrences_should_count_occurrences_in_simple_list():
+    result = count_occurrences(["a", "b", "c"], "b")
+    expected = 1
+    assert result == expected, format_err_msg(expected, result)
+
+
+@run_test
+def count_occurrences_should_count_occurrences_in_mixed_list():
+    result = count_occurrences(
+        ["1", "a", 2, "2", "b", 1, "a", "1", "2", "c", 3, "2", 2], 2
+    )
+    expected = 2
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -71,23 +95,65 @@ def add_guests_to_party(invitees):
 
 # Do not change tests!
 
-Check(add_guests_to_party, 'returns a list').when_called_with([]).is_type(list)
-Check(add_guests_to_party, 'returns unchanged guestlist if no invitees').when_called_with([]).returns([{'name': 'Cat'}, {'name': 'Kyle'}])
-Check(add_guests_to_party, 'returns unchanged guestlist if NO RSVPs').when_called_with([{'name': 'Chon', 'RSVP': 'no'}, {'name': 'Verity', 'RSVP': 'no'}]).returns([{'name': 'Cat'}, {'name': 'Kyle'}])
-Check(add_guests_to_party, 'returns new guests if ALL RSVP yes')\
-    .when_called_with([{'name': 'Liam', 'RSVP': 'yes'}, {'name': 'Haz', 'RSVP': 'yes'}])\
-    .returns([{'name': 'Cat'}, {'name': 'Kyle'}, {'name': 'Liam'}, {'name': 'Haz'}])
-Check(add_guests_to_party, 'returns new guests if SOME RSVP yes')\
-    .when_called_with([
-        {'name': 'Sarah', 'RSVP': 'yes'},
-        {'name': 'Jim', 'RSVP': 'no'},
-        {'name': 'Emily', 'RSVP': 'yes'},
-        {'name': 'Dominic', 'RSVP': 'yes'},
-    ])\
-    .returns([
-        {'name': 'Cat'},
-        {'name': 'Kyle'},
-        {'name': 'Sarah'},
-        {'name': 'Emily'},
-        {'name': 'Dominic'}
-    ])
+@skip_test
+def add_guests_to_party_should_return_a_list():
+    result = add_guests_to_party([])
+    expected = []
+    assert isinstance(result, list), format_err_msg(expected, result)
+
+
+@skip_test
+def add_guests_to_party_should_return_unchanged_guestlist_if_no_invitees():
+    result = add_guests_to_party([])
+    expected = [{"name": "Cat"}, {"name": "Kyle"}]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def add_guests_to_party_should_return_unchanged_guestlist_if_NO_RSVPs():
+    result = add_guests_to_party(
+        [{"name": "Chon", "RSVP": "no"}, {"name": "Verity", "RSVP": "no"}]
+    )
+    expected = [{"name": "Cat"}, {"name": "Kyle"}]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def add_guests_to_party_should_return_new_guests_if_ALL_RSVP_yes():
+    result = add_guests_to_party(
+        [{"name": "Liam", "RSVP": "yes"}, {"name": "Haz", "RSVP": "yes"}]
+    )
+    expected = [{"name": "Cat"}, {"name": "Kyle"}, {"name": "Liam"}, {"name": "Haz"}]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def add_guests_to_party_should_return_new_guests_if_SOME_RSVP_yes():
+    result = add_guests_to_party(
+        [
+            {"name": "Sarah", "RSVP": "yes"},
+            {"name": "Jim", "RSVP": "no"},
+            {"name": "Emily", "RSVP": "yes"},
+            {"name": "Dominic", "RSVP": "yes"},
+        ]
+    )
+    expected = [
+        {"name": "Cat"},
+        {"name": "Kyle"},
+        {"name": "Sarah"},
+        {"name": "Emily"},
+        {"name": "Dominic"},
+    ]
+    assert result == expected, format_err_msg(expected, result)
+
+if __name__ == "__main__":
+    count_occurrences_should_return_0_if_no_match_empty_list()
+    count_occurrences_should_return_0_if_no_match_non_empty_list()
+    count_occurrences_should_count_occurrences_in_simple_list()
+    count_occurrences_should_count_occurrences_in_mixed_list()
+
+    add_guests_to_party_should_return_a_list()
+    add_guests_to_party_should_return_unchanged_guestlist_if_no_invitees()
+    add_guests_to_party_should_return_unchanged_guestlist_if_NO_RSVPs()
+    add_guests_to_party_should_return_new_guests_if_ALL_RSVP_yes()
+    add_guests_to_party_should_return_new_guests_if_SOME_RSVP_yes()

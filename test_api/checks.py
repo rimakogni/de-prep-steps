@@ -15,28 +15,33 @@ def run_test(testing_func):
     def wrapper():
         try:
             testing_func()
-            feedback_msg = (f"{BOLD_GREEN}{testing_func.__name__}()"
-                            f"{NORMAL_GREEN}: Test passed ✅{DEFAULT}")
+            feedback_msg = (
+                f"{BOLD_GREEN}{testing_func.__name__}()"
+                f"{NORMAL_GREEN}: Test passed ✅{DEFAULT}"
+            )
             print(feedback_msg)
         except Exception:
-            feedback_msg = (f"{BOLD_RED}{testing_func.__name__}(){NORMAL_RED}:"
-                            " Test failed ❌, see error message below:"
-                            f"{DEFAULT}\n")
+            feedback_msg = (
+                f"{BOLD_RED}{testing_func.__name__}(){NORMAL_RED}: "
+                "Test failed ❌, see error message below:"
+                f"{DEFAULT}\n"
+            )
             print(feedback_msg)
             raise
     return wrapper
 
-
 def skip_test(testing_func):
     @functools.wraps(testing_func)
     def wrapper():
-        feedback_msg = (f"{BOLD_YELLOW}{testing_func.__name__}()"
-                        f"{NORMAL_YELLOW}: Test skipped 🔇{DEFAULT}")
+        feedback_msg = (
+            f"{BOLD_YELLOW}{testing_func.__name__}()"
+            f"{NORMAL_YELLOW}: Test skipped 🔇{DEFAULT}"
+        )
         print(feedback_msg)
+
     return wrapper
 
 
 def format_err_msg(expected, received):
-    err_msg = (f"{NORMAL_RED}expected {expected}, instead received "
-               f"{received}{DEFAULT}")
+    err_msg = f"{NORMAL_RED}expected {expected}, instead received {received}{DEFAULT}"
     return err_msg

@@ -1,4 +1,4 @@
-from test_api.checks import Check, SkipCheck
+from test_api.checks import run_test, skip_test, format_err_msg
 
 """
 ### add_price_to_product ###
@@ -21,28 +21,36 @@ def add_price_to_product(product, price):
     pass
 
 
-Check(
-    add_price_to_product, "returns empty dictionary when there is no product"
-).when_called_with({}, 2.20).returns({})
+@run_test
+def add_price_to_product_should_return_empty_dict_when_passed_an_empty_dict():
+    updated_product = add_price_to_product({}, 2.20)
+    expected = {}
+    assert updated_product == expected, format_err_msg(expected, updated_product)
 
-Check(
-    add_price_to_product, "adds price to single product in dictionary"
-).when_called_with({"type": "Tofu slices"}, 2.20).returns(
-    {"type": "Tofu slices", "price": 2.20}
-)
 
-Check(
-    add_price_to_product, "adds price to single product with multiple fields"
-).when_called_with(
-    {"type": "Tofu slices", "flavour": "chocolate"}, 2.50
-).returns(
-    {"type": "Tofu slices", "flavour": "chocolate", "price": 2.50}
-)
+@run_test
+def add_price_to_product_should_update_product_with_single_key():
+    updated_product = add_price_to_product({"type": "Tofu slices"}, 2.20)
+    expected = {"type": "Tofu slices", "price": 2.20}
+    assert updated_product == expected, format_err_msg(expected, updated_product)
 
-product = {"type": "Tofu slices"}
-Check(
-    add_price_to_product, "should return the *original* product dictionary"
-).when_called_with(product, 2.20).is_same_as(product)
+
+@run_test
+def add_price_to_product_should_update_multi_field_product():
+    updated_product = add_price_to_product(
+        {"type": "Tofu slices", "flavour": "chocolate"}, 2.50
+    )
+    expected = {"type": "Tofu slices", "flavour": "chocolate", "price": 2.50}
+    assert updated_product == expected, format_err_msg(expected, updated_product)
+
+
+@run_test
+def add_price_to_product_should_modify_original():
+    product = {"type": "Tofu slices"}
+    updated_product = add_price_to_product(product, 2.20)
+    assert updated_product is product, format_err_msg(
+        "original dictionary to be updated", "new dictionary"
+    )
 
 
 """
@@ -52,13 +60,13 @@ Write a function that takes three arguments:
 
  - a dictionary (`product`) that looks like this: `{'type': 'Terminator 2:
  Judgement Day', 'price': '£6.99', 'quantity': 1 }`
- - a `property` to add
- - a `value` corresponding to the property
+ - a `key` to add
+ - a `value` corresponding to the key
 
-It should then update the `product` to include this new property and return
+It should then update the `product` to include this new attribute and return
 the updated `product`.
 
-add_property_to_product(
+add_attribute_to_product(
     {'type': 'Terminator 2: Judgement Day', 'price': '£6.99', 'quantity': 1 },
     'length', '2h 36m'
     )
@@ -77,117 +85,106 @@ types to be set as a key:
 - float
 - boolean
 
-If the given `property` argument is not one of these types then it should be
+If the given `key` argument is not one of these types then it should be
 ignored and the product returned unchanged!
 """
 
 
-def add_property_to_product(product, property, value):
+def add_attribute_to_product(product, key, value):
     # Your code here
     pass
 
 
-# ❗ Remember to change SkipCheck to Check!
-SkipCheck(
-    add_property_to_product, "empty product gains a single property"
-).when_called_with({}, "length", "2h 36m").returns({"length": "2h 36m"})
+# ❗ Remember to change @skip_test to @run_test!
+@skip_test
+def add_attribute_to_product_should_add_single_attribute_to_empty_product():
+    result = add_attribute_to_product({}, "length", "2h 36m")
+    expected = {"length": "2h 36m"}
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    add_property_to_product, "string property added to product"
-).when_called_with(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
-    "length",
-    "2h 36m",
-).returns(
-    {
+
+@skip_test
+def add_attribute_to_product_should_add_string_attribute_to_product():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, "length", "2h 36m")
+    expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
         "quantity": 1,
         "length": "2h 36m",
     }
-)
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    add_property_to_product, "integer property added to product"
-).when_called_with(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
-    36,
-    42,
-).returns(
-    {
+
+@skip_test
+def add_attribute_to_product_should_add_integer_attribute_to_product():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, 36, 42)
+    expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
         "quantity": 1,
         36: 42,
     }
-)
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    add_property_to_product, "float property added to product"
-).when_called_with(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
-    36.1,
-    "dave",
-).returns(
-    {
+
+@skip_test
+def add_attribute_to_product_should_add_float_attribute_to_product():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, 36.1, "dave")
+    expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
         "quantity": 1,
         36.1: "dave",
     }
-)
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    add_property_to_product, "boolean property added to product"
-).when_called_with(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
-    True,
-    False,
-).returns(
-    {
+
+@skip_test
+def add_attribute_to_product_should_add_boolean_attribute_to_product():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, True, False)
+    expected = {
         "type": "Terminator 2: Judgement Day",
         "price": "£6.99",
         "quantity": 1,
         True: False,
     }
-)
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    add_property_to_product, "list property NOT added to product"
-).when_called_with(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
-    [1, 2, 3],
-    "a",
-).returns(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-)
 
-SkipCheck(
-    add_property_to_product, "dictionary property NOT added to product"
-).when_called_with(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1},
-    {"a": "b"},
-    "a",
-).returns(
-    {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
-)
+@skip_test
+def add_attribute_to_product_should_not_add_list_attribute_to_product():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, [1, 2, 3], "a")
+    expected = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    assert result == expected, format_err_msg(expected, result)
 
-product = {
-    "type": "Terminator 2: Judgement Day",
-    "price": "£6.99",
-    "quantity": 1,
-}
 
-SkipCheck(
-    add_property_to_product, "should return the *original* product dictionary"
-).when_called_with(product, "length", "2h 36m").is_same_as(product)
+@skip_test
+def add_attribute_to_product_should_not_add_dictionary_attribute_to_product():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, {"a": "b"}, "a")
+    expected = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def add_attribute_to_product_should_return_the_original_product_dictionary():
+    product = {"type": "Terminator 2: Judgement Day", "price": "£6.99", "quantity": 1}
+    result = add_attribute_to_product(product, "length", "2h 36m")
+    assert result is product, format_err_msg(
+        "original input dictionary", "new dictionary"
+    )
 
 
 """
 ### create_northcoder ###
 
 Write a function that takes a string (name) and a number (year_of_birth) and
-returns an object with:
+returns a dictionary with:
 
  - a name property set to the value of the name parameter
  - an age property set to whatever the age of the northcoder would be in the
@@ -212,19 +209,27 @@ def create_northcoder(name, year_of_birth):
     pass
 
 
-SkipCheck(
-    create_northcoder, "creates northcoder with correct age"
-).when_called_with("Joe", 2002).returns(
-    {"name": "Joe", "age": 21, "language": "Python"}
-)
+@skip_test
+def create_northcoder_should_create_northcoder_with_correct_age():
+    result = create_northcoder("Joe", 2002)
 
-SkipCheck(create_northcoder, "2023 baby is 0 years old").when_called_with(
-    "Paul", 2023
-).returns({"name": "Paul", "age": 0, "language": "Python"})
+    expected = {"name": "Joe", "age": 21, "language": "Python"}
 
-SkipCheck(create_northcoder, "2123 baby is shows age error").when_called_with(
-    "Zarkon", 2123
-).returns({"name": "Zarkon", "age": "error", "language": "Python"})
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def create_northcoder_should_add_age_as_0_for_birth_year_2023():
+    result = create_northcoder("Paul", 2023)
+    expected = {"name": "Paul", "age": 0, "language": "Python"}
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def create_northcoder_should_show_age_error_if_birth_year_is_after_2023():
+    result = create_northcoder("Zarkon", 2123)
+    expected = {"name": "Zarkon", "age": "error", "language": "Python"}
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -259,57 +264,61 @@ def delete_many_passwords(users):
     pass
 
 
-SkipCheck(delete_many_passwords, "changes single password").when_called_with(
-    [{"name": "Barry", "password": "ilovetea", "department": "Tea"}]
-).returns([{"name": "Barry", "department": "Tea"}])
+@skip_test
+def delete_many_passwords_should_change_single_password():
+    result = delete_many_passwords(
+        [{"name": "Barry", "password": "ilovetea", "department": "Tea"}]
+    )
+    expected = [{"name": "Barry", "department": "Tea"}]
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    delete_many_passwords, "does not change user without password"
-).when_called_with([{"name": "Sandeep", "favourite_drink": "Coffee"}]).returns(
-    [{"name": "Sandeep", "favourite_drink": "Coffee"}]
-)
 
-SkipCheck(delete_many_passwords, "changes many users").when_called_with(
-    [
-        {"name": "Barry", "password": "ilovetea", "department": "Tea"},
-        {
-            "name": "Sandeep",
-            "password": "ilovecoffee",
-            "favourite_drink": "Coffee",
-        },
-        {"name": "Kavita", "password": "ilovepie", "weakness": "Pie"},
-    ]
-).returns(
-    [
+@skip_test
+def delete_many_passwords_should_not_change_user_without_password():
+    result = delete_many_passwords([{"name": "Sandeep", "favourite_drink": "Coffee"}])
+    expected = [{"name": "Sandeep", "favourite_drink": "Coffee"}]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def delete_many_passwords_should_change_many_users():
+    result = delete_many_passwords(
+        [
+            {"name": "Barry", "password": "ilovetea", "department": "Tea"},
+            {"name": "Sandeep", "password": "ilovecoffee", "favourite_drink": "Coffee"},
+            {"name": "Kavita", "password": "ilovepie", "weakness": "Pie"},
+        ]
+    )
+    expected = [
         {"name": "Barry", "department": "Tea"},
         {"name": "Sandeep", "favourite_drink": "Coffee"},
         {"name": "Kavita", "weakness": "Pie"},
     ]
-)
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    delete_many_passwords, "changes many users when some do not have passwords"
-).when_called_with(
-    [
-        {"name": "Barry", "password": "ilovetea", "department": "Tea"},
-        {
-            "name": "Sandeep",
-            "password": "ilovecoffee",
-            "favourite_drink": "Coffee",
-        },
-        {"name": "Kavita", "weakness": "Pie"},
-    ]
-).returns(
-    [
+
+@skip_test
+def delete_many_passwords_should_change_many_users_when_some_do_not_have_passwords():
+    result = delete_many_passwords(
+        [
+            {"name": "Barry", "password": "ilovetea", "department": "Tea"},
+            {"name": "Sandeep", "password": "ilovecoffee", "favourite_drink": "Coffee"},
+            {"name": "Kavita", "weakness": "Pie"},
+        ]
+    )
+    expected = [
         {"name": "Barry", "department": "Tea"},
         {"name": "Sandeep", "favourite_drink": "Coffee"},
         {"name": "Kavita", "weakness": "Pie"},
     ]
-)
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(
-    delete_many_passwords, "returns empty list when no users present"
-).when_called_with([]).returns([])
+
+@skip_test
+def delete_many_passwords_should_return_empty_list_when_no_users_present():
+    result = delete_many_passwords([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -342,20 +351,30 @@ def get_northcoders_names(northcoders):
     pass
 
 
-SkipCheck(
-    get_northcoders_names, "returns empty list if input is empty"
-).when_called_with([]).returns([])
+@skip_test
+def get_northcoders_names_should_return_empty_list_if_input_is_empty():
+    result = get_northcoders_names([])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_northcoders_names, "gets names of northcoders").when_called_with(
-    [
-        {"name": "Callum", "age": 31, "language": "JavaScript"},
-        {"name": "Carrie", "age": 32, "language": "Python"},
-    ]
-).returns(["Callum", "Carrie"])
 
-SkipCheck(
-    get_northcoders_names, "returns empty list if name is omitted"
-).when_called_with([{"age": 32, "language": "Python"}]).returns([])
+@skip_test
+def get_northcoders_names_should_get_names_of_northcoders():
+    result = get_northcoders_names(
+        [
+            {"name": "Callum", "age": 31, "language": "JavaScript"},
+            {"name": "Carrie", "age": 32, "language": "Python"},
+        ]
+    )
+    expected = ["Callum", "Carrie"]
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_northcoders_names_should_ignore_northcoders_without_names():
+    result = get_northcoders_names([{"age": 32, "language": "Python"}])
+    expected = []
+    assert result == expected, format_err_msg(expected, result)
 
 
 """
@@ -399,18 +418,63 @@ def get_user_pet_age(user):
     pass
 
 
-SkipCheck(get_user_pet_age, "returns pet age").when_called_with(
-    {
-        "name": "Carrie",
-        "age": 26,
-        "pet": {"name": "Pixie", "age": 4, "type": "gremlin"},
-    }
-).returns(4)
+@skip_test
+def get_user_pet_age_should_return_pet_age():
+    result = get_user_pet_age(
+        {
+            "name": "Carrie",
+            "age": 26,
+            "pet": {"name": "Pixie", "age": 4, "type": "gremlin"},
+        }
+    )
+    expected = 4
+    assert result == expected, format_err_msg(expected, result)
 
-SkipCheck(get_user_pet_age, "returns none if no pet").when_called_with(
-    {"name": "Carrie", "age": 26}
-).returns(None)
 
-SkipCheck(get_user_pet_age, "returns none if no pet age").when_called_with(
-    {"name": "Carrie", "age": 26, "pet": {"name": "Pixie", "type": "gremlin"}}
-).returns(None)
+@skip_test
+def get_user_pet_age_should_return_none_if_no_pet():
+    result = get_user_pet_age({"name": "Carrie", "age": 26})
+    expected = None
+    assert result == expected, format_err_msg(expected, result)
+
+
+@skip_test
+def get_user_pet_age_should_return_none_if_no_pet_age():
+    result = get_user_pet_age(
+        {
+            "name": "Carrie",
+            "age": 26,
+            "pet": {"name": "Pixie", "type": "gremlin"},
+        }
+    )
+    expected = None
+    assert result == expected, format_err_msg(expected, result)
+
+
+if __name__ == "__main__":
+    add_price_to_product_should_return_empty_dict_when_passed_an_empty_dict()
+    add_price_to_product_should_update_product_with_single_key()
+    add_price_to_product_should_update_multi_field_product()
+    add_price_to_product_should_modify_original()
+    add_attribute_to_product_should_add_single_attribute_to_empty_product()
+    add_attribute_to_product_should_add_string_attribute_to_product()
+    add_attribute_to_product_should_add_integer_attribute_to_product()
+    add_attribute_to_product_should_add_float_attribute_to_product()
+    add_attribute_to_product_should_add_boolean_attribute_to_product()
+    add_attribute_to_product_should_not_add_list_attribute_to_product()
+    add_attribute_to_product_should_not_add_dictionary_attribute_to_product()
+    add_attribute_to_product_should_return_the_original_product_dictionary()
+    create_northcoder_should_create_northcoder_with_correct_age()
+    create_northcoder_should_add_age_as_0_for_birth_year_2023()
+    create_northcoder_should_show_age_error_if_birth_year_is_after_2023()
+    delete_many_passwords_should_change_single_password()
+    delete_many_passwords_should_not_change_user_without_password()
+    delete_many_passwords_should_change_many_users()
+    delete_many_passwords_should_change_many_users_when_some_do_not_have_passwords()
+    delete_many_passwords_should_return_empty_list_when_no_users_present()
+    get_northcoders_names_should_return_empty_list_if_input_is_empty()
+    get_northcoders_names_should_get_names_of_northcoders()
+    get_northcoders_names_should_ignore_northcoders_without_names()
+    get_user_pet_age_should_return_pet_age()
+    get_user_pet_age_should_return_none_if_no_pet()
+    get_user_pet_age_should_return_none_if_no_pet_age()
