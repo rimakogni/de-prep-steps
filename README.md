@@ -49,7 +49,7 @@ There are two types of exercise included here.
 
 ### REPL Exercises
 
-The exercises in Section `01_variables` are intended to be executed in the Python REPL.
+The exercises in Section `variables` are intended to be executed in the Python REPL.
 
 The Python _REPL_ (**R**ead **E**valuate **P**rint **L**oop) is a command line tool for running Python code interactively one instruction at a time.
 To start the REPL, just type
@@ -82,18 +82,18 @@ notes on functions first.
 
 To test how you coded these functions we will you the pre-written tests.
 
-For example, the file `00_demonstration.py` file has a very simple function that is going wrong. You
+For example, the file `demonstration.py` file has a very simple function that is going wrong. You
 should be able to test this by typing (at the command prompt):
 
 ```bash
-python 00_demonstration.py
+python 00_start_your_journey_here/demonstration.py
 ```
 
-You should see a message saying that one of the tests is passing and one is being skipped. Now, in VS Code, navigate to the `00_demonstration.py` file.
+You should see a message saying that one of the tests is passing and one is being skipped. Now, in VS Code, navigate to the `demonstration.py` file.
 
-Change the `SkipCheck` on line 30 to `Check`.
+Change the `Skip_test` on line 35 to `run_test`.
 
-You should now be able to re-run `python 00_demonstration.py` and see the second test is failing.
+You should now be able to re-run `python 00_start_your_journey_here/demonstration.py` and see the second test is failing.
 
 Now change the code to add 2 to the counter and re-run the `python` command to see the test passing. Congratulations!
 
