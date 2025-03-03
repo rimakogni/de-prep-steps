@@ -10,7 +10,7 @@ going wrong. To see the first test pass, from the command line, type:
 python 00_start_your_journey/demonstration.py
 
 The second test is currently being skipped, to run this test you should change
-`SkipCheck` to `Check` and run the same `python` command. This test should
+`@skip_test` to `@run_test` and run the same `python` command. This test should
 fail until the code is fixed.
 
 To fix the code, you should add 2 to the counter rather than 1.
