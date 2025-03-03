@@ -4,7 +4,7 @@
 
 ## 1. Initialise a new git repo:
 
-1. Create a new folder inside `de-prep-steps` called `git-practice`.
+1. Create a new folder inside `prep-steps` called `git-practice`.
 2. Navigate into this directory and run `ls -a`. What do the `.` and `..` refer to?
 3. To turn this directory into a git repository, run `git init`.
 4. Run `ls -a` again to see the `.git` directory which means your repository has been successfully initialised.

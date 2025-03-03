@@ -7,7 +7,7 @@ tests.
 The (not very useful) function `count_to_two` should count to two, but is
 going wrong. To see the first test pass, from the command line, type:
 
-python demonstration.py
+python 00_start_your_journey/demonstration.py
 
 The second test is currently being skipped, to run this test you should change
 `SkipCheck` to `Check` and run the same `python` command. This test should

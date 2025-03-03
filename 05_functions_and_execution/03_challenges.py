@@ -8,7 +8,7 @@ from test_api.checks import run_test, skip_test, format_err_msg
 # DO NOT CHANGE CODE ABOVE THIS LINE
 
 
-# Exercise 0
+# Challenge 0
 # This function should take a list as an argument and return True if the list
 #  is empty, False otherwise.
 def is_empty_list():
@@ -24,7 +24,7 @@ def test_is_empty_list():
     assert is_empty_list(["a"]) is False, format_err_msg(False, is_empty_list(["a"]))
 
 
-# Exercise 1
+# Challenge 1
 # This function should take an dictionary representing a person and information
 #  about whether they like to code
 
@@ -62,7 +62,7 @@ def test_create_profile_description():
     )
 
 
-# Exercise 2
+# Challenge 2
 # This function should take a string representing a traffic light colour as
 #  an argument
 
@@ -98,7 +98,7 @@ def test_read_traffic_light():
     )
 
 
-# Exercise 3
+# Challenge 3
 # This function should take any number of arguments and return the number of
 #  arguments passed into the function
 def how_many_arguments():
@@ -119,7 +119,7 @@ def test_how_many_arguments():
     ), format_err_msg(8, how_many_arguments("the", "meaning", "of", "life", "is", 42))
 
 
-# Exercise 4
+# Challenge 4
 # This function should take a dictionary representing a coin machine and a
 #  string representing a coin as its arguments
 
@@ -190,7 +190,7 @@ def test_update_coin_machine():
     )
 
 
-# Exercise 5
+# Challenge 5
 
 # This function should take a list representing coordinates - an x position and
 #  a y position - and a string representing a direction.
@@ -226,7 +226,7 @@ def test_update_position():
     )
 
 
-# Exercise 6
+# Challenge 6
 # This function should take any value as an argument, and return true if it is
 #  falsy, and false otherwise
 def is_falsy():
@@ -246,7 +246,7 @@ def test_is_falsy():
     assert is_falsy(None) is True, format_err_msg(True, is_falsy(None))
 
 
-# Exercise 7
+# Challenge 7
 # This function should take a number representing a dice roll and a string
 #  representing a coin toss as its arguments
 # A dice roll will be a number between 1 and 6
@@ -267,7 +267,7 @@ def test_check_game():
     assert check_game(6, "T") is False, format_err_msg(False, check_game(6, "T"))
 
 
-# Exercise 8
+# Challenge 8
 # In this function, a "coin collection" is represented by a list containing 4
 #  other nested lists, each representing a slot in the collection in the
 #  following way:

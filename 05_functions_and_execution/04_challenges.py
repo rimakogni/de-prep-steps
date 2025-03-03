@@ -8,7 +8,7 @@ from test_api.checks import run_test, skip_test, format_err_msg
 # DO NOT CHANGE CODE ABOVE THIS LINE
 
 
-# Exercise 0
+# Challenge 0
 # Write a function, check_if_key_exists, that takes a dictionary and a key as
 #  its arguments
 # It should return True if the dictionary contains the provided key,
@@ -28,7 +28,7 @@ def test_check_if_key_exists():
     ), format_err_msg(False, check_if_key_exists({"name": "jonny", "age": 32}, "pets"))
 
 
-# Exercise 1
+# Challenge 1
 # Write a function, create_dict, that takes a list consisting of two elements
 #  representing a key / value pair as its argument
 # It should return a dictionary with a single key based on the input
@@ -49,7 +49,7 @@ def test_create_dict():
     }, format_err_msg({"language": "haskell"}, create_dict(["language", "haskell"]))
 
 
-# Exercise 2
+# Challenge 2
 # Write a function, get_first_n_items, that takes two arguments, a list and
 #  a number 'n'
 # It should return a new list containing the first 'n' items of the given list
@@ -75,7 +75,7 @@ def test_get_first_n_items():
     )
 
 
-# Exercise 3
+# Challenge 3
 # Write a function, create_arrow, that takes a string representing a
 #  direction ("left", "right", "up" or "down") as its argument
 # It should return the corresponding arrow ("←", "→", "↑", "↓")
@@ -91,7 +91,7 @@ def test_create_arrow():
     assert create_arrow("down") == "↓", format_err_msg("↓", create_arrow("down"))
 
 
-# Exercise 4
+# Challenge 4
 # Write a function, move_item_to_end, that takes two arguments, a list and an
 #  index value
 # It should return a new list where the item that was previously at the
@@ -119,7 +119,7 @@ def test_move_item_to_end():
     ], format_err_msg(["a", "c", "d", "b"], move_item_to_end(["a", "b", "c", "d"], 1))
 
 
-# Exercise 5
+# Challenge 5
 # Write a function, update_user_age, that takes a dictionary representing a
 #  user's account information
 # A user object will look
@@ -201,7 +201,7 @@ def test_update_user_age():
     )
 
 
-# Exercise 6
+# Challenge 6
 # Write a function, check_infinitive, that takes a string representing a
 #  French word as an argument
 # It should return True if it is an infinitive verb, and False otherwise
@@ -246,7 +246,7 @@ def test_check_infinitive():
     )
 
 
-# Exercise 7
+# Challenge 7
 # Write a function, collect_plurals, that takes a list of strings as
 #  an argument
 # It should return a list containing all strings ending with an 's' from the
@@ -272,7 +272,7 @@ def test_collect_plurals():
     )
 
 
-# Exercise 8
+# Challenge 8
 # Write a function, make_all_admins, that takes a list of 'user' dictionaries
 #  as an argument
 # Each user will be an dictionary with key of 'name' and 'admin'

@@ -4,7 +4,7 @@
 
 ## Commit and push:
 
-1. Using the terminal, create a new file called `git-terminology.txt` inside your `11_git_exercises_part_2` directory, and add the snippet below to the file:
+1. Using the terminal, create a new file called `git-terminology.txt` inside your `01_git_exercises` directory, and add the snippet below to the file:
 
 ```txt
 git clone <github-link-here> - makes a local copy of the remote repo at the specified link
@@ -22,7 +22,7 @@ At this point, press refresh on the GitHub page. You should be able to see the n
 
 ## Amend Github file:
 
-1. On the github website, navigate to your repository, click the folder `11_git_exercises_part_2`.
+1. On the github website, navigate to your repository, click the folder `01_git_exercises`.
 2. Once inside the folder, click your `git-terminology.txt` file.
 3. Click the pencil icon to edit this file and add the following to the file:
 
