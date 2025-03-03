@@ -24,11 +24,11 @@
 
 ## 6
 
-- Change directory into your `intro-week` directory.
+- Change directory into your `fundamentals` directory.
 
 ## 7
 
-- Create a new blank file in your `intro-week` directory called `questions.txt`.
+- Create a new blank file in your `fundamentals` directory called `questions.txt`.
 
 - Look up the commands to do this if you need to. You can find some [good documentation online here](http://oliverelliott.org/article/computing/tut_unix/).
 
