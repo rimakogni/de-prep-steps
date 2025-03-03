@@ -91,7 +91,7 @@ python 00_start_your_journey_here/demonstration.py
 
 You should see a message saying that one of the tests is passing and one is being skipped. Now, in VS Code, navigate to the `demonstration.py` file.
 
-Change the `Skip_test` on line 35 to `run_test`.
+Change the `@skip_test` on line 35 to `@run_test`.
 
 You should now be able to re-run `python 00_start_your_journey_here/demonstration.py` and see the second test is failing.
 
