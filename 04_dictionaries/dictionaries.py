@@ -1,5 +1,11 @@
+import os
+import sys
+
+sys.path.append(os.getcwd())
+
 from test_api.checks import run_test, skip_test, format_err_msg
 
+# DO NOT CHANGE CODE ABOVE THIS LINE
 """
 ### add_price_to_product ###
 

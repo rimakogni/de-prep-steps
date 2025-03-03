@@ -18,19 +18,19 @@
 
 ## 5
 
-- Create some directories inside northcoders called `fundamentals`, `data`, `toolkit`, `ai_ml` and `project`.
+- Create some directories inside northcoders called `fundamentals`, `prep-steps`, `data`, `toolkit`, `ai_ml` and `project`.
 
 - List all the directory contents of `northcoders` - you should be able to see the 5 directories you’ve just created.
 
 ## 6
 
-- Change directory into your `intro-week` directory.
+- Change directory into your `fundamentals` directory.
 
 ## 7
 
-- Create a new blank file in your `intro-week` directory called `questions.txt`.
+- Create a new blank file in your `fundamentals` directory called `questions.txt`.
 
-- Look up the commands to do this if you need to. You can find some [good documentation online here](http://oliverelliott.org/article/computing/tut_unix/).
+- Look up the commands to do this if you need to. You can find some [good documentation online here](https://oliverelliott.org/post/commandline/).
 
 ## 8
 
