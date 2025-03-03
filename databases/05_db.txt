@@ -1,0 +1,11 @@
+We need more than one table! Please create a table called 'baked_goods'.
+
+'baked_goods' should contain the following columns:
+- baked_good_id : integer (primary key)
+- baked_good_name: text (not null)
+- bakery: text
+- stock: integer
+
+Then, insert the data (found in data/baked_goods.txt) and make sure that all the data has been inserted properly with a SELECT command.
+
+Paste the results below:

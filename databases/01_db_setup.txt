@@ -1,0 +1,21 @@
+Welcome to Northbakers! 🍰
+
+We've decided Data Engineering isn't for us anymore, and we're all leaving to become bakers.
+
+Help us! 
+
+First of all, you'll need the notes: [LINK TO NOTES]
+
+Next, you'll need to do a bit of setup:
+
+1. In your terminal, create your first database. It should be called `northbakers`.
+
+2. Make a table called 'bakers'. It should have the following columns:
+- baker_id: integer (primary key)
+- baker_name: text (not null)
+- bakery: text
+
+3. Insert data into the 'bakers' table. 
+Hint: the data you're looking for is in data/bakers.txt in this repo!
+
+*If you ever accidentally leave the sqlite3 repl, don't panic! You can reopen it using the `sqlite3` command and then use the command `.open northbakers.db` to reconnect to the database.
