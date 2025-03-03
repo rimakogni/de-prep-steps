@@ -54,7 +54,7 @@ def outer_function():
 chicken_nugget_count = 6
 
 def increase_nuggets():
-    global chicken_nugget_count
+    # global chicken_nugget_count
     chicken_nugget_count += 14
     print(f"{chicken_nugget_count} nuggets")
 
