@@ -1,4 +1,11 @@
+import os
+import sys
+
+sys.path.append(os.getcwd())
+
 from test_api.checks import run_test, skip_test, format_err_msg
+
+# DO NOT CHANGE CODE ABOVE THIS LINE
 
 """
 Write a function that takes a string as an argument and returns a boolean

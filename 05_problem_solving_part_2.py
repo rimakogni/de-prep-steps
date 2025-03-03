@@ -1,5 +1,11 @@
+import os
+import sys
+
+sys.path.append(os.getcwd())
+
 from test_api.checks import run_test, skip_test, format_err_msg
 
+# DO NOT CHANGE CODE ABOVE THIS LINE
 """
 Write a function that takes a list of triangles.
 Each triangle is represented as a list e.g. [10, 12, 22] where the three
