@@ -1,6 +1,6 @@
 # 01_section
 
-## Instructions
+## Instructions
 
 It's now time to write your own `import` statements!
 

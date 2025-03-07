@@ -1,6 +1,6 @@
 # 02_section
 
-## Part 1
+## Part 1
 
 You'll now be working on the `challenge.py` files in `02_section/01_challenges`.
 
