@@ -4,7 +4,7 @@
 
 You'll now be working on the `fix_me` files in `challenges_2/section_1`.
 
-For these tasks, you will need to import functions and variables from different parts of the `de-modules-and-imports` repository.
+For these tasks, you will need to import functions and variables from different parts of the `de-prep-steps` repository.
 
 To do these you will need to make changes to your Python Path to make certain files and directories discoverable. This should be done by appending the appropriate file path to the in-built `sys.path` variable.
 
