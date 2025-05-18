@@ -27,67 +27,67 @@ Make sure you understand why you got the results you did and investigate any tha
 A:
 
 ```python
-a * b
+a * b int
 ```
 
 B:
 
 ```python
-b * c
+b * c float
 ```
 
 C:
 
 ```python
-b + c
+b + c float
 ```
 
 D:
 
 ```python
-d - a
+d - a float
 ```
 
 E:
 
 ```python
-a % b
+a % b int 
 ```
 
 F:
 
 ```python
-a % 5.0
+a % 5.0 float
 ```
 
 G:
 
 ```python
-b**2
+b**2 int
 ```
 
 H:
 
 ```python
-a + b
+a + b int
 ```
 
 I:
 
 ```python
-b / a
+b / a float
 ```
 
 J:
 
 ```python
-a // b
+a // b int
 ```
 
 K:
 
 ```python
-len('northcoders') + b
+len('northcoders') + b int
 ```
 
 # Strings
@@ -107,25 +107,26 @@ You can see what _methods_ are available for strings in the [documentation](http
 but you might find it easier to check out [SpeedSheet](https://speedsheet.io/s/python?q=strings-only#T7xJ). Use _string methods_ to create:
 
 A. A new variable called `shouty_name` with value `DAVID JOHN BARTLETT`
-
+ shouty_name = tutor.upper() 
 B. A new variable called `low_key_title` with value `mr`
-
+low_key_title=title.lower()
 C. A new variable called `low_key_job_title` with value `senior tutor`
-
+low_key_job_title=job_title.lower()
 D. A new variable called `low_key_full_honours` with value `mr david john bartlett senior tutor`
+low_key_full_honours= f'{low_key_title} {tutor} {low_key_job_title}'
 
 For getting _parts_ of strings, check out [substrings and slicing](https://speedsheet.io/s/python?q=strings-only#nXRd)
 
 Then try to create:
 
 E: A new variable called `first_name` with value `david`
-
+first_name = tutor.split()[0]
 F: A new variable called `surname` with value `bartlett`
-
+surname = tutor.split()[2]
 G: A new variable called `middle_name` with value `john`
-
+middle_name = tutor.split()[1]
 H: A new variable called `full_honours` with value `Mr David John Bartlett, Senior Tutor`. (Note the comma!)
-
+full_honours = f'{title} {tutor.title()}, {job_title}'
 Note: it's easy to create brand new variables by just typing them in. For example:
 
 ```python
@@ -145,95 +146,95 @@ Make sure you understand why you got the results you did and investigate any tha
 A:
 
 ```
-30 > 12
+30 > 12 True
 ```
 
 B:
 
 ```
-4 < 4
+4 < 4 False
 ```
 
 C:
 
 ```
-12 == '12'
+12 == '12' False
 ```
 
 D:
 
 ```
-7 < 7.0
+7 < 7.0 False
 ```
 
 E:
 
 ```
-1 == True
+1 == True 
 ```
 
 F:
 
 ```
-0.9 < True
+0.9 < True True
 ```
 
 G:
 
 ```
-14 > 5 and len('tree') == 8/2
+14 > 5 and len('tree') == 8/2 True
 ```
 
 H:
 
 ```
-3 and 4
+3 and 4 True 4
 ```
 
 I:
 
 ```
-3 and 0
+3 and 0 False 0
 ```
 
 J:
 
 ```
-0 and 3
+0 and 3 False 0
 ```
 
 K:
 
 ```
-3 > 4 or 5 > 2
+3 > 4 or 5 > 2 True
 ```
 
 L:
 
 ```
-5 or 0.7
+5 or 0.7 True 5
 ```
 
 M:
 
 ```
-5 > 10 or 4
+5 > 10 or 4 True 4
 ```
 
 N:
 
 ```
-not 10 > 5
+not 10 > 5 False
 ```
 
 O:
 
 ```
-not 10 < 5
+not 10 < 5 True
 ```
 
 P:
 
 ```
-not 3
+not 3 False
 ```
