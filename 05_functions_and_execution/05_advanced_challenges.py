@@ -20,6 +20,17 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def find_total_of_multiples(limit):
+    if limit < 0:
+        return 0
+
+    # Usamos un conjunto para evitar duplicados
+    multiples = set()
+
+    for i in range(limit):
+        if i % 3 == 0 or i % 5 == 0:
+            multiples.add(i)
+
+    return sum(multiples)
     pass
 
 
@@ -74,11 +85,17 @@ def test_find_total_of_multiples():
 # count_printer_errors(control) should return "8/22"
 
 
-def count_printer_errors():
+def count_printer_errors(control):
+    errors = 0
+    for c in control:
+        if c > 'm':
+            errors += 1
+    total = len(control)
+    return f"{errors}/{total}"
     pass
 
 
-@skip_test
+@run_test
 def test_count_printer_errors():
     # countPrinterErrors() should return zero for an empty control string
     assert count_printer_errors("") == "0/0", format_err_msg(
@@ -112,10 +129,25 @@ def test_count_printer_errors():
 
 
 def get_ordinal_suffix(num):
+   # Special cases for 11th, 12th, 13th
+    match num % 100:
+        case 11 | 12 | 13:
+            return "th"
+
+    match num % 10:
+        case 1:
+            return "st"
+        case 2:
+            return "nd"
+        case 3:
+            return "rd"
+        case _:
+            return "th"
+
     pass
 
 
-@skip_test
+@run_test
 def test_get_ordinal_suffix():
     # get_ordinal_suffix() returns 'st' when given 1
     assert get_ordinal_suffix(1) == "st", format_err_msg("st", get_ordinal_suffix(1))
@@ -162,10 +194,14 @@ def test_get_ordinal_suffix():
 # This function should take a string as its argument and
 # return True if each character appears only once and False otherwise
 def contains_no_repeats(str):
+    repeated = set(str)
+    if len(repeated) == len(str):
+        return True
+    return False
     pass
 
 
-@skip_test
+@run_test
 def test_contains_no_repeats():
     # contains_no_repeats() returns True for an empty string
     assert contains_no_repeats("") is True, format_err_msg(True, "")
@@ -201,10 +237,15 @@ def test_contains_no_repeats():
 
 
 def check_usernames_available(usernames, *names):
+    existing = set(usernames)
+    for name in names:
+        if name in existing:
+            return False
+    return True
     pass
 
 
-@skip_test
+@run_test
 def test_check_usernames_available():
     # check_usernames_available returns True for a single available username
     assert check_usernames_available(["Roy", "Moss"], "Jen") is True, format_err_msg(
