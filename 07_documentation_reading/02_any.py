@@ -14,7 +14,7 @@ def is_suspicious(crew_mates):
 
     Pay attention to the behaviour of any with its arguments - comprehensions may be useful here.
     """
-
+    return 'imposter' in crew_mates 
     pass
 
 
@@ -32,7 +32,7 @@ def test_is_not_suspicious():
         format_err_msg(False, is_suspicious(test_group))
 
 
-@skip_test
+@run_test
 def test_is_suspicious():
     assert is_suspicious(["imposter"]) is True, \
         format_err_msg(True, is_suspicious(["imposter"]))
