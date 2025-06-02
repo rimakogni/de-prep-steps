@@ -15,15 +15,9 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def extract_repo_name(text):
-    """
-    This function should take a string representing a github url and return
-    the name of the repo.
-
-    Github urls are of the form https://github.com/northcoders/de-intro-regex
-    where "northcoders" is the name of the account and "de-intro-regex" is the
-    name of the repo
-    """
-    pass
+    match = re.search(r'github\.com/[^/]+/([^/]+)', text)
+    if match:
+        return match.group(1)
 
 
 @run_test

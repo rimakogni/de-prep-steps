@@ -15,11 +15,8 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def count_vowels(text):
-    """
-    This function should take a string as an argument, and return a count
-    representing the number of vowels it contains
-    """
-    pass
+    
+   return len(re.findall(r'[aeiouAEIOU]', text))
 
 
 @run_test

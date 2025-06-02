@@ -15,22 +15,7 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def exclude_words(text):
-    """
-    Write a function using regex which returns a string with everything except
-    the words 'north' and 'coders'.
-
-    Everything else, even words starting, including or ending with these words
-    should be matched.
-
-    Your matches and non-matches should be case insensitive.
-
-    For example:
-    - "I visited the north pole last year." should be "I visited the pole last
-        year."
-    - "I study at Northcoders." should be "I study at Northcoders."
-    - "IBM hired a lot of coders." should be "IBM hired a lot of ."
-    """
-    pass
+    return re.sub(r'\b(north|coders)\b', '', text, flags=re.IGNORECASE).replace('  ', ' ').strip()
 
 
 @run_test

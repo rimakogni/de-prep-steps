@@ -15,18 +15,7 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def has_exactly_2_consecutive_ls(text):
-    """
-    This function should take a string as an argument
-
-    You will need to check whether or not it contains *exactly* 2 consecutive
-    occurrences of the letter "l" (lower case)
-
-    This means that there *must* be exactly 2 "l"s in total and they *must* be
-    consecutive
-
-    You should return True if this is the case, and False otherwise
-    """
-    pass
+    return bool(re.fullmatch(r'[^l]*ll[^l]*', text))
 
 
 @run_test
@@ -47,7 +36,7 @@ def test_returns_true_when_two_consecutive_ls_found():
         format_err_msg(True, has_exactly_2_consecutive_ls("well"))
 
 
-@skip_test
+@run_test
 def test_returns_false_when_exactly_two_consecutive_ls_not_found():
     assert not has_exactly_2_consecutive_ls("mile"), \
         format_err_msg(False, has_exactly_2_consecutive_ls("mile"))

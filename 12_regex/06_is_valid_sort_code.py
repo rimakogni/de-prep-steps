@@ -15,15 +15,7 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def is_valid_sort_code(text):
-    """
-    This function should take a string representing a sort code as an argument
-
-    A valid sort code should adhere to the format: 2 digits hyphen 2 digits
-    hyphen 2 digits
-
-    You should return True if the sort code is valid, and False otherwise
-    """
-    pass
+   return bool(re.fullmatch(r'\d{2}-\d{2}-\d{2}', text))
 
 
 @run_test
@@ -36,7 +28,7 @@ def test_is_valid_sort_code_returns_true_if_sort_code_in_the_correct_format():
         format_err_msg(True, is_valid_sort_code("85-16-23"))
 
 
-@skip_test
+@run_test
 def test_is_valid_sort_code_returns_false_if_sort_code_NOT_in_the_correct_format():
     assert not is_valid_sort_code("51-349-67"), \
         format_err_msg(False, is_valid_sort_code("51-349-67"))

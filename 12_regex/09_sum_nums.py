@@ -15,16 +15,9 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def sum_nums(text):
-    """
-    This function should take a string as an argument, and return a sum of
-    all the numbers found within.
-
-    Consecutive digits should be taken as numbers: i.e. "24" = 24, not 6
-
-    If there are no numbers, you should return 0
-    """
-    pass
-
+    
+    numbers = re.findall(r'\d+', text)
+    return sum(int(n) for n in numbers)
 
 @run_test
 def test_sum_nums_totals_all_numbers_in_string():

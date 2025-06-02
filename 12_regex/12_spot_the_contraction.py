@@ -15,25 +15,7 @@ from test_api.checks import run_test, skip_test, format_err_msg
 
 
 def spot_the_contraction(text):
-    """
-    Write a function using regex to return True if a sentence contains any of
-    these contractions: "I'm", "I've" or "don't". (case insensitive)
-
-    This function will take a string and return True or False. See examples
-    below:
-
-    - "do not" False
-    - "don't" True
-    - "I am" False
-    - I have been fishing and I've caught plenty fishes True
-    - "I am a coding panda" False
-    - "I'm a coding panda" True
-    - I've got a collection of foreign coins True
-    - "Sometimes I do not like to get up early" False
-    - "Sometimes I don't like to get up early" True
-    - "Don't feed the birds" True
-    """
-    pass
+    return bool(re.search(r"\b(I['’](?:m|ve)|don['’]t)\b", text, re.IGNORECASE))
 
 
 @run_test
@@ -46,7 +28,7 @@ def test_spot_the_contraction_returns_true_when_contraction_spotted():
             "I've got a collection of foreign coins"))
 
 
-@skip_test
+@run_test
 def test_spot_the_contraction_returns_false_when_contraction_not_spotted():
     assert not spot_the_contraction("do not"), \
         format_err_msg(False, spot_the_contraction("do not"))
